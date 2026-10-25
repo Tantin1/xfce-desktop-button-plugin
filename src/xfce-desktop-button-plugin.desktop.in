@@ -1,0 +1,10 @@
+[Xfce Panel]
+Type=X-XFCE-PanelPlugin
+Name=Desktop Button
+Comment=Slim, customizable Show Desktop button
+Icon=user-desktop
+X-XFCE-Module=xfce-desktop-button-plugin
+X-XFCE-Module-Path=@XFCE_PLUGIN_DIR@
+X-XFCE-Internal=false
+X-XFCE-Unique=false
+X-XFCE-API=2.0
