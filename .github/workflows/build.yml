@@ -1,0 +1,124 @@
+# Compila, prueba y empaqueta el plugin.
+#
+# - En cada push o pull request: compila en cada distro, arma el .deb,
+#   lo instala, corre check.sh y deja los paquetes como "artifacts"
+#   (pestaña Actions → la ejecución → Artifacts).
+# - Al subir una etiqueta vX.Y.Z (git tag v0.3.0 && git push --tags):
+#   además crea una Release con los .deb adjuntos.
+
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deb:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    container: ${{ matrix.image }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Debian 12 (Xfce 4.18)
+            image: debian:bookworm
+            suffix: deb12
+          - name: Debian 13 (Xfce 4.20)
+            image: debian:trixie
+            suffix: deb13
+          - name: Ubuntu 24.04 / Mint 22 (Xfce 4.18)
+            image: ubuntu:24.04
+            suffix: ubuntu24.04
+
+    steps:
+      - name: Instalar dependencias de compilación
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            build-essential cmake pkg-config dpkg-dev git ca-certificates procps \
+            libgtk-3-dev libxfce4panel-2.0-dev libxfce4util-dev libxfconf-0-dev libwnck-3-dev
+          # Xfce 4.20 (y Ubuntu 24.04) traen libxfce4windowing: X11 + Wayland
+          if apt-cache show libxfce4windowing-0-dev >/dev/null 2>&1; then
+            apt-get install -y --no-install-recommends libxfce4windowing-0-dev
+          fi
+
+      - uses: actions/checkout@v4
+
+      - name: Compilar y empaquetar
+        run: bash .github/scripts/build-deb.sh ${{ matrix.suffix }}
+
+      - name: Instalar el paquete (verifica que las dependencias existan)
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          apt-get install -y ./dist/*.deb
+          dpkg -s xfce-desktop-button-plugin | grep -E '^(Status|Version|Depends):'
+
+      - name: Pruebas (check.sh)
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          apt-get install -y --no-install-recommends xvfb dbus-x11 xfconf
+          cd src && bash check.sh
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deb-${{ matrix.suffix }}
+          path: dist/*.deb
+          if-no-files-found: error
+
+  arch:
+    # sin paquete: solo avisa si algo deja de compilar en Arch / CachyOS
+    name: Arch Linux (compilación y pruebas)
+    runs-on: ubuntu-latest
+    container: archlinux:latest
+    steps:
+      - name: Instalar dependencias
+        run: |
+          pacman -Syu --noconfirm --needed \
+            base-devel cmake pkgconf git procps-ng \
+            gtk3 xfce4-panel xfconf libxfce4windowing libwnck3 \
+            xorg-server-xvfb dbus
+
+      - uses: actions/checkout@v4
+
+      - name: Compilar e instalar
+        run: |
+          cmake -S src -B build -DCMAKE_INSTALL_PREFIX=/usr
+          cmake --build build --parallel
+          cmake --install build
+
+      - name: Pruebas (check.sh)
+        run: cd src && bash check.sh
+
+  release:
+    name: Publicar release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [deb, arch]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          pattern: deb-*
+          merge-multiple: true
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.deb
+          generate_release_notes: true

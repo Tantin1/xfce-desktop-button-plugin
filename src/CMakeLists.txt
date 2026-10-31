@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(xfce-desktop-button-plugin VERSION 0.2.0 LANGUAGES C)
+project(xfce-desktop-button-plugin VERSION 0.3.0 LANGUAGES C)
 
 # Por defecto instalar en /usr (donde el panel busca los plugins)
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
@@ -44,6 +44,7 @@ add_library(xfce-desktop-button-plugin MODULE
     dialog.c
     wm.c
     tone.c
+    drop.c
 )
 
 target_include_directories(xfce-desktop-button-plugin PRIVATE
@@ -76,6 +77,7 @@ target_link_libraries(xfce-desktop-button-plugin PRIVATE
     ${XFCE4UTIL_LIBRARIES}
     ${XFCONF_LIBRARIES}
     ${WM_LIBRARIES}
+    m
 )
 
 install(TARGETS xfce-desktop-button-plugin

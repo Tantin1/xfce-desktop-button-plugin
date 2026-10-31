@@ -7,3 +7,10 @@ install_manifest.txt
 *.o
 *.so
 .DS_Store
+
+# paquetes generados y restos de parches
+dist/
+*.deb
+*.patch
+*.orig
+*.rej

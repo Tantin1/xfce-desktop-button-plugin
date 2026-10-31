@@ -5,6 +5,7 @@
  * Tocar cualquier ajuste de apariencia pasa el perfil a "Personalizado".
  */
 
+#include <string.h>
 #include <glib/gi18n-lib.h>
 
 #include "plugin.h"
@@ -30,6 +31,7 @@ typedef struct
     GtkWidget *line_color;
     GtkWidget *line_hover_color;
     GtkWidget *line_pressed_color;
+    GtkWidget *line_round;
 
     GtkWidget *icon_frame;
     GtkWidget *icon_name;
@@ -41,13 +43,24 @@ typedef struct
     GtkWidget *active_bg_color;
     GtkWidget *glass;
     GtkWidget *highlight_shown;
+    GtkWidget *bg_radius;
+    GtkWidget *bg_margin;
+    GtkWidget *animate;
+    GtkWidget *anim_speed;
+    GtkWidget *anim_hint;
 
     GtkWidget *middle_action;
+    GtkWidget *shade_hint;
     GtkWidget *scroll_action;
+    GtkWidget *scroll_hint;
     GtkWidget *drag_hover;
+    GtkWidget *drop_to_desktop;
     GtkWidget *show_tooltip;
     GtkWidget *peek_on_hover;
     GtkWidget *peek_delay;
+
+    GtkWidget *copy_combo;
+    GtkWidget *copy_button;
 } DbDialog;
 
 /* descripción de cada perfil, en el orden de DbProfile */
@@ -166,6 +179,26 @@ update_sensitivity (DbDialog *d)
     gtk_widget_set_sensitive (d->icon_frame, cfg->style == STYLE_ICON);
     gtk_widget_set_sensitive (d->icon_size,  !cfg->icon_follow_panel);
     gtk_widget_set_sensitive (d->peek_delay, cfg->peek_on_hover);
+    gtk_widget_set_sensitive (d->anim_speed, cfg->animate);
+
+    if (d->shade_hint != NULL)
+        gtk_widget_set_visible (d->shade_hint,
+                                cfg->middle_action == MIDDLE_SHADE && !db_wm_can_shade (d->db));
+
+    if (d->scroll_hint != NULL)
+        gtk_widget_set_visible (d->scroll_hint,
+                                cfg->scroll_action == SCROLL_WORKSPACES
+                                && !db_wm_can_switch_workspace (d->db));
+}
+
+/* avisa si el sistema tiene las animaciones desactivadas */
+static void
+update_anim_hint (DbDialog *d)
+{
+    gboolean system = TRUE;
+
+    g_object_get (gtk_widget_get_settings (d->anim_hint), "gtk-enable-animations", &system, NULL);
+    gtk_widget_set_visible (d->anim_hint, !system);
 }
 
 /* cfg -> controles */
@@ -196,6 +229,7 @@ dialog_fill (DbDialog *d)
     gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (d->line_color), &cfg->line_color);
     gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (d->line_hover_color), &cfg->line_hover_color);
     gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (d->line_pressed_color), &cfg->line_pressed_color);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (d->line_round), cfg->line_round);
 
     gtk_entry_set_text (GTK_ENTRY (d->icon_name), cfg->icon_name ? cfg->icon_name : "");
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (d->icon_size), db_plugin_icon_size (d->db));
@@ -206,10 +240,15 @@ dialog_fill (DbDialog *d)
     gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (d->active_bg_color), &cfg->active_bg_color);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (d->glass), cfg->glass);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (d->highlight_shown), cfg->highlight_shown);
+    gtk_spin_button_set_value (GTK_SPIN_BUTTON (d->bg_radius), cfg->bg_radius);
+    gtk_spin_button_set_value (GTK_SPIN_BUTTON (d->bg_margin), cfg->bg_margin);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (d->animate), cfg->animate);
+    gtk_combo_box_set_active (GTK_COMBO_BOX (d->anim_speed), cfg->anim_speed);
 
     gtk_combo_box_set_active (GTK_COMBO_BOX (d->middle_action), cfg->middle_action);
     gtk_combo_box_set_active (GTK_COMBO_BOX (d->scroll_action), cfg->scroll_action);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (d->drag_hover), cfg->drag_hover);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (d->drop_to_desktop), cfg->drop_to_desktop);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (d->show_tooltip), cfg->show_tooltip);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (d->peek_on_hover), cfg->peek_on_hover);
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (d->peek_delay), cfg->peek_delay);
@@ -256,6 +295,7 @@ on_appearance_changed (GtkWidget *widget, DbDialog *d)
     gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (d->line_color), &cfg->line_color);
     gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (d->line_hover_color), &cfg->line_hover_color);
     gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (d->line_pressed_color), &cfg->line_pressed_color);
+    cfg->line_round = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->line_round));
 
     g_free (cfg->icon_name);
     cfg->icon_name = g_strdup (gtk_entry_get_text (GTK_ENTRY (d->icon_name)));
@@ -267,6 +307,8 @@ on_appearance_changed (GtkWidget *widget, DbDialog *d)
     gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (d->hover_bg_color), &cfg->hover_bg_color);
     gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (d->active_bg_color), &cfg->active_bg_color);
     cfg->glass = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->glass));
+    cfg->bg_radius = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (d->bg_radius));
+    cfg->bg_margin = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (d->bg_margin));
 
     if (cfg->profile != PROFILE_CUSTOM)
     {
@@ -293,10 +335,13 @@ on_behavior_changed (GtkWidget *widget, DbDialog *d)
     cfg->middle_action = gtk_combo_box_get_active (GTK_COMBO_BOX (d->middle_action));
     cfg->scroll_action = gtk_combo_box_get_active (GTK_COMBO_BOX (d->scroll_action));
     cfg->drag_hover    = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->drag_hover));
+    cfg->drop_to_desktop = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->drop_to_desktop));
     cfg->show_tooltip  = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->show_tooltip));
     cfg->highlight_shown = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->highlight_shown));
     cfg->peek_on_hover   = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->peek_on_hover));
     cfg->peek_delay      = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (d->peek_delay));
+    cfg->animate         = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->animate));
+    cfg->anim_speed      = gtk_combo_box_get_active (GTK_COMBO_BOX (d->anim_speed));
 
     update_sensitivity (d);
     apply_to_panel (d);
@@ -347,6 +392,67 @@ db_dialog_sync (DbPlugin *db)
     d = g_object_get_data (G_OBJECT (db->dialog), "db-dialog");
     if (d != NULL)
         dialog_fill (d);
+}
+
+/* copia toda la configuración de otro Desktop Button */
+static void
+on_copy_clicked (GtkButton *button, DbDialog *d)
+{
+    DbPlugin    *db = d->db;
+    const gchar *id_str;
+    gchar       *own, *dir, *file;
+    DbConfig     tmp;
+
+    (void) button;
+
+    id_str = gtk_combo_box_get_active_id (GTK_COMBO_BOX (d->copy_combo));
+    if (id_str == NULL)
+        return;
+
+    /* el archivo del otro botón está junto al nuestro: <módulo>-<id>.rc */
+    own  = xfce_panel_plugin_save_location (db->plugin, FALSE);
+    dir  = own != NULL ? g_path_get_dirname (own) : NULL;
+    file = dir != NULL ? g_strdup_printf ("%s" G_DIR_SEPARATOR_S "%s-%s.rc", dir,
+                                          xfce_panel_plugin_get_name (db->plugin), id_str)
+                       : NULL;
+
+    memset (&tmp, 0, sizeof (tmp));
+    db_config_load_file (&tmp, file);
+
+    db_config_clear (&db->cfg);
+    db->cfg = tmp;              /* la estructura pasa a ser nuestra (incluido icon_name) */
+
+    db_plugin_config_replaced (db);
+
+    g_free (file);
+    g_free (dir);
+    g_free (own);
+}
+
+/* llena la lista con los otros botones que hay en los paneles */
+static void
+fill_copy_combo (DbDialog *d)
+{
+    GList *ids = db_tone_list_siblings (d->db), *l;
+
+    for (l = ids; l != NULL; l = l->next)
+    {
+        gint   id    = GPOINTER_TO_INT (l->data);
+        gint   panel = db_tone_panel_of_plugin (d->db, id);
+        gchar *key   = g_strdup_printf ("%d", id);
+        gchar *label = g_strdup_printf (_("Panel %d — button #%d"), panel, id);
+
+        gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (d->copy_combo), key, label);
+        g_free (label);
+        g_free (key);
+    }
+
+    if (ids != NULL)
+        gtk_combo_box_set_active (GTK_COMBO_BOX (d->copy_combo), 0);
+
+    gtk_widget_set_sensitive (d->copy_combo,  ids != NULL);
+    gtk_widget_set_sensitive (d->copy_button, ids != NULL);
+    g_list_free (ids);
 }
 
 static void
@@ -459,6 +565,26 @@ db_dialog_show (DbPlugin *db)
     d->icon_frame = make_frame (_("Icon"), grid);
     gtk_box_pack_start (GTK_BOX (page), d->icon_frame, FALSE, FALSE, 0);
 
+    /* copiar de otro botón (útil con un panel por monitor) */
+    grid = make_grid ();
+    row  = 0;
+    {
+        GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+
+        d->copy_combo  = gtk_combo_box_text_new ();
+        d->copy_button = gtk_button_new_with_mnemonic (_("C_opy"));
+        gtk_widget_set_tooltip_text (d->copy_button,
+            _("Replace all settings of this button with those of the selected one"));
+        gtk_widget_set_hexpand (d->copy_combo, TRUE);
+        gtk_box_pack_start (GTK_BOX (box), d->copy_combo, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (box), d->copy_button, FALSE, FALSE, 0);
+        add_row (grid, row++, _("_From:"), box);
+        gtk_label_set_mnemonic_widget (
+            GTK_LABEL (gtk_grid_get_child_at (GTK_GRID (grid), 0, row - 1)), d->copy_combo);
+    }
+    gtk_box_pack_start (GTK_BOX (page), make_frame (_("Copy settings from another button"), grid),
+                        FALSE, FALSE, 0);
+
     /* ===== pestaña Línea ===== */
     page = new_page (notebook, _("Line"));
 
@@ -495,6 +621,9 @@ db_dialog_show (DbPlugin *db)
     d->line_pressed_color = make_color ();
     add_row (grid, row++, _("Color when p_ressed:"), d->line_pressed_color);
 
+    d->line_round = gtk_check_button_new_with_mnemonic (_("R_ounded ends"));
+    gtk_grid_attach (GTK_GRID (grid), d->line_round, 0, row++, 2, 1);
+
     d->line_frame = make_frame (_("Line"), grid);
     gtk_box_pack_start (GTK_BOX (page), d->line_frame, FALSE, FALSE, 0);
 
@@ -513,6 +642,14 @@ db_dialog_show (DbPlugin *db)
     d->active_bg_color = make_color ();
     add_row (grid, row++, _("_Pressed:"), d->active_bg_color);
 
+    d->bg_radius = gtk_spin_button_new_with_range (0, 16, 1);
+    add_row (grid, row++, _("Corner _radius (px):"), d->bg_radius);
+
+    d->bg_margin = gtk_spin_button_new_with_range (0, 8, 1);
+    gtk_widget_set_tooltip_text (d->bg_margin,
+        _("Empty space between the edge of the button and the colored background"));
+    add_row (grid, row++, _("_Margin (px):"), d->bg_margin);
+
     d->glass = gtk_check_button_new_with_mnemonic (_("_Glass shine"));
     gtk_grid_attach (GTK_GRID (grid), d->glass, 0, row++, 2, 1);
 
@@ -521,6 +658,26 @@ db_dialog_show (DbPlugin *db)
     gtk_grid_attach (GTK_GRID (grid), d->highlight_shown, 0, row++, 2, 1);
 
     gtk_box_pack_start (GTK_BOX (page), make_frame (_("Background colors"), grid), FALSE, FALSE, 0);
+
+    /* animación */
+    grid = make_grid ();
+    row  = 0;
+    d->animate = gtk_check_button_new_with_mnemonic (_("Smooth _transitions"));
+    gtk_widget_set_tooltip_text (d->animate,
+        _("Fade colors when hovering and clicking instead of changing them instantly"));
+    gtk_grid_attach (GTK_GRID (grid), d->animate, 0, row++, 2, 1);
+
+    d->anim_speed = make_combo (_("Fast"), _("Normal"), _("Slow"), NULL);
+    add_row (grid, row++, _("Spee_d:"), d->anim_speed);
+
+    d->anim_hint = gtk_label_new (_("Animations are disabled in the system settings."));
+    gtk_label_set_xalign (GTK_LABEL (d->anim_hint), 0.0);
+    gtk_label_set_line_wrap (GTK_LABEL (d->anim_hint), TRUE);
+    gtk_style_context_add_class (gtk_widget_get_style_context (d->anim_hint), "dim-label");
+    gtk_widget_set_no_show_all (d->anim_hint, TRUE);
+    gtk_grid_attach (GTK_GRID (grid), d->anim_hint, 0, row++, 2, 1);
+
+    gtk_box_pack_start (GTK_BOX (page), make_frame (_("Animation"), grid), FALSE, FALSE, 0);
 
     /* ===== pestaña Comportamiento ===== */
     page = new_page (notebook, _("Behavior"));
@@ -532,12 +689,33 @@ db_dialog_show (DbPlugin *db)
                                    _("Shade / unshade windows (X11 only)"), NULL);
     add_row (grid, row++, _("_Middle click:"), d->middle_action);
 
+    d->shade_hint = gtk_label_new (_("Window shading is not supported on Wayland."));
+    gtk_label_set_xalign (GTK_LABEL (d->shade_hint), 0.0);
+    gtk_label_set_line_wrap (GTK_LABEL (d->shade_hint), TRUE);
+    gtk_style_context_add_class (gtk_widget_get_style_context (d->shade_hint), "dim-label");
+    gtk_widget_set_no_show_all (d->shade_hint, TRUE);
+    gtk_grid_attach (GTK_GRID (grid), d->shade_hint, 1, row++, 1, 1);
+
     d->scroll_action = make_combo (_("Do nothing"), _("Switch workspace"),
                                    _("Up shows desktop, down restores"), NULL);
     add_row (grid, row++, _("Mouse _wheel:"), d->scroll_action);
 
+    d->scroll_hint = gtk_label_new (_("Workspace switching is not available in this session."));
+    gtk_label_set_xalign (GTK_LABEL (d->scroll_hint), 0.0);
+    gtk_label_set_line_wrap (GTK_LABEL (d->scroll_hint), TRUE);
+    gtk_style_context_add_class (gtk_widget_get_style_context (d->scroll_hint), "dim-label");
+    gtk_widget_set_no_show_all (d->scroll_hint, TRUE);
+    gtk_grid_attach (GTK_GRID (grid), d->scroll_hint, 1, row++, 1, 1);
+
     d->drag_hover = gtk_check_button_new_with_mnemonic (_("Show desktop when _dragging a file over the button"));
     gtk_grid_attach (GTK_GRID (grid), d->drag_hover, 0, row++, 2, 1);
+
+    d->drop_to_desktop = gtk_check_button_new_with_mnemonic (
+        _("Cop_y files dropped on the button to the Desktop"));
+    gtk_widget_set_tooltip_text (d->drop_to_desktop,
+        _("The original files are never moved or deleted, and existing files on the "
+          "Desktop are never overwritten: a copy gets a new name such as \"photo (2).jpg\"."));
+    gtk_grid_attach (GTK_GRID (grid), d->drop_to_desktop, 0, row++, 2, 1);
 
     d->show_tooltip = gtk_check_button_new_with_mnemonic (_("Show _tooltip"));
     gtk_grid_attach (GTK_GRID (grid), d->show_tooltip, 0, row++, 2, 1);
@@ -589,6 +767,9 @@ db_dialog_show (DbPlugin *db)
     connect_appearance (d->line_color,       "color-set",     d);
     connect_appearance (d->line_hover_color, "color-set",     d);
     connect_appearance (d->line_pressed_color, "color-set",   d);
+    connect_appearance (d->line_round,       "toggled",       d);
+    connect_appearance (d->bg_radius,        "value-changed", d);
+    connect_appearance (d->bg_margin,        "value-changed", d);
     connect_appearance (d->icon_name,        "changed",       d);
     connect_appearance (d->icon_size,        "value-changed", d);
     connect_appearance (d->icon_follow_panel, "toggled",      d);
@@ -600,12 +781,18 @@ db_dialog_show (DbPlugin *db)
     connect_behavior (d->middle_action, "changed", d);
     connect_behavior (d->scroll_action, "changed", d);
     connect_behavior (d->drag_hover,    "toggled", d);
+    connect_behavior (d->drop_to_desktop, "toggled", d);
     connect_behavior (d->show_tooltip,  "toggled", d);
     connect_behavior (d->highlight_shown, "toggled", d);
     connect_behavior (d->peek_on_hover, "toggled",       d);
     connect_behavior (d->peek_delay,    "value-changed", d);
+    connect_behavior (d->animate,       "toggled",       d);
+    connect_behavior (d->anim_speed,    "changed",       d);
 
     g_signal_connect (dialog, "response", G_CALLBACK (on_response), d);
+
+    fill_copy_combo (d);
+    g_signal_connect (d->copy_button, "clicked", G_CALLBACK (on_copy_clicked), d);
 
     if (s_label_group != NULL)
     {
@@ -614,4 +801,5 @@ db_dialog_show (DbPlugin *db)
     }
 
     gtk_widget_show_all (dialog);
+    update_anim_hint (d);
 }

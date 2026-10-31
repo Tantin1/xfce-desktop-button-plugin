@@ -37,6 +37,16 @@ db_wm_available (DbPlugin *db)
     return db->wm != NULL && WM (db)->screen != NULL;
 }
 
+gboolean
+db_wm_can_shade (DbPlugin *db)
+{
+#ifdef HAVE_XFW
+    return db_wm_available (db) && xfw_windowing_get () == XFW_WINDOWING_X11;
+#else
+    return db_wm_available (db);
+#endif
+}
+
 #ifdef HAVE_XFW
 /* =====================================================================
  *  libxfce4windowing
@@ -209,11 +219,25 @@ db_wm_switch_workspace (DbPlugin *db, gint delta, guint32 timestamp)
     if (active == NULL || count == 0)
         return;
 
-    idx    = CLAMP ((gint) xfw_workspace_get_number (active) + delta, 0, count - 1);
+    idx = g_list_index (list, active);
+    if (idx < 0)
+        idx = (gint) xfw_workspace_get_number (active);
+    idx    = CLAMP (idx + delta, 0, count - 1);
     target = g_list_nth_data (list, idx);
 
     if (target != NULL && target != active)
         xfw_workspace_activate (target, NULL);
+}
+
+gboolean
+db_wm_can_switch_workspace (DbPlugin *db)
+{
+    XfwWorkspaceGroup *group;
+
+    if (!db_wm_available (db) || (group = first_group (db)) == NULL)
+        return FALSE;
+
+    return xfw_workspace_group_list_workspaces (group) != NULL;
 }
 
 #else
@@ -242,7 +266,10 @@ db_wm_init (DbPlugin *db)
     wm->handle = wnck_handle_new (WNCK_CLIENT_TYPE_PAGER);
     wm->screen = wnck_handle_get_default_screen (wm->handle);
     if (wm->screen == NULL)
+    {
+        g_clear_object (&wm->handle);
         return FALSE;
+    }
 
     wnck_screen_force_update (wm->screen);
     wm->showing_handler = g_signal_connect (wm->screen, "showing-desktop-changed",
@@ -365,6 +392,12 @@ db_wm_switch_workspace (DbPlugin *db, gint delta, guint32 timestamp)
     target = wnck_screen_get_workspace (WM (db)->screen, idx);
     if (target != NULL && target != active)
         wnck_workspace_activate (target, timestamp);
+}
+
+gboolean
+db_wm_can_switch_workspace (DbPlugin *db)
+{
+    return db_wm_available (db) && wnck_screen_get_workspace_count (WM (db)->screen) > 1;
 }
 
 #endif

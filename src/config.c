@@ -77,6 +77,9 @@ db_config_apply_profile (DbConfig *cfg, DbProfile profile, gboolean light)
         TINT (&cfg->hover_bg_color,     0.30);
         TINT (&cfg->active_bg_color,    0.40);
         cfg->glass           = TRUE;
+        cfg->line_round      = FALSE;
+        cfg->bg_radius       = 0;
+        cfg->bg_margin       = 0;
         break;
 
     case PROFILE_STRIP:
@@ -95,6 +98,9 @@ db_config_apply_profile (DbConfig *cfg, DbProfile profile, gboolean light)
         TINT (&cfg->hover_bg_color,     0.12);
         TINT (&cfg->active_bg_color,    0.18);
         cfg->glass           = FALSE;
+        cfg->line_round      = FALSE;
+        cfg->bg_radius       = 0;
+        cfg->bg_margin       = 0;
         break;
 
     case PROFILE_MINIMAL:
@@ -114,6 +120,9 @@ db_config_apply_profile (DbConfig *cfg, DbProfile profile, gboolean light)
         TINT (&cfg->hover_bg_color,     0.00);
         TINT (&cfg->active_bg_color,    0.00);
         cfg->glass           = FALSE;
+        cfg->line_round      = TRUE;   /* línea tipo "píldora" */
+        cfg->bg_radius       = 0;
+        cfg->bg_margin       = 0;
         break;
 
     case PROFILE_CLASSIC:
@@ -136,6 +145,9 @@ db_config_apply_profile (DbConfig *cfg, DbProfile profile, gboolean light)
         TINT (&cfg->hover_bg_color,     0.10);
         TINT (&cfg->active_bg_color,    0.16);
         cfg->glass           = FALSE;
+        cfg->line_round      = FALSE;
+        cfg->bg_radius       = 4;      /* resaltado redondeado alrededor del icono */
+        cfg->bg_margin       = 2;
         break;
 
     case PROFILE_CUSTOM:
@@ -166,6 +178,9 @@ db_config_init_defaults (DbConfig *cfg)
     cfg->peek_on_hover   = FALSE;
     cfg->peek_delay      = 500;
 
+    cfg->animate         = TRUE;
+    cfg->anim_speed      = ANIM_NORMAL;
+
     /* "Franja" por defecto: delgado y visible desde el primer momento.
      * La variante clara/oscura se ajusta después, al detectar el panel. */
     db_config_apply_profile (cfg, PROFILE_STRIP, FALSE);
@@ -183,18 +198,26 @@ db_config_clear (DbConfig *cfg)
 void
 db_config_load (DbPlugin *db)
 {
-    DbConfig *cfg = &db->cfg;
-    gchar    *file;
-    XfceRc   *rc;
+    gchar *file = xfce_panel_plugin_lookup_rc_file (db->plugin);
 
+    db_config_load_file (&db->cfg, file);
+    g_free (file);
+}
+
+/* lee un archivo de configuración; también sirve para copiar los
+ * ajustes de otro botón. Sin archivo, quedan los valores por defecto. */
+void
+db_config_load_file (DbConfig *cfg, const gchar *file)
+{
+    XfceRc *rc;
+
+    db_config_clear (cfg);
     db_config_init_defaults (cfg);
 
-    file = xfce_panel_plugin_lookup_rc_file (db->plugin);
-    if (file == NULL)
+    if (file == NULL || !g_file_test (file, G_FILE_TEST_IS_REGULAR))
         return;
 
     rc = xfce_rc_simple_open (file, TRUE);
-    g_free (file);
     if (rc == NULL)
         return;
 
@@ -210,7 +233,10 @@ db_config_load (DbPlugin *db)
         cfg->line_length_pct = xfce_rc_read_bool_entry (rc, "line-length-pct", cfg->line_length_pct);
         cfg->line_align      = xfce_rc_read_int_entry  (rc, "line-align",      cfg->line_align);
         cfg->line_visibility = xfce_rc_read_int_entry  (rc, "line-visibility", cfg->line_visibility);
+        cfg->line_round      = xfce_rc_read_bool_entry (rc, "line-round",      cfg->line_round);
         cfg->glass           = xfce_rc_read_bool_entry (rc, "glass",           cfg->glass);
+        cfg->bg_radius       = xfce_rc_read_int_entry  (rc, "bg-radius",       cfg->bg_radius);
+        cfg->bg_margin       = xfce_rc_read_int_entry  (rc, "bg-margin",       cfg->bg_margin);
         cfg->icon_follow_panel = xfce_rc_read_bool_entry (rc, "icon-follow-panel", cfg->icon_follow_panel);
 
         rc_read_color (rc, "line-color",       &cfg->line_color);
@@ -233,11 +259,14 @@ db_config_load (DbPlugin *db)
     cfg->middle_action   = xfce_rc_read_int_entry  (rc, "middle-action",   cfg->middle_action);
     cfg->scroll_action   = xfce_rc_read_int_entry  (rc, "scroll-action",   cfg->scroll_action);
     cfg->drag_hover      = xfce_rc_read_bool_entry (rc, "drag-hover",      cfg->drag_hover);
+    cfg->drop_to_desktop = xfce_rc_read_bool_entry (rc, "drop-to-desktop", cfg->drop_to_desktop);
     cfg->show_tooltip    = xfce_rc_read_bool_entry (rc, "show-tooltip",    cfg->show_tooltip);
     cfg->highlight_shown = xfce_rc_read_bool_entry (rc, "highlight-shown", cfg->highlight_shown);
     cfg->panel_tone      = xfce_rc_read_int_entry  (rc, "panel-tone",      cfg->panel_tone);
     cfg->peek_on_hover   = xfce_rc_read_bool_entry (rc, "peek-on-hover",   cfg->peek_on_hover);
     cfg->peek_delay      = xfce_rc_read_int_entry  (rc, "peek-delay",      cfg->peek_delay);
+    cfg->animate         = xfce_rc_read_bool_entry (rc, "animate",         cfg->animate);
+    cfg->anim_speed      = xfce_rc_read_int_entry  (rc, "anim-speed",      cfg->anim_speed);
 
     /* el perfil Icono clásico fija su propio icono */
     if (cfg->profile != PROFILE_CLASSIC)
@@ -258,6 +287,7 @@ db_config_load (DbPlugin *db)
     cfg->middle_action   = CLAMP (cfg->middle_action,   MIDDLE_NONE, MIDDLE_SHADE);
     cfg->scroll_action   = CLAMP (cfg->scroll_action,   SCROLL_NONE, SCROLL_SHOW_HIDE);
     cfg->panel_tone      = CLAMP (cfg->panel_tone,      TONE_AUTO,   TONE_LIGHT);
+    cfg->anim_speed      = CLAMP (cfg->anim_speed,      ANIM_FAST,   ANIM_SLOW);
 
     /* límites por si el archivo fue editado a mano */
     cfg->thickness   = CLAMP (cfg->thickness,   1, 128);
@@ -265,6 +295,8 @@ db_config_load (DbPlugin *db)
     cfg->line_length = CLAMP (cfg->line_length, 1, cfg->line_length_pct ? 100 : 256);
     cfg->icon_size   = CLAMP (cfg->icon_size,   8, 128);
     cfg->peek_delay  = CLAMP (cfg->peek_delay,  100, 3000);
+    cfg->bg_radius   = CLAMP (cfg->bg_radius,   0, 16);
+    cfg->bg_margin   = CLAMP (cfg->bg_margin,   0, 8);
 }
 
 void
@@ -298,11 +330,17 @@ db_config_save (DbPlugin *db)
     xfce_rc_write_int_entry  (rc, "middle-action",   cfg->middle_action);
     xfce_rc_write_int_entry  (rc, "scroll-action",   cfg->scroll_action);
     xfce_rc_write_bool_entry (rc, "drag-hover",      cfg->drag_hover);
+    xfce_rc_write_bool_entry (rc, "drop-to-desktop", cfg->drop_to_desktop);
+    xfce_rc_write_bool_entry (rc, "line-round",      cfg->line_round);
+    xfce_rc_write_int_entry  (rc, "bg-radius",       cfg->bg_radius);
+    xfce_rc_write_int_entry  (rc, "bg-margin",       cfg->bg_margin);
     xfce_rc_write_bool_entry (rc, "show-tooltip",    cfg->show_tooltip);
     xfce_rc_write_bool_entry (rc, "highlight-shown", cfg->highlight_shown);
     xfce_rc_write_int_entry  (rc, "panel-tone",      cfg->panel_tone);
     xfce_rc_write_bool_entry (rc, "peek-on-hover",   cfg->peek_on_hover);
     xfce_rc_write_int_entry  (rc, "peek-delay",      cfg->peek_delay);
+    xfce_rc_write_bool_entry (rc, "animate",         cfg->animate);
+    xfce_rc_write_int_entry  (rc, "anim-speed",      cfg->anim_speed);
 
     rc_write_color (rc, "line-color",       &cfg->line_color);
     rc_write_color (rc, "line-hover-color", &cfg->line_hover_color);
