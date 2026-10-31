@@ -13,6 +13,19 @@ pkg_check_modules(XFCE4PANEL REQUIRED libxfce4panel-2.0>=4.18)
 pkg_check_modules(XFCE4UTIL  REQUIRED libxfce4util-1.0>=4.18)
 pkg_check_modules(XFCONF     REQUIRED libxfconf-0>=4.18)
 
+# En Xfce 4.20, libxfce4panel-2.0.pc pide libxfce4ui-2 (Requires.private),
+# pero algunas distros (Debian 13) no instalan su paquete de desarrollo junto
+# con el del panel. pkg-config entonces "encuentra" el panel pero no devuelve
+# sus rutas, y la compilación falla más tarde con un error confuso.
+if(NOT XFCE4PANEL_INCLUDE_DIRS)
+    message(FATAL_ERROR
+        "pkg-config no devolvió las rutas de libxfce4panel-2.0.\n"
+        "Casi seguro falta el paquete de desarrollo de libxfce4ui:\n"
+        "  Debian / Ubuntu:  sudo apt install libxfce4ui-2-dev\n"
+        "  Arch / CachyOS:   sudo pacman -S libxfce4ui\n"
+        "Para ver el motivo exacto:  pkg-config --cflags libxfce4panel-2.0")
+endif()
+
 # Motor de ventanas:
 #   Xfce 4.20 -> libxfce4windowing (X11 y Wayland, igual que el plugin oficial)
 #   Xfce 4.18 -> libwnck (solo X11)
