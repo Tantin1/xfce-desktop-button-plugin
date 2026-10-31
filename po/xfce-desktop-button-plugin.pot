@@ -1,0 +1,431 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the xfce-desktop-button-plugin package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce-desktop-button-plugin 0.4.0\n"
+"Report-Msgid-Bugs-To: https://github.com/Tantin1/xfce-desktop-button-plugin/"
+"issues\n"
+"POT-Creation-Date: 2026-10-31 20:21+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/dialog.c:72
+msgid "Inspired by Windows 7"
+msgstr ""
+
+#: src/dialog.c:73
+msgid "Inspired by Windows 10"
+msgstr ""
+
+#: src/dialog.c:74
+msgid "Inspired by Windows 11"
+msgstr ""
+
+#: src/dialog.c:75
+msgid "Like the original Xfce button"
+msgstr ""
+
+#: src/dialog.c:77
+msgid "Your own settings"
+msgstr ""
+
+#: src/dialog.c:218
+msgid "Detected: light panel"
+msgstr ""
+
+#: src/dialog.c:218
+msgid "Detected: dark panel"
+msgstr ""
+
+#. TRANSLATORS: entry in "Copy settings from another button";
+#. * the first number is the panel, the second the plugin id
+#: src/dialog.c:445
+#, c-format
+msgid "Panel %d — button #%d"
+msgstr ""
+
+#: src/dialog.c:505 src/plugin.c:982
+#: src/xfce-desktop-button-plugin.desktop.in:4
+msgid "Desktop Button"
+msgstr ""
+
+#: src/dialog.c:507
+msgid "_Close"
+msgstr ""
+
+#: src/dialog.c:523
+msgid "Button"
+msgstr ""
+
+#. TRANSLATORS: profile names. "Glass", "Strip" and "Minimal" are styles
+#. * inspired by Windows 7, 10 and 11; translate them as short style names
+#: src/dialog.c:530 src/plugin.c:928
+msgid "Custom"
+msgstr ""
+
+#: src/dialog.c:530 src/plugin.c:928
+msgid "Glass"
+msgstr ""
+
+#: src/dialog.c:530 src/plugin.c:928
+msgid "Strip"
+msgstr ""
+
+#: src/dialog.c:530 src/plugin.c:928
+msgid "Minimal"
+msgstr ""
+
+#: src/dialog.c:531 src/plugin.c:928
+msgid "Classic icon"
+msgstr ""
+
+#: src/dialog.c:532
+msgid "_Profile:"
+msgstr ""
+
+#: src/dialog.c:539
+msgid "Automatic"
+msgstr ""
+
+#: src/dialog.c:539
+msgid "Dark"
+msgstr ""
+
+#: src/dialog.c:539
+msgid "Light"
+msgstr ""
+
+#: src/dialog.c:541
+msgid "Built-in profiles use white on dark panels and black on light panels"
+msgstr ""
+
+#: src/dialog.c:542
+msgid "Panel t_one:"
+msgstr ""
+
+#: src/dialog.c:550
+msgid "Button _thickness (px):"
+msgstr ""
+
+#: src/dialog.c:552 src/dialog.c:593 src/dialog.c:633
+msgid "Line"
+msgstr ""
+
+#: src/dialog.c:552 src/dialog.c:569
+msgid "Icon"
+msgstr ""
+
+#: src/dialog.c:552
+msgid "None (background only)"
+msgstr ""
+
+#: src/dialog.c:553
+msgid "_Style:"
+msgstr ""
+
+#: src/dialog.c:554
+msgid "General"
+msgstr ""
+
+#: src/dialog.c:561
+msgid "Icon _name:"
+msgstr ""
+
+#: src/dialog.c:564
+msgid "Icon si_ze (px):"
+msgstr ""
+
+#: src/dialog.c:566
+msgid "_Follow the panel icon size"
+msgstr ""
+
+#: src/dialog.c:579
+msgid "C_opy"
+msgstr ""
+
+#: src/dialog.c:581
+msgid "Replace all settings of this button with those of the selected one"
+msgstr ""
+
+#: src/dialog.c:585
+msgid "_From:"
+msgstr ""
+
+#: src/dialog.c:589
+msgid "Copy settings from another button"
+msgstr ""
+
+#: src/dialog.c:599
+msgid "Line _width (px):"
+msgstr ""
+
+#. TRANSLATORS: unit of the line length: percent of the panel height, or pixels
+#: src/dialog.c:606
+#, no-c-format
+msgid "% of panel"
+msgstr ""
+
+#: src/dialog.c:606
+msgid "px"
+msgstr ""
+
+#: src/dialog.c:610
+msgid "Line _length:"
+msgstr ""
+
+#: src/dialog.c:615
+msgid "Start (left / top)"
+msgstr ""
+
+#: src/dialog.c:615
+msgid "Center"
+msgstr ""
+
+#: src/dialog.c:615
+msgid "End (right / bottom)"
+msgstr ""
+
+#: src/dialog.c:616
+msgid "_Position:"
+msgstr ""
+
+#: src/dialog.c:618
+msgid "Always"
+msgstr ""
+
+#: src/dialog.c:618
+msgid "Only on hover"
+msgstr ""
+
+#: src/dialog.c:619
+msgid "_Visible:"
+msgstr ""
+
+#: src/dialog.c:622
+msgid "_Color:"
+msgstr ""
+
+#: src/dialog.c:625
+msgid "Color on _hover:"
+msgstr ""
+
+#: src/dialog.c:628
+msgid "Color when p_ressed:"
+msgstr ""
+
+#: src/dialog.c:630
+msgid "R_ounded ends"
+msgstr ""
+
+#: src/dialog.c:637
+msgid "Background"
+msgstr ""
+
+#: src/dialog.c:643
+msgid "_Normal:"
+msgstr ""
+
+#: src/dialog.c:646
+msgid "On h_over:"
+msgstr ""
+
+#: src/dialog.c:649
+msgid "_Pressed:"
+msgstr ""
+
+#: src/dialog.c:652
+msgid "Corner _radius (px):"
+msgstr ""
+
+#: src/dialog.c:656
+msgid "Empty space between the edge of the button and the colored background"
+msgstr ""
+
+#: src/dialog.c:657
+msgid "_Margin (px):"
+msgstr ""
+
+#: src/dialog.c:659
+msgid "_Glass shine"
+msgstr ""
+
+#: src/dialog.c:663
+msgid "_Keep the pressed color while the desktop is shown"
+msgstr ""
+
+#: src/dialog.c:666
+msgid "Background colors"
+msgstr ""
+
+#: src/dialog.c:671
+msgid "Smooth _transitions"
+msgstr ""
+
+#: src/dialog.c:673
+msgid ""
+"Fade colors when hovering and clicking instead of changing them instantly"
+msgstr ""
+
+#: src/dialog.c:676
+msgid "Fast"
+msgstr ""
+
+#: src/dialog.c:676
+msgid "Normal"
+msgstr ""
+
+#: src/dialog.c:676
+msgid "Slow"
+msgstr ""
+
+#: src/dialog.c:677
+msgid "Spee_d:"
+msgstr ""
+
+#: src/dialog.c:679
+msgid "Animations are disabled in the system settings."
+msgstr ""
+
+#: src/dialog.c:686
+msgid "Animation"
+msgstr ""
+
+#: src/dialog.c:689
+msgid "Behavior"
+msgstr ""
+
+#: src/dialog.c:693 src/dialog.c:705
+msgid "Do nothing"
+msgstr ""
+
+#: src/dialog.c:693
+msgid "Show / restore desktop"
+msgstr ""
+
+#: src/dialog.c:694
+msgid "Minimize all windows"
+msgstr ""
+
+#: src/dialog.c:695
+msgid "Shade / unshade windows (X11 only)"
+msgstr ""
+
+#: src/dialog.c:696
+msgid "_Middle click:"
+msgstr ""
+
+#: src/dialog.c:698
+msgid "Window shading is not supported on Wayland."
+msgstr ""
+
+#: src/dialog.c:705
+msgid "Switch workspace"
+msgstr ""
+
+#: src/dialog.c:706
+msgid "Up shows desktop, down restores"
+msgstr ""
+
+#: src/dialog.c:707
+msgid "Mouse _wheel:"
+msgstr ""
+
+#: src/dialog.c:709
+msgid "Workspace switching is not available in this session."
+msgstr ""
+
+#: src/dialog.c:716
+msgid "Show desktop when _dragging a file over the button"
+msgstr ""
+
+#: src/dialog.c:720
+msgid "Cop_y files dropped on the button to the Desktop"
+msgstr ""
+
+#: src/dialog.c:722
+msgid ""
+"The original files are never moved or deleted, and existing files on the "
+"Desktop are never overwritten: a copy gets a new name such as \"photo (2)."
+"jpg\"."
+msgstr ""
+
+#: src/dialog.c:726
+msgid "Show _tooltip"
+msgstr ""
+
+#: src/dialog.c:729
+msgid "Actions"
+msgstr ""
+
+#: src/dialog.c:736
+msgid "Show the desktop while the mouse is _over the button"
+msgstr ""
+
+#: src/dialog.c:738
+msgid ""
+"Moving the mouse away restores the windows. Click during the peek to keep "
+"the desktop visible."
+msgstr ""
+
+#: src/dialog.c:743
+msgid "D_elay (ms):"
+msgstr ""
+
+#: src/dialog.c:745
+msgid "Peek"
+msgstr ""
+
+#: src/dialog.c:750
+msgid ""
+"Tip: place the button at the end of the panel and set the panel margin to 0 "
+"so you can click it by pushing the mouse into the screen corner."
+msgstr ""
+
+#: src/dialog.c:752
+msgid "Keyboard shortcut command:"
+msgstr ""
+
+#: src/plugin.c:243
+msgid "Show desktop is not available in this session"
+msgstr ""
+
+#: src/plugin.c:245
+msgid "Restore the minimized windows"
+msgstr ""
+
+#: src/plugin.c:247
+msgid "Minimize all open windows and show the desktop"
+msgstr ""
+
+#: src/plugin.c:253
+msgid "Show Desktop"
+msgstr ""
+
+#: src/plugin.c:933
+msgid "_Minimize all windows"
+msgstr ""
+
+#: src/plugin.c:939
+msgid "S_hade / unshade windows"
+msgstr ""
+
+#: src/plugin.c:955
+msgid "_Profile"
+msgstr ""
+
+#: src/plugin.c:984
+msgid "A slim, customizable Show Desktop button"
+msgstr ""
+
+#: src/xfce-desktop-button-plugin.desktop.in:5
+msgid "Slim, customizable Show Desktop button"
+msgstr ""

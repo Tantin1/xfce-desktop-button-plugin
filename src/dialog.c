@@ -440,6 +440,8 @@ fill_copy_combo (DbDialog *d)
         gint   id    = GPOINTER_TO_INT (l->data);
         gint   panel = db_tone_panel_of_plugin (d->db, id);
         gchar *key   = g_strdup_printf ("%d", id);
+        /* TRANSLATORS: entry in "Copy settings from another button";
+         * the first number is the panel, the second the plugin id */
         gchar *label = g_strdup_printf (_("Panel %d — button #%d"), panel, id);
 
         gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (d->copy_combo), key, label);
@@ -523,6 +525,8 @@ db_dialog_show (DbPlugin *db)
     /* perfil + botón */
     grid = make_grid ();
     row  = 0;
+    /* TRANSLATORS: profile names. "Glass", "Strip" and "Minimal" are styles
+     * inspired by Windows 7, 10 and 11; translate them as short style names */
     d->profile = make_combo (_("Custom"), _("Glass"), _("Strip"), _("Minimal"),
                              _("Classic icon"), NULL);
     add_row (grid, row++, _("_Profile:"), d->profile);
@@ -597,6 +601,8 @@ db_dialog_show (DbPlugin *db)
     {
         GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         d->line_length = gtk_spin_button_new_with_range (1, 100, 1);
+        /* TRANSLATORS: unit of the line length: percent of the panel height, or pixels */
+        /* xgettext:no-c-format */
         d->line_unit   = make_combo (_("% of panel"), _("px"), NULL);
         gtk_widget_set_hexpand (d->line_length, TRUE);
         gtk_box_pack_start (GTK_BOX (box), d->line_length, TRUE, TRUE, 0);
@@ -725,6 +731,7 @@ db_dialog_show (DbPlugin *db)
     /* peek */
     grid = make_grid ();
     row  = 0;
+    /* TRANSLATORS: "peek" = briefly showing the desktop while hovering, like Aero Peek */
     d->peek_on_hover = gtk_check_button_new_with_mnemonic (
         _("Show the desktop while the mouse is _over the button"));
     gtk_widget_set_tooltip_text (d->peek_on_hover,
@@ -738,11 +745,14 @@ db_dialog_show (DbPlugin *db)
     gtk_box_pack_start (GTK_BOX (page), make_frame (_("Peek"), grid), FALSE, FALSE, 0);
 
     {
-        GtkWidget *hint = gtk_label_new (
+        /* el comando queda fuera del texto traducible: debe escribirse tal cual */
+        gchar *text = g_strdup_printf ("%s\n\n%s\n%s",
             _("Tip: place the button at the end of the panel and set the panel margin "
-              "to 0 so you can click it by pushing the mouse into the screen corner.\n\n"
-              "Keyboard shortcut command:\n"
-              "xfce4-panel --plugin-event=xfce-desktop-button-plugin:show"));
+              "to 0 so you can click it by pushing the mouse into the screen corner."),
+            _("Keyboard shortcut command:"),
+            "xfce4-panel --plugin-event=xfce-desktop-button-plugin:show");
+        GtkWidget *hint = gtk_label_new (text);
+        g_free (text);
         gtk_label_set_selectable (GTK_LABEL (hint), TRUE);
         gtk_label_set_line_wrap (GTK_LABEL (hint), TRUE);
         gtk_label_set_max_width_chars (GTK_LABEL (hint), 50);

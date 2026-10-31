@@ -1,0 +1,439 @@
+# Portuguese (Brazil) translation for xfce-desktop-button-plugin.
+# This file is distributed under the same license as the xfce-desktop-button-plugin package.
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce-desktop-button-plugin 0.4.0\n"
+"Report-Msgid-Bugs-To: https://github.com/Tantin1/xfce-desktop-button-plugin/issues\n"
+"POT-Creation-Date: 2026-10-31 20:21+0000\n"
+"PO-Revision-Date: 2026-10-31 18:00-0300\n"
+"Last-Translator: Tantin1\n"
+"Language-Team: Portuguese (Brazil)\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: src/dialog.c:72
+msgid "Inspired by Windows 7"
+msgstr "Inspirado no Windows 7"
+
+#: src/dialog.c:73
+msgid "Inspired by Windows 10"
+msgstr "Inspirado no Windows 10"
+
+#: src/dialog.c:74
+msgid "Inspired by Windows 11"
+msgstr "Inspirado no Windows 11"
+
+#: src/dialog.c:75
+msgid "Like the original Xfce button"
+msgstr "Como o botão original do Xfce"
+
+#: src/dialog.c:77
+msgid "Your own settings"
+msgstr "Configurações próprias"
+
+#: src/dialog.c:218
+msgid "Detected: light panel"
+msgstr "Detectado: painel claro"
+
+#: src/dialog.c:218
+msgid "Detected: dark panel"
+msgstr "Detectado: painel escuro"
+
+#. TRANSLATORS: entry in "Copy settings from another button";
+#. * the first number is the panel, the second the plugin id
+#: src/dialog.c:445
+#, c-format
+msgid "Panel %d — button #%d"
+msgstr "Painel %d — botão nº %d"
+
+#: src/dialog.c:505 src/plugin.c:982
+#: src/xfce-desktop-button-plugin.desktop.in:4
+msgid "Desktop Button"
+msgstr "Botão da área de trabalho"
+
+#: src/dialog.c:507
+msgid "_Close"
+msgstr "_Fechar"
+
+#: src/dialog.c:523
+msgid "Button"
+msgstr "Botão"
+
+#. TRANSLATORS: profile names. "Glass", "Strip" and "Minimal" are styles
+#. * inspired by Windows 7, 10 and 11; translate them as short style names
+#: src/dialog.c:530 src/plugin.c:928
+msgid "Custom"
+msgstr "Personalizado"
+
+#: src/dialog.c:530 src/plugin.c:928
+msgid "Glass"
+msgstr "Vidro"
+
+#: src/dialog.c:530 src/plugin.c:928
+msgid "Strip"
+msgstr "Faixa"
+
+#: src/dialog.c:530 src/plugin.c:928
+msgid "Minimal"
+msgstr "Mínimo"
+
+#: src/dialog.c:531 src/plugin.c:928
+msgid "Classic icon"
+msgstr "Ícone clássico"
+
+#: src/dialog.c:532
+msgid "_Profile:"
+msgstr "_Perfil:"
+
+#: src/dialog.c:539
+msgid "Automatic"
+msgstr "Automático"
+
+#: src/dialog.c:539
+msgid "Dark"
+msgstr "Escuro"
+
+#: src/dialog.c:539
+msgid "Light"
+msgstr "Claro"
+
+#: src/dialog.c:541
+msgid "Built-in profiles use white on dark panels and black on light panels"
+msgstr ""
+"Os perfis predefinidos usam branco em painéis escuros e preto em painéis "
+"claros"
+
+#: src/dialog.c:542
+msgid "Panel t_one:"
+msgstr "_Tom do painel:"
+
+#: src/dialog.c:550
+msgid "Button _thickness (px):"
+msgstr "_Espessura do botão (px):"
+
+#: src/dialog.c:552 src/dialog.c:593 src/dialog.c:633
+msgid "Line"
+msgstr "Linha"
+
+#: src/dialog.c:552 src/dialog.c:569
+msgid "Icon"
+msgstr "Ícone"
+
+#: src/dialog.c:552
+msgid "None (background only)"
+msgstr "Nenhum (apenas fundo)"
+
+#: src/dialog.c:553
+msgid "_Style:"
+msgstr "_Estilo:"
+
+#: src/dialog.c:554
+msgid "General"
+msgstr "Geral"
+
+#: src/dialog.c:561
+msgid "Icon _name:"
+msgstr "_Nome do ícone:"
+
+#: src/dialog.c:564
+msgid "Icon si_ze (px):"
+msgstr "_Tamanho do ícone (px):"
+
+#: src/dialog.c:566
+msgid "_Follow the panel icon size"
+msgstr "_Seguir o tamanho dos ícones do painel"
+
+#: src/dialog.c:579
+msgid "C_opy"
+msgstr "C_opiar"
+
+#: src/dialog.c:581
+msgid "Replace all settings of this button with those of the selected one"
+msgstr "Substitui todas as configurações deste botão pelas do selecionado"
+
+#: src/dialog.c:585
+msgid "_From:"
+msgstr "_De:"
+
+#: src/dialog.c:589
+msgid "Copy settings from another button"
+msgstr "Copiar configurações de outro botão"
+
+#: src/dialog.c:599
+msgid "Line _width (px):"
+msgstr "_Espessura da linha (px):"
+
+#. TRANSLATORS: unit of the line length: percent of the panel height, or pixels
+#: src/dialog.c:606
+#, no-c-format
+msgid "% of panel"
+msgstr "% do painel"
+
+#: src/dialog.c:606
+msgid "px"
+msgstr "px"
+
+#: src/dialog.c:610
+msgid "Line _length:"
+msgstr "_Comprimento da linha:"
+
+#: src/dialog.c:615
+msgid "Start (left / top)"
+msgstr "Início (esquerda / topo)"
+
+#: src/dialog.c:615
+msgid "Center"
+msgstr "Centro"
+
+#: src/dialog.c:615
+msgid "End (right / bottom)"
+msgstr "Fim (direita / base)"
+
+#: src/dialog.c:616
+msgid "_Position:"
+msgstr "_Posição:"
+
+#: src/dialog.c:618
+msgid "Always"
+msgstr "Sempre"
+
+#: src/dialog.c:618
+msgid "Only on hover"
+msgstr "Somente ao passar o mouse"
+
+#: src/dialog.c:619
+msgid "_Visible:"
+msgstr "_Visível:"
+
+#: src/dialog.c:622
+msgid "_Color:"
+msgstr "_Cor:"
+
+#: src/dialog.c:625
+msgid "Color on _hover:"
+msgstr "Cor ao _passar o mouse:"
+
+#: src/dialog.c:628
+msgid "Color when p_ressed:"
+msgstr "Cor ao p_ressionar:"
+
+#: src/dialog.c:630
+msgid "R_ounded ends"
+msgstr "Pontas a_rredondadas"
+
+#: src/dialog.c:637
+msgid "Background"
+msgstr "Fundo"
+
+#: src/dialog.c:643
+msgid "_Normal:"
+msgstr "_Normal:"
+
+#: src/dialog.c:646
+msgid "On h_over:"
+msgstr "Ao passar o _mouse:"
+
+#: src/dialog.c:649
+msgid "_Pressed:"
+msgstr "_Pressionado:"
+
+#: src/dialog.c:652
+msgid "Corner _radius (px):"
+msgstr "_Raio dos cantos (px):"
+
+#: src/dialog.c:656
+msgid "Empty space between the edge of the button and the colored background"
+msgstr "Espaço vazio entre a borda do botão e o fundo colorido"
+
+#: src/dialog.c:657
+msgid "_Margin (px):"
+msgstr "_Margem (px):"
+
+#: src/dialog.c:659
+msgid "_Glass shine"
+msgstr "_Brilho de vidro"
+
+#: src/dialog.c:663
+msgid "_Keep the pressed color while the desktop is shown"
+msgstr ""
+"_Manter a cor de pressionado enquanto a área de trabalho estiver visível"
+
+#: src/dialog.c:666
+msgid "Background colors"
+msgstr "Cores de fundo"
+
+#: src/dialog.c:671
+msgid "Smooth _transitions"
+msgstr "_Transições suaves"
+
+#: src/dialog.c:673
+msgid ""
+"Fade colors when hovering and clicking instead of changing them instantly"
+msgstr ""
+"Esmaece as cores ao passar o mouse e clicar, em vez de mudá-las "
+"instantaneamente"
+
+#: src/dialog.c:676
+msgid "Fast"
+msgstr "Rápida"
+
+#: src/dialog.c:676
+msgid "Normal"
+msgstr "Normal"
+
+#: src/dialog.c:676
+msgid "Slow"
+msgstr "Lenta"
+
+#: src/dialog.c:677
+msgid "Spee_d:"
+msgstr "_Velocidade:"
+
+#: src/dialog.c:679
+msgid "Animations are disabled in the system settings."
+msgstr "As animações estão desativadas nas configurações do sistema."
+
+#: src/dialog.c:686
+msgid "Animation"
+msgstr "Animação"
+
+#: src/dialog.c:689
+msgid "Behavior"
+msgstr "Comportamento"
+
+#: src/dialog.c:693 src/dialog.c:705
+msgid "Do nothing"
+msgstr "Não fazer nada"
+
+#: src/dialog.c:693
+msgid "Show / restore desktop"
+msgstr "Mostrar / restaurar área de trabalho"
+
+#: src/dialog.c:694
+msgid "Minimize all windows"
+msgstr "Minimizar todas as janelas"
+
+#: src/dialog.c:695
+msgid "Shade / unshade windows (X11 only)"
+msgstr "Enrolar / desenrolar janelas (somente X11)"
+
+#: src/dialog.c:696
+msgid "_Middle click:"
+msgstr "Clique do _meio:"
+
+#: src/dialog.c:698
+msgid "Window shading is not supported on Wayland."
+msgstr "Enrolar janelas não é suportado no Wayland."
+
+#: src/dialog.c:705
+msgid "Switch workspace"
+msgstr "Alternar espaço de trabalho"
+
+#: src/dialog.c:706
+msgid "Up shows desktop, down restores"
+msgstr "Para cima mostra a área de trabalho, para baixo restaura"
+
+#: src/dialog.c:707
+msgid "Mouse _wheel:"
+msgstr "_Roda do mouse:"
+
+#: src/dialog.c:709
+msgid "Workspace switching is not available in this session."
+msgstr "A troca de espaço de trabalho não está disponível nesta sessão."
+
+#: src/dialog.c:716
+msgid "Show desktop when _dragging a file over the button"
+msgstr "Mostrar a área de trabalho ao _arrastar um arquivo sobre o botão"
+
+#: src/dialog.c:720
+msgid "Cop_y files dropped on the button to the Desktop"
+msgstr "Cop_iar para a Área de Trabalho os arquivos soltos sobre o botão"
+
+#: src/dialog.c:722
+msgid ""
+"The original files are never moved or deleted, and existing files on the "
+"Desktop are never overwritten: a copy gets a new name such as \"photo "
+"(2).jpg\"."
+msgstr ""
+"Os arquivos originais nunca são movidos ou excluídos, e os arquivos "
+"existentes na Área de Trabalho nunca são sobrescritos: a cópia recebe um novo"
+" nome, como \"foto (2).jpg\"."
+
+#: src/dialog.c:726
+msgid "Show _tooltip"
+msgstr "Mostrar _dica"
+
+#: src/dialog.c:729
+msgid "Actions"
+msgstr "Ações"
+
+#: src/dialog.c:736
+msgid "Show the desktop while the mouse is _over the button"
+msgstr "Mostrar a área de trabalho enquanto o mouse estiver s_obre o botão"
+
+#: src/dialog.c:738
+msgid ""
+"Moving the mouse away restores the windows. Click during the peek to keep the"
+" desktop visible."
+msgstr ""
+"Afastar o mouse restaura as janelas. Clique durante a espiada para manter a "
+"área de trabalho visível."
+
+#: src/dialog.c:743
+msgid "D_elay (ms):"
+msgstr "_Atraso (ms):"
+
+#: src/dialog.c:745
+msgid "Peek"
+msgstr "Espiada"
+
+#: src/dialog.c:750
+msgid ""
+"Tip: place the button at the end of the panel and set the panel margin to 0 "
+"so you can click it by pushing the mouse into the screen corner."
+msgstr ""
+"Dica: coloque o botão no fim do painel e defina a margem do painel como 0 "
+"para clicar nele empurrando o mouse até o canto da tela."
+
+#: src/dialog.c:752
+msgid "Keyboard shortcut command:"
+msgstr "Comando para atalho de teclado:"
+
+#: src/plugin.c:243
+msgid "Show desktop is not available in this session"
+msgstr "Mostrar a área de trabalho não está disponível nesta sessão"
+
+#: src/plugin.c:245
+msgid "Restore the minimized windows"
+msgstr "Restaurar as janelas minimizadas"
+
+#: src/plugin.c:247
+msgid "Minimize all open windows and show the desktop"
+msgstr "Minimizar todas as janelas abertas e mostrar a área de trabalho"
+
+#: src/plugin.c:253
+msgid "Show Desktop"
+msgstr "Mostrar área de trabalho"
+
+#: src/plugin.c:933
+msgid "_Minimize all windows"
+msgstr "_Minimizar todas as janelas"
+
+#: src/plugin.c:939
+msgid "S_hade / unshade windows"
+msgstr "_Enrolar / desenrolar janelas"
+
+#: src/plugin.c:955
+msgid "_Profile"
+msgstr "_Perfil"
+
+#: src/plugin.c:984
+msgid "A slim, customizable Show Desktop button"
+msgstr "Um botão \"Mostrar área de trabalho\" fino e personalizável"
+
+#: src/xfce-desktop-button-plugin.desktop.in:5
+msgid "Slim, customizable Show Desktop button"
+msgstr "Botão \"Mostrar área de trabalho\" fino e personalizável"

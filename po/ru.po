@@ -1,0 +1,437 @@
+# Russian translation for xfce-desktop-button-plugin.
+# This file is distributed under the same license as the xfce-desktop-button-plugin package.
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce-desktop-button-plugin 0.4.0\n"
+"Report-Msgid-Bugs-To: https://github.com/Tantin1/xfce-desktop-button-plugin/issues\n"
+"POT-Creation-Date: 2026-10-31 20:21+0000\n"
+"PO-Revision-Date: 2026-10-31 18:00-0300\n"
+"Last-Translator: Tantin1\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: src/dialog.c:72
+msgid "Inspired by Windows 7"
+msgstr "В стиле Windows 7"
+
+#: src/dialog.c:73
+msgid "Inspired by Windows 10"
+msgstr "В стиле Windows 10"
+
+#: src/dialog.c:74
+msgid "Inspired by Windows 11"
+msgstr "В стиле Windows 11"
+
+#: src/dialog.c:75
+msgid "Like the original Xfce button"
+msgstr "Как стандартная кнопка Xfce"
+
+#: src/dialog.c:77
+msgid "Your own settings"
+msgstr "Собственные настройки"
+
+#: src/dialog.c:218
+msgid "Detected: light panel"
+msgstr "Обнаружено: светлая панель"
+
+#: src/dialog.c:218
+msgid "Detected: dark panel"
+msgstr "Обнаружено: тёмная панель"
+
+#. TRANSLATORS: entry in "Copy settings from another button";
+#. * the first number is the panel, the second the plugin id
+#: src/dialog.c:445
+#, c-format
+msgid "Panel %d — button #%d"
+msgstr "Панель %d — кнопка №%d"
+
+#: src/dialog.c:505 src/plugin.c:982
+#: src/xfce-desktop-button-plugin.desktop.in:4
+msgid "Desktop Button"
+msgstr "Кнопка рабочего стола"
+
+#: src/dialog.c:507
+msgid "_Close"
+msgstr "_Закрыть"
+
+#: src/dialog.c:523
+msgid "Button"
+msgstr "Кнопка"
+
+#. TRANSLATORS: profile names. "Glass", "Strip" and "Minimal" are styles
+#. * inspired by Windows 7, 10 and 11; translate them as short style names
+#: src/dialog.c:530 src/plugin.c:928
+msgid "Custom"
+msgstr "Свой"
+
+#: src/dialog.c:530 src/plugin.c:928
+msgid "Glass"
+msgstr "Стекло"
+
+#: src/dialog.c:530 src/plugin.c:928
+msgid "Strip"
+msgstr "Полоса"
+
+#: src/dialog.c:530 src/plugin.c:928
+msgid "Minimal"
+msgstr "Минимальный"
+
+#: src/dialog.c:531 src/plugin.c:928
+msgid "Classic icon"
+msgstr "Классический значок"
+
+#: src/dialog.c:532
+msgid "_Profile:"
+msgstr "_Профиль:"
+
+#: src/dialog.c:539
+msgid "Automatic"
+msgstr "Автоматически"
+
+#: src/dialog.c:539
+msgid "Dark"
+msgstr "Тёмный"
+
+#: src/dialog.c:539
+msgid "Light"
+msgstr "Светлый"
+
+#: src/dialog.c:541
+msgid "Built-in profiles use white on dark panels and black on light panels"
+msgstr ""
+"Встроенные профили используют белый цвет на тёмных панелях и чёрный — на "
+"светлых"
+
+#: src/dialog.c:542
+msgid "Panel t_one:"
+msgstr "_Тон панели:"
+
+#: src/dialog.c:550
+msgid "Button _thickness (px):"
+msgstr "_Толщина кнопки (пикс.):"
+
+#: src/dialog.c:552 src/dialog.c:593 src/dialog.c:633
+msgid "Line"
+msgstr "Линия"
+
+#: src/dialog.c:552 src/dialog.c:569
+msgid "Icon"
+msgstr "Значок"
+
+#: src/dialog.c:552
+msgid "None (background only)"
+msgstr "Нет (только фон)"
+
+#: src/dialog.c:553
+msgid "_Style:"
+msgstr "_Стиль:"
+
+#: src/dialog.c:554
+msgid "General"
+msgstr "Общие"
+
+#: src/dialog.c:561
+msgid "Icon _name:"
+msgstr "_Имя значка:"
+
+#: src/dialog.c:564
+msgid "Icon si_ze (px):"
+msgstr "_Размер значка (пикс.):"
+
+#: src/dialog.c:566
+msgid "_Follow the panel icon size"
+msgstr "_Следовать размеру значков панели"
+
+#: src/dialog.c:579
+msgid "C_opy"
+msgstr "_Копировать"
+
+#: src/dialog.c:581
+msgid "Replace all settings of this button with those of the selected one"
+msgstr "Заменить все настройки этой кнопки настройками выбранной"
+
+#: src/dialog.c:585
+msgid "_From:"
+msgstr "_Из:"
+
+#: src/dialog.c:589
+msgid "Copy settings from another button"
+msgstr "Копировать настройки другой кнопки"
+
+#: src/dialog.c:599
+msgid "Line _width (px):"
+msgstr "_Толщина линии (пикс.):"
+
+#. TRANSLATORS: unit of the line length: percent of the panel height, or pixels
+#: src/dialog.c:606
+#, no-c-format
+msgid "% of panel"
+msgstr "% панели"
+
+#: src/dialog.c:606
+msgid "px"
+msgstr "пикс."
+
+#: src/dialog.c:610
+msgid "Line _length:"
+msgstr "_Длина линии:"
+
+#: src/dialog.c:615
+msgid "Start (left / top)"
+msgstr "Начало (слева / сверху)"
+
+#: src/dialog.c:615
+msgid "Center"
+msgstr "Центр"
+
+#: src/dialog.c:615
+msgid "End (right / bottom)"
+msgstr "Конец (справа / снизу)"
+
+#: src/dialog.c:616
+msgid "_Position:"
+msgstr "_Положение:"
+
+#: src/dialog.c:618
+msgid "Always"
+msgstr "Всегда"
+
+#: src/dialog.c:618
+msgid "Only on hover"
+msgstr "Только при наведении"
+
+#: src/dialog.c:619
+msgid "_Visible:"
+msgstr "_Видимость:"
+
+#: src/dialog.c:622
+msgid "_Color:"
+msgstr "_Цвет:"
+
+#: src/dialog.c:625
+msgid "Color on _hover:"
+msgstr "Цвет при _наведении:"
+
+#: src/dialog.c:628
+msgid "Color when p_ressed:"
+msgstr "Цвет при н_ажатии:"
+
+#: src/dialog.c:630
+msgid "R_ounded ends"
+msgstr "_Скруглённые концы"
+
+#: src/dialog.c:637
+msgid "Background"
+msgstr "Фон"
+
+#: src/dialog.c:643
+msgid "_Normal:"
+msgstr "_Обычный:"
+
+#: src/dialog.c:646
+msgid "On h_over:"
+msgstr "При н_аведении:"
+
+#: src/dialog.c:649
+msgid "_Pressed:"
+msgstr "_Нажатие:"
+
+#: src/dialog.c:652
+msgid "Corner _radius (px):"
+msgstr "_Радиус углов (пикс.):"
+
+#: src/dialog.c:656
+msgid "Empty space between the edge of the button and the colored background"
+msgstr "Пустое пространство между краем кнопки и цветным фоном"
+
+#: src/dialog.c:657
+msgid "_Margin (px):"
+msgstr "_Отступ (пикс.):"
+
+#: src/dialog.c:659
+msgid "_Glass shine"
+msgstr "_Стеклянный блеск"
+
+#: src/dialog.c:663
+msgid "_Keep the pressed color while the desktop is shown"
+msgstr "_Сохранять цвет нажатия, пока показан рабочий стол"
+
+#: src/dialog.c:666
+msgid "Background colors"
+msgstr "Цвета фона"
+
+#: src/dialog.c:671
+msgid "Smooth _transitions"
+msgstr "_Плавные переходы"
+
+#: src/dialog.c:673
+msgid ""
+"Fade colors when hovering and clicking instead of changing them instantly"
+msgstr ""
+"Плавно менять цвета при наведении и нажатии вместо мгновенного переключения"
+
+#: src/dialog.c:676
+msgid "Fast"
+msgstr "Быстро"
+
+#: src/dialog.c:676
+msgid "Normal"
+msgstr "Обычно"
+
+#: src/dialog.c:676
+msgid "Slow"
+msgstr "Медленно"
+
+#: src/dialog.c:677
+msgid "Spee_d:"
+msgstr "_Скорость:"
+
+#: src/dialog.c:679
+msgid "Animations are disabled in the system settings."
+msgstr "Анимация отключена в настройках системы."
+
+#: src/dialog.c:686
+msgid "Animation"
+msgstr "Анимация"
+
+#: src/dialog.c:689
+msgid "Behavior"
+msgstr "Поведение"
+
+#: src/dialog.c:693 src/dialog.c:705
+msgid "Do nothing"
+msgstr "Ничего не делать"
+
+#: src/dialog.c:693
+msgid "Show / restore desktop"
+msgstr "Показать / восстановить рабочий стол"
+
+#: src/dialog.c:694
+msgid "Minimize all windows"
+msgstr "Свернуть все окна"
+
+#: src/dialog.c:695
+msgid "Shade / unshade windows (X11 only)"
+msgstr "Свернуть / развернуть окна в заголовок (только X11)"
+
+#: src/dialog.c:696
+msgid "_Middle click:"
+msgstr "_Средняя кнопка:"
+
+#: src/dialog.c:698
+msgid "Window shading is not supported on Wayland."
+msgstr "Сворачивание окон в заголовок не поддерживается в Wayland."
+
+#: src/dialog.c:705
+msgid "Switch workspace"
+msgstr "Переключить рабочее место"
+
+#: src/dialog.c:706
+msgid "Up shows desktop, down restores"
+msgstr "Вверх — показать рабочий стол, вниз — восстановить"
+
+#: src/dialog.c:707
+msgid "Mouse _wheel:"
+msgstr "_Колёсико мыши:"
+
+#: src/dialog.c:709
+msgid "Workspace switching is not available in this session."
+msgstr "Переключение рабочих мест недоступно в этом сеансе."
+
+#: src/dialog.c:716
+msgid "Show desktop when _dragging a file over the button"
+msgstr "Показывать рабочий стол при _перетаскивании файла на кнопку"
+
+#: src/dialog.c:720
+msgid "Cop_y files dropped on the button to the Desktop"
+msgstr "_Копировать на рабочий стол файлы, брошенные на кнопку"
+
+#: src/dialog.c:722
+msgid ""
+"The original files are never moved or deleted, and existing files on the "
+"Desktop are never overwritten: a copy gets a new name such as \"photo "
+"(2).jpg\"."
+msgstr ""
+"Исходные файлы никогда не перемещаются и не удаляются, а существующие файлы "
+"на рабочем столе никогда не перезаписываются: копия получает новое имя, "
+"например «фото (2).jpg»."
+
+#: src/dialog.c:726
+msgid "Show _tooltip"
+msgstr "Показывать _подсказку"
+
+#: src/dialog.c:729
+msgid "Actions"
+msgstr "Действия"
+
+#: src/dialog.c:736
+msgid "Show the desktop while the mouse is _over the button"
+msgstr "Показывать рабочий стол, пока указатель _над кнопкой"
+
+#: src/dialog.c:738
+msgid ""
+"Moving the mouse away restores the windows. Click during the peek to keep the"
+" desktop visible."
+msgstr ""
+"Если убрать указатель, окна восстановятся. Щёлкните во время просмотра, чтобы"
+" рабочий стол остался видимым."
+
+#: src/dialog.c:743
+msgid "D_elay (ms):"
+msgstr "_Задержка (мс):"
+
+#: src/dialog.c:745
+msgid "Peek"
+msgstr "Просмотр"
+
+#: src/dialog.c:750
+msgid ""
+"Tip: place the button at the end of the panel and set the panel margin to 0 "
+"so you can click it by pushing the mouse into the screen corner."
+msgstr ""
+"Совет: поместите кнопку в конец панели и установите отступ панели 0, чтобы "
+"нажимать её, просто уводя указатель в угол экрана."
+
+#: src/dialog.c:752
+msgid "Keyboard shortcut command:"
+msgstr "Команда для сочетания клавиш:"
+
+#: src/plugin.c:243
+msgid "Show desktop is not available in this session"
+msgstr "Показ рабочего стола недоступен в этом сеансе"
+
+#: src/plugin.c:245
+msgid "Restore the minimized windows"
+msgstr "Восстановить свёрнутые окна"
+
+#: src/plugin.c:247
+msgid "Minimize all open windows and show the desktop"
+msgstr "Свернуть все открытые окна и показать рабочий стол"
+
+#: src/plugin.c:253
+msgid "Show Desktop"
+msgstr "Показать рабочий стол"
+
+#: src/plugin.c:933
+msgid "_Minimize all windows"
+msgstr "_Свернуть все окна"
+
+#: src/plugin.c:939
+msgid "S_hade / unshade windows"
+msgstr "Свернуть / _развернуть окна в заголовок"
+
+#: src/plugin.c:955
+msgid "_Profile"
+msgstr "_Профиль"
+
+#: src/plugin.c:984
+msgid "A slim, customizable Show Desktop button"
+msgstr "Тонкая настраиваемая кнопка «Показать рабочий стол»"
+
+#: src/xfce-desktop-button-plugin.desktop.in:5
+msgid "Slim, customizable Show Desktop button"
+msgstr "Тонкая настраиваемая кнопка «Показать рабочий стол»"

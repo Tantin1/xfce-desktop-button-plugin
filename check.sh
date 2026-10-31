@@ -2,7 +2,7 @@
 #
 # check.sh — pruebas automáticas mínimas del plugin
 #
-# Uso (desde la carpeta src, funciona igual en fish):
+# Uso (desde la carpeta del proyecto, funciona igual en fish):
 #     bash check.sh
 #
 # Qué comprueba, sin instalar nada ni tocar tu panel:
@@ -10,7 +10,8 @@
 #   2. Que la biblioteca exporte la función que el panel necesita para cargarla.
 #   3. Que el archivo .desktop generado sea válido para el panel.
 #   4. Que copiar al Escritorio nunca sobrescriba ni duplique (en carpetas temporales).
-#   5. (Opcional) Que un panel de prueba, en una pantalla virtual aparte,
+#   5. Que las traducciones estén completas, sean válidas y funcionen.
+#   6. (Opcional) Que un panel de prueba, en una pantalla virtual aparte,
 #      cargue el plugin INSTALADO sin errores. El panel solo busca plugins
 #      en la carpeta del sistema, así que para probar la versión nueva
 #      corré este script después de instalarla. Se omite si falta Xvfb.
@@ -19,7 +20,8 @@
 
 set -u
 
-SRC=$(cd "$(dirname "$0")" && pwd)
+ROOT=$(cd "$(dirname "$0")" && pwd)
+SRC="$ROOT/src"
 TMP=$(mktemp -d)
 PIDS=()
 cleanup ()
@@ -40,14 +42,14 @@ FIRST_BUILD=""
 # ------------------------------------------------------------------
 echo "1. Compilación (los avisos cuentan como error)"
 
-build ()   # $1 = nombre, $2.. = opciones de cmake
+build ()   # $1 = nombre, $2.. = opciones de meson
 {
     local name=$1; shift
     local dir="$TMP/build-$name"
 
-    if cmake -S "$SRC" -B "$dir" -DCMAKE_C_FLAGS=-Werror "$@" >"$dir.log" 2>&1 \
-       && cmake --build "$dir" >>"$dir.log" 2>&1; then
-        pass "$(grep -o 'Motor de ventanas: .*' "$dir.log" | head -1)"
+    if meson setup "$dir" "$ROOT" -Dwerror=true "$@" >"$dir.log" 2>&1 \
+       && meson compile -C "$dir" >>"$dir.log" 2>&1; then
+        pass "$(grep -o 'Motor de ventanas.*' "$dir.log" | head -1 | tr -s ' ')"
         [ -z "$FIRST_BUILD" ] && FIRST_BUILD=$dir
     else
         bad "compilar ($name) — últimas líneas del registro:"
@@ -56,13 +58,13 @@ build ()   # $1 = nombre, $2.. = opciones de cmake
 }
 
 if pkg-config --exists 'libxfce4windowing-0 >= 4.19.2'; then
-    build xfw
+    build xfw -Dwindowing=xfw
 else
     skip "libxfce4windowing no instalado (normal en Xfce 4.18)"
 fi
 
 if pkg-config --exists libwnck-3.0; then
-    build wnck -DFORCE_WNCK=ON
+    build wnck -Dwindowing=wnck
 else
     skip "libwnck no instalado"
 fi
@@ -245,7 +247,54 @@ else
 fi
 
 # ------------------------------------------------------------------
-echo "5. Carga del plugin instalado en un panel de prueba (pantalla virtual)"
+echo "5. Traducciones"
+
+POT="$TMP/actual.pot"
+if ! command -v msgfmt >/dev/null || ! command -v xgettext >/dev/null; then
+    skip "falta gettext (sudo pacman -S gettext / sudo apt install gettext)"
+elif xgettext --from-code=UTF-8 --keyword=_ --keyword=N_ --directory="$ROOT" \
+              -f "$ROOT/po/POTFILES" -o "$POT" 2>"$TMP/xgettext.log"; then
+    po_ok=1
+    for lang in $(grep -v '^#' "$ROOT/po/LINGUAS"); do
+        po="$ROOT/po/$lang.po"
+        stats=$(msgfmt -c --statistics -o /dev/null "$po" 2>&1)
+        # cada texto del código tiene que estar traducido en este idioma
+        if ! msgcmp "$po" "$POT" >"$TMP/msgcmp.log" 2>&1; then
+            bad "$lang: faltan textos (corré: meson compile -C build xfce-desktop-button-plugin-update-po)"
+            head -3 "$TMP/msgcmp.log" | sed 's/^/           /'; po_ok=0
+        elif echo "$stats" | grep -qE 'untranslated|fuzzy|error'; then
+            bad "$lang: $stats"; po_ok=0
+        fi
+    done
+    [ $po_ok = 1 ] && pass "$(grep -vc '^#' "$ROOT/po/LINGUAS") idiomas completos y válidos ($(( $(grep -c '^msgid "' "$POT") - 1 )) textos)"
+
+    # que el .desktop lleve los nombres traducidos
+    if grep -q '^Name\[es\]=' "$DESK"; then
+        pass ".desktop con nombres traducidos ($(grep -c '^Name\[' "$DESK") idiomas)"
+    else
+        bad ".desktop sin traducciones"
+    fi
+
+    # que cada .mo compilado contenga las traducciones (se leen tal como
+    # las va a cargar el plugin)
+    mo_ok=1
+    for lang in $(grep -v '^#' "$ROOT/po/LINGUAS"); do
+        mo="$FIRST_BUILD/po/$lang/LC_MESSAGES/$MODULE.mo"
+        n=$(msgunfmt "$mo" 2>/dev/null | grep -c '^msgid "')
+        if [ "${n:-0}" -lt 2 ]; then
+            bad "$lang: el .mo compilado está vacío o no existe"; mo_ok=0
+        fi
+    done
+    if [ $mo_ok = 1 ]; then
+        es=$(msgunfmt "$FIRST_BUILD/po/es/LC_MESSAGES/$MODULE.mo" | grep -A1 '^msgid "Show Desktop"' | sed -n 's/^msgstr "\(.*\)"/\1/p')
+        pass "archivos .mo compilados (ej.: \"Show Desktop\" → \"$es\")"
+    fi
+else
+    bad "xgettext no pudo leer el código:"; sed 's/^/           /' "$TMP/xgettext.log"
+fi
+
+# ------------------------------------------------------------------
+echo "6. Carga del plugin instalado en un panel de prueba (pantalla virtual)"
 
 INSTALLED_DESK=$(ls /usr/share/xfce4/panel/plugins/$MODULE.desktop \
                     /usr/local/share/xfce4/panel/plugins/$MODULE.desktop 2>/dev/null | head -1)

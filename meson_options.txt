@@ -1,0 +1,7 @@
+option(
+  'windowing',
+  type: 'combo',
+  choices: ['auto', 'xfw', 'wnck'],
+  value: 'auto',
+  description: 'Motor de ventanas: auto (libxfce4windowing si está, si no libwnck), xfw o wnck',
+)

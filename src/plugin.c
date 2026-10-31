@@ -7,6 +7,7 @@
 
 #include <math.h>
 #include <glib/gi18n-lib.h>
+#include <libxfce4util/libxfce4util.h>
 
 #include "plugin.h"
 
@@ -923,6 +924,7 @@ on_menu_profile (GtkCheckMenuItem *item, DbPlugin *db)
 static void
 menu_build (DbPlugin *db)
 {
+    /* TRANSLATORS: same profile names as in the properties dialog */
     static const gchar *names[PROFILE_CLASSIC + 1] =
         { N_("Custom"), N_("Glass"), N_("Strip"), N_("Minimal"), N_("Classic icon") };
     GtkWidget *item, *submenu;
@@ -1018,8 +1020,10 @@ db_plugin_construct (XfcePanelPlugin *plugin)
 {
     DbPlugin   *db;
 
-    bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
-    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+    /* igual que los plugins oficiales: además de enlazar el dominio, lo deja
+     * como dominio por omisión del proceso. Sin esto GLib no traduce los
+     * textos del plugin si el proceso contenedor no tiene traducción propia. */
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
 
     db = g_new0 (DbPlugin, 1);
     db->plugin = plugin;

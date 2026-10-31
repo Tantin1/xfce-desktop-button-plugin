@@ -1,0 +1,7 @@
+src/config.c
+src/dialog.c
+src/drop.c
+src/plugin.c
+src/tone.c
+src/wm.c
+src/xfce-desktop-button-plugin.desktop.in

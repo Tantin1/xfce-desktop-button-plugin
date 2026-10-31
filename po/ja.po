@@ -1,0 +1,429 @@
+# Japanese translation for xfce-desktop-button-plugin.
+# This file is distributed under the same license as the xfce-desktop-button-plugin package.
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce-desktop-button-plugin 0.4.0\n"
+"Report-Msgid-Bugs-To: https://github.com/Tantin1/xfce-desktop-button-plugin/issues\n"
+"POT-Creation-Date: 2026-10-31 20:21+0000\n"
+"PO-Revision-Date: 2026-10-31 18:00-0300\n"
+"Last-Translator: Tantin1\n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/dialog.c:72
+msgid "Inspired by Windows 7"
+msgstr "Windows 7 風"
+
+#: src/dialog.c:73
+msgid "Inspired by Windows 10"
+msgstr "Windows 10 風"
+
+#: src/dialog.c:74
+msgid "Inspired by Windows 11"
+msgstr "Windows 11 風"
+
+#: src/dialog.c:75
+msgid "Like the original Xfce button"
+msgstr "Xfce 標準のボタンと同様"
+
+#: src/dialog.c:77
+msgid "Your own settings"
+msgstr "独自の設定"
+
+#: src/dialog.c:218
+msgid "Detected: light panel"
+msgstr "検出結果: 明るいパネル"
+
+#: src/dialog.c:218
+msgid "Detected: dark panel"
+msgstr "検出結果: 暗いパネル"
+
+#. TRANSLATORS: entry in "Copy settings from another button";
+#. * the first number is the panel, the second the plugin id
+#: src/dialog.c:445
+#, c-format
+msgid "Panel %d — button #%d"
+msgstr "パネル %d — ボタン #%d"
+
+#: src/dialog.c:505 src/plugin.c:982
+#: src/xfce-desktop-button-plugin.desktop.in:4
+msgid "Desktop Button"
+msgstr "デスクトップボタン"
+
+#: src/dialog.c:507
+msgid "_Close"
+msgstr "閉じる(_C)"
+
+#: src/dialog.c:523
+msgid "Button"
+msgstr "ボタン"
+
+#. TRANSLATORS: profile names. "Glass", "Strip" and "Minimal" are styles
+#. * inspired by Windows 7, 10 and 11; translate them as short style names
+#: src/dialog.c:530 src/plugin.c:928
+msgid "Custom"
+msgstr "カスタム"
+
+#: src/dialog.c:530 src/plugin.c:928
+msgid "Glass"
+msgstr "ガラス"
+
+#: src/dialog.c:530 src/plugin.c:928
+msgid "Strip"
+msgstr "ストライプ"
+
+#: src/dialog.c:530 src/plugin.c:928
+msgid "Minimal"
+msgstr "ミニマル"
+
+#: src/dialog.c:531 src/plugin.c:928
+msgid "Classic icon"
+msgstr "クラシックアイコン"
+
+#: src/dialog.c:532
+msgid "_Profile:"
+msgstr "プロファイル(_P):"
+
+#: src/dialog.c:539
+msgid "Automatic"
+msgstr "自動"
+
+#: src/dialog.c:539
+msgid "Dark"
+msgstr "ダーク"
+
+#: src/dialog.c:539
+msgid "Light"
+msgstr "ライト"
+
+#: src/dialog.c:541
+msgid "Built-in profiles use white on dark panels and black on light panels"
+msgstr "組み込みプロファイルは、暗いパネルでは白、明るいパネルでは黒を使います"
+
+#: src/dialog.c:542
+msgid "Panel t_one:"
+msgstr "パネルの色調(_O):"
+
+#: src/dialog.c:550
+msgid "Button _thickness (px):"
+msgstr "ボタンの太さ(_T) (px):"
+
+#: src/dialog.c:552 src/dialog.c:593 src/dialog.c:633
+msgid "Line"
+msgstr "ライン"
+
+#: src/dialog.c:552 src/dialog.c:569
+msgid "Icon"
+msgstr "アイコン"
+
+#: src/dialog.c:552
+msgid "None (background only)"
+msgstr "なし (背景のみ)"
+
+#: src/dialog.c:553
+msgid "_Style:"
+msgstr "スタイル(_S):"
+
+#: src/dialog.c:554
+msgid "General"
+msgstr "全般"
+
+#: src/dialog.c:561
+msgid "Icon _name:"
+msgstr "アイコン名(_N):"
+
+#: src/dialog.c:564
+msgid "Icon si_ze (px):"
+msgstr "アイコンサイズ(_Z) (px):"
+
+#: src/dialog.c:566
+msgid "_Follow the panel icon size"
+msgstr "パネルのアイコンサイズに合わせる(_F)"
+
+#: src/dialog.c:579
+msgid "C_opy"
+msgstr "コピー(_O)"
+
+#: src/dialog.c:581
+msgid "Replace all settings of this button with those of the selected one"
+msgstr "このボタンのすべての設定を、選択したボタンの設定で置き換えます"
+
+#: src/dialog.c:585
+msgid "_From:"
+msgstr "コピー元(_F):"
+
+#: src/dialog.c:589
+msgid "Copy settings from another button"
+msgstr "他のボタンから設定をコピー"
+
+#: src/dialog.c:599
+msgid "Line _width (px):"
+msgstr "線の太さ(_W) (px):"
+
+#. TRANSLATORS: unit of the line length: percent of the panel height, or pixels
+#: src/dialog.c:606
+#, no-c-format
+msgid "% of panel"
+msgstr "パネルの %"
+
+#: src/dialog.c:606
+msgid "px"
+msgstr "px"
+
+#: src/dialog.c:610
+msgid "Line _length:"
+msgstr "線の長さ(_L):"
+
+#: src/dialog.c:615
+msgid "Start (left / top)"
+msgstr "始端 (左 / 上)"
+
+#: src/dialog.c:615
+msgid "Center"
+msgstr "中央"
+
+#: src/dialog.c:615
+msgid "End (right / bottom)"
+msgstr "終端 (右 / 下)"
+
+#: src/dialog.c:616
+msgid "_Position:"
+msgstr "位置(_P):"
+
+#: src/dialog.c:618
+msgid "Always"
+msgstr "常に表示"
+
+#: src/dialog.c:618
+msgid "Only on hover"
+msgstr "ホバー時のみ"
+
+#: src/dialog.c:619
+msgid "_Visible:"
+msgstr "表示(_V):"
+
+#: src/dialog.c:622
+msgid "_Color:"
+msgstr "色(_C):"
+
+#: src/dialog.c:625
+msgid "Color on _hover:"
+msgstr "ホバー時の色(_H):"
+
+#: src/dialog.c:628
+msgid "Color when p_ressed:"
+msgstr "押下時の色(_R):"
+
+#: src/dialog.c:630
+msgid "R_ounded ends"
+msgstr "端を丸くする(_O)"
+
+#: src/dialog.c:637
+msgid "Background"
+msgstr "背景"
+
+#: src/dialog.c:643
+msgid "_Normal:"
+msgstr "通常(_N):"
+
+#: src/dialog.c:646
+msgid "On h_over:"
+msgstr "ホバー時(_O):"
+
+#: src/dialog.c:649
+msgid "_Pressed:"
+msgstr "押下時(_P):"
+
+#: src/dialog.c:652
+msgid "Corner _radius (px):"
+msgstr "角の半径(_R) (px):"
+
+#: src/dialog.c:656
+msgid "Empty space between the edge of the button and the colored background"
+msgstr "ボタンの端と色付き背景の間の余白"
+
+#: src/dialog.c:657
+msgid "_Margin (px):"
+msgstr "余白(_M) (px):"
+
+#: src/dialog.c:659
+msgid "_Glass shine"
+msgstr "ガラスの光沢(_G)"
+
+#: src/dialog.c:663
+msgid "_Keep the pressed color while the desktop is shown"
+msgstr "デスクトップ表示中は押下時の色を維持する(_K)"
+
+#: src/dialog.c:666
+msgid "Background colors"
+msgstr "背景色"
+
+#: src/dialog.c:671
+msgid "Smooth _transitions"
+msgstr "なめらかな切り替え(_T)"
+
+#: src/dialog.c:673
+msgid ""
+"Fade colors when hovering and clicking instead of changing them instantly"
+msgstr "ホバーやクリック時に色を即座に切り替えず、徐々に変化させます"
+
+#: src/dialog.c:676
+msgid "Fast"
+msgstr "速い"
+
+#: src/dialog.c:676
+msgid "Normal"
+msgstr "普通"
+
+#: src/dialog.c:676
+msgid "Slow"
+msgstr "遅い"
+
+#: src/dialog.c:677
+msgid "Spee_d:"
+msgstr "速度(_D):"
+
+#: src/dialog.c:679
+msgid "Animations are disabled in the system settings."
+msgstr "システム設定でアニメーションが無効になっています。"
+
+#: src/dialog.c:686
+msgid "Animation"
+msgstr "アニメーション"
+
+#: src/dialog.c:689
+msgid "Behavior"
+msgstr "動作"
+
+#: src/dialog.c:693 src/dialog.c:705
+msgid "Do nothing"
+msgstr "何もしない"
+
+#: src/dialog.c:693
+msgid "Show / restore desktop"
+msgstr "デスクトップの表示 / 復元"
+
+#: src/dialog.c:694
+msgid "Minimize all windows"
+msgstr "すべてのウィンドウを最小化"
+
+#: src/dialog.c:695
+msgid "Shade / unshade windows (X11 only)"
+msgstr "ウィンドウの巻き上げ / 解除 (X11 のみ)"
+
+#: src/dialog.c:696
+msgid "_Middle click:"
+msgstr "中クリック(_M):"
+
+#: src/dialog.c:698
+msgid "Window shading is not supported on Wayland."
+msgstr "Wayland ではウィンドウの巻き上げはサポートされていません。"
+
+#: src/dialog.c:705
+msgid "Switch workspace"
+msgstr "ワークスペースを切り替え"
+
+#: src/dialog.c:706
+msgid "Up shows desktop, down restores"
+msgstr "上でデスクトップ表示、下で復元"
+
+#: src/dialog.c:707
+msgid "Mouse _wheel:"
+msgstr "マウスホイール(_W):"
+
+#: src/dialog.c:709
+msgid "Workspace switching is not available in this session."
+msgstr "このセッションではワークスペースを切り替えできません。"
+
+#: src/dialog.c:716
+msgid "Show desktop when _dragging a file over the button"
+msgstr "ファイルをボタンにドラッグしたらデスクトップを表示(_D)"
+
+#: src/dialog.c:720
+msgid "Cop_y files dropped on the button to the Desktop"
+msgstr "ボタンにドロップしたファイルをデスクトップにコピー(_Y)"
+
+#: src/dialog.c:722
+msgid ""
+"The original files are never moved or deleted, and existing files on the "
+"Desktop are never overwritten: a copy gets a new name such as \"photo "
+"(2).jpg\"."
+msgstr ""
+"元のファイルが移動・削除されることはなく、デスクトップ上の既存ファイルが上書きされることもありません。コピーには「photo "
+"(2).jpg」のような新しい名前が付きます。"
+
+#: src/dialog.c:726
+msgid "Show _tooltip"
+msgstr "ツールチップを表示(_T)"
+
+#: src/dialog.c:729
+msgid "Actions"
+msgstr "操作"
+
+#: src/dialog.c:736
+msgid "Show the desktop while the mouse is _over the button"
+msgstr "マウスがボタンの上にある間デスクトップを表示(_O)"
+
+#: src/dialog.c:738
+msgid ""
+"Moving the mouse away restores the windows. Click during the peek to keep the"
+" desktop visible."
+msgstr "マウスを離すとウィンドウが元に戻ります。プレビュー中にクリックするとデスクトップが表示されたままになります。"
+
+#: src/dialog.c:743
+msgid "D_elay (ms):"
+msgstr "遅延(_E) (ms):"
+
+#: src/dialog.c:745
+msgid "Peek"
+msgstr "プレビュー"
+
+#: src/dialog.c:750
+msgid ""
+"Tip: place the button at the end of the panel and set the panel margin to 0 "
+"so you can click it by pushing the mouse into the screen corner."
+msgstr "ヒント: ボタンをパネルの端に置き、パネルの余白を 0 にすると、マウスを画面の隅に押し当てるだけでクリックできます。"
+
+#: src/dialog.c:752
+msgid "Keyboard shortcut command:"
+msgstr "キーボードショートカット用のコマンド:"
+
+#: src/plugin.c:243
+msgid "Show desktop is not available in this session"
+msgstr "このセッションではデスクトップの表示を利用できません"
+
+#: src/plugin.c:245
+msgid "Restore the minimized windows"
+msgstr "最小化したウィンドウを元に戻す"
+
+#: src/plugin.c:247
+msgid "Minimize all open windows and show the desktop"
+msgstr "開いているすべてのウィンドウを最小化してデスクトップを表示"
+
+#: src/plugin.c:253
+msgid "Show Desktop"
+msgstr "デスクトップを表示"
+
+#: src/plugin.c:933
+msgid "_Minimize all windows"
+msgstr "すべてのウィンドウを最小化(_M)"
+
+#: src/plugin.c:939
+msgid "S_hade / unshade windows"
+msgstr "ウィンドウの巻き上げ / 解除(_H)"
+
+#: src/plugin.c:955
+msgid "_Profile"
+msgstr "プロファイル(_P)"
+
+#: src/plugin.c:984
+msgid "A slim, customizable Show Desktop button"
+msgstr "細くてカスタマイズできる「デスクトップを表示」ボタン"
+
+#: src/xfce-desktop-button-plugin.desktop.in:5
+msgid "Slim, customizable Show Desktop button"
+msgstr "細くてカスタマイズできる「デスクトップを表示」ボタン"

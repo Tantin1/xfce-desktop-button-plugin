@@ -48,7 +48,7 @@ jobs:
         run: |
           apt-get update
           apt-get install -y --no-install-recommends \
-            build-essential cmake pkg-config dpkg-dev git ca-certificates procps \
+            build-essential meson ninja-build gettext pkg-config dpkg-dev git ca-certificates procps \
             libgtk-3-dev libxfce4panel-2.0-dev libxfce4util-dev libxfconf-0-dev libwnck-3-dev \
             libxfce4ui-2-dev
           # libxfce4ui-2-dev: el .pc del panel 4.20 lo requiere, pero Debian 13
@@ -75,7 +75,7 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         run: |
           apt-get install -y --no-install-recommends xvfb dbus-x11 xfconf
-          cd src && bash check.sh
+          bash check.sh
 
       - uses: actions/upload-artifact@v4
         with:
@@ -92,7 +92,7 @@ jobs:
       - name: Instalar dependencias
         run: |
           pacman -Syu --noconfirm --needed \
-            base-devel cmake pkgconf git procps-ng \
+            base-devel meson ninja gettext pkgconf git procps-ng \
             gtk3 xfce4-panel xfconf libxfce4windowing libwnck3 libxfce4ui \
             xorg-server-xvfb dbus
 
@@ -100,12 +100,12 @@ jobs:
 
       - name: Compilar e instalar
         run: |
-          cmake -S src -B build -DCMAKE_INSTALL_PREFIX=/usr
-          cmake --build build --parallel
-          cmake --install build
+          meson setup build --prefix=/usr
+          meson compile -C build
+          meson install -C build
 
       - name: Pruebas (check.sh)
-        run: cd src && bash check.sh
+        run: bash check.sh
 
   release:
     name: Publicar release

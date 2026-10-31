@@ -20,18 +20,18 @@ BUILD="$WORK/build"
 STAGE="$WORK/debian/$PKG"     # la ruta que espera dpkg-shlibdeps
 DIST="$ROOT/dist"
 
-# versión: la de project(... VERSION x.y.z) en CMakeLists.txt
-UPSTREAM=$(sed -n 's/^project([^)]*VERSION \([0-9.]*\).*/\1/p' "$ROOT/src/CMakeLists.txt")
-[ -n "$UPSTREAM" ] || { echo "No se encontró la versión en src/CMakeLists.txt" >&2; exit 1; }
+# versión: la de "version: 'x.y.z'" en meson.build
+UPSTREAM=$(sed -n "s/^ *version: *'\([0-9.]*\)'.*/\1/p" "$ROOT/meson.build" | head -1)
+[ -n "$UPSTREAM" ] || { echo "No se encontró la versión en meson.build" >&2; exit 1; }
 VERSION="$UPSTREAM-1~$SUFFIX"
 ARCH=$(dpkg --print-architecture)
 
 mkdir -p "$DIST"
 
 # --- compilar e instalar en una carpeta de preparación ---
-cmake -S "$ROOT/src" -B "$BUILD" -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
-cmake --build "$BUILD" --parallel
-DESTDIR="$STAGE" cmake --install "$BUILD"
+meson setup "$BUILD" "$ROOT" --prefix=/usr --buildtype=release
+meson compile -C "$BUILD"
+meson install -C "$BUILD" --destdir "$STAGE"
 
 # sin símbolos de depuración: paquete más chico
 find "$STAGE" -name '*.so' -exec strip --strip-unneeded {} +
