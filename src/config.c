@@ -171,6 +171,7 @@ db_config_init_defaults (DbConfig *cfg)
     cfg->scroll_action = SCROLL_NONE;
     cfg->drag_hover    = TRUE;
     cfg->show_tooltip  = TRUE;
+    cfg->single_row    = FALSE;
 
     cfg->highlight_shown = FALSE;
     cfg->panel_tone      = TONE_AUTO;
@@ -261,6 +262,7 @@ db_config_load_file (DbConfig *cfg, const gchar *file)
     cfg->drag_hover      = xfce_rc_read_bool_entry (rc, "drag-hover",      cfg->drag_hover);
     cfg->drop_to_desktop = xfce_rc_read_bool_entry (rc, "drop-to-desktop", cfg->drop_to_desktop);
     cfg->show_tooltip    = xfce_rc_read_bool_entry (rc, "show-tooltip",    cfg->show_tooltip);
+    cfg->single_row      = xfce_rc_read_bool_entry (rc, "single-row",      cfg->single_row);
     cfg->highlight_shown = xfce_rc_read_bool_entry (rc, "highlight-shown", cfg->highlight_shown);
     cfg->panel_tone      = xfce_rc_read_int_entry  (rc, "panel-tone",      cfg->panel_tone);
     cfg->peek_on_hover   = xfce_rc_read_bool_entry (rc, "peek-on-hover",   cfg->peek_on_hover);
@@ -335,6 +337,7 @@ db_config_save (DbPlugin *db)
     xfce_rc_write_int_entry  (rc, "bg-radius",       cfg->bg_radius);
     xfce_rc_write_int_entry  (rc, "bg-margin",       cfg->bg_margin);
     xfce_rc_write_bool_entry (rc, "show-tooltip",    cfg->show_tooltip);
+    xfce_rc_write_bool_entry (rc, "single-row",      cfg->single_row);
     xfce_rc_write_bool_entry (rc, "highlight-shown", cfg->highlight_shown);
     xfce_rc_write_int_entry  (rc, "panel-tone",      cfg->panel_tone);
     xfce_rc_write_bool_entry (rc, "peek-on-hover",   cfg->peek_on_hover);

@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the xfce-desktop-button-plugin package.
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-desktop-button-plugin 0.4.0\n"
+"Project-Id-Version: xfce-desktop-button-plugin 0.4.1\n"
 "Report-Msgid-Bugs-To: https://github.com/Tantin1/xfce-desktop-button-plugin/issues\n"
-"POT-Creation-Date: 2026-10-31 20:21+0000\n"
+"POT-Creation-Date: 2026-11-06 21:24+0000\n"
 "PO-Revision-Date: 2026-10-31 18:00-0300\n"
 "Last-Translator: Tantin1\n"
 "Language-Team: Turkish\n"
@@ -14,342 +14,354 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/dialog.c:72
+#: src/dialog.c:73
 msgid "Inspired by Windows 7"
 msgstr "Windows 7'den esinlenildi"
 
-#: src/dialog.c:73
+#: src/dialog.c:74
 msgid "Inspired by Windows 10"
 msgstr "Windows 10'dan esinlenildi"
 
-#: src/dialog.c:74
+#: src/dialog.c:75
 msgid "Inspired by Windows 11"
 msgstr "Windows 11'den esinlenildi"
 
-#: src/dialog.c:75
+#: src/dialog.c:76
 msgid "Like the original Xfce button"
 msgstr "Özgün Xfce düğmesi gibi"
 
-#: src/dialog.c:77
+#: src/dialog.c:78
 msgid "Your own settings"
 msgstr "Kendi ayarlarınız"
 
-#: src/dialog.c:218
+#: src/dialog.c:219
 msgid "Detected: light panel"
 msgstr "Algılanan: açık panel"
 
-#: src/dialog.c:218
+#: src/dialog.c:219
 msgid "Detected: dark panel"
 msgstr "Algılanan: koyu panel"
 
 #. TRANSLATORS: entry in "Copy settings from another button";
 #. * the first number is the panel, the second the plugin id
-#: src/dialog.c:445
+#: src/dialog.c:448
 #, c-format
 msgid "Panel %d — button #%d"
 msgstr "Panel %d — düğme #%d"
 
-#: src/dialog.c:505 src/plugin.c:982
+#: src/dialog.c:508 src/plugin.c:988
 #: src/xfce-desktop-button-plugin.desktop.in:4
 msgid "Desktop Button"
 msgstr "Masaüstü Düğmesi"
 
-#: src/dialog.c:507
+#: src/dialog.c:510
 msgid "_Close"
 msgstr "_Kapat"
 
-#: src/dialog.c:523
+#: src/dialog.c:526
 msgid "Button"
 msgstr "Düğme"
 
 #. TRANSLATORS: profile names. "Glass", "Strip" and "Minimal" are styles
 #. * inspired by Windows 7, 10 and 11; translate them as short style names
-#: src/dialog.c:530 src/plugin.c:928
+#: src/dialog.c:533 src/plugin.c:934
 msgid "Custom"
 msgstr "Özel"
 
-#: src/dialog.c:530 src/plugin.c:928
+#: src/dialog.c:533 src/plugin.c:934
 msgid "Glass"
 msgstr "Cam"
 
-#: src/dialog.c:530 src/plugin.c:928
+#: src/dialog.c:533 src/plugin.c:934
 msgid "Strip"
 msgstr "Şerit"
 
-#: src/dialog.c:530 src/plugin.c:928
+#: src/dialog.c:533 src/plugin.c:934
 msgid "Minimal"
 msgstr "Minimal"
 
-#: src/dialog.c:531 src/plugin.c:928
+#: src/dialog.c:534 src/plugin.c:934
 msgid "Classic icon"
 msgstr "Klasik simge"
 
-#: src/dialog.c:532
+#: src/dialog.c:535
 msgid "_Profile:"
 msgstr "_Profil:"
 
-#: src/dialog.c:539
+#: src/dialog.c:542
 msgid "Automatic"
 msgstr "Otomatik"
 
-#: src/dialog.c:539
+#: src/dialog.c:542
 msgid "Dark"
 msgstr "Koyu"
 
-#: src/dialog.c:539
+#: src/dialog.c:542
 msgid "Light"
 msgstr "Açık"
 
-#: src/dialog.c:541
+#: src/dialog.c:544
 msgid "Built-in profiles use white on dark panels and black on light panels"
 msgstr "Hazır profiller koyu panellerde beyaz, açık panellerde siyah kullanır"
 
-#: src/dialog.c:542
+#: src/dialog.c:545
 msgid "Panel t_one:"
 msgstr "Panel _tonu:"
 
-#: src/dialog.c:550
+#: src/dialog.c:553
 msgid "Button _thickness (px):"
 msgstr "Düğme _kalınlığı (px):"
 
-#: src/dialog.c:552 src/dialog.c:593 src/dialog.c:633
+#: src/dialog.c:555 src/dialog.c:602 src/dialog.c:642
 msgid "Line"
 msgstr "Çizgi"
 
-#: src/dialog.c:552 src/dialog.c:569
+#: src/dialog.c:555 src/dialog.c:578
 msgid "Icon"
 msgstr "Simge"
 
-#: src/dialog.c:552
+#: src/dialog.c:555
 msgid "None (background only)"
 msgstr "Yok (yalnızca arka plan)"
 
-#: src/dialog.c:553
+#: src/dialog.c:556
 msgid "_Style:"
 msgstr "_Biçem:"
 
-#: src/dialog.c:554
+#: src/dialog.c:558
+msgid "Use a single panel _row"
+msgstr "Panelin yalnızca bir _satırını kullan"
+
+#: src/dialog.c:560
+msgid ""
+"On panels with more than one row, the button takes up only one row instead of"
+" the full height of the panel"
+msgstr ""
+"Birden çok satırlı panellerde düğme, panelin tüm yüksekliği yerine yalnızca "
+"bir satır kaplar"
+
+#: src/dialog.c:563
 msgid "General"
 msgstr "Genel"
 
-#: src/dialog.c:561
+#: src/dialog.c:570
 msgid "Icon _name:"
 msgstr "Simge _adı:"
 
-#: src/dialog.c:564
+#: src/dialog.c:573
 msgid "Icon si_ze (px):"
 msgstr "Simge _boyutu (px):"
 
-#: src/dialog.c:566
+#: src/dialog.c:575
 msgid "_Follow the panel icon size"
 msgstr "Panel simge boyutunu _izle"
 
-#: src/dialog.c:579
+#: src/dialog.c:588
 msgid "C_opy"
 msgstr "K_opyala"
 
-#: src/dialog.c:581
+#: src/dialog.c:590
 msgid "Replace all settings of this button with those of the selected one"
 msgstr "Bu düğmenin tüm ayarlarını seçilen düğmeninkilerle değiştirir"
 
-#: src/dialog.c:585
+#: src/dialog.c:594
 msgid "_From:"
 msgstr "_Kaynak:"
 
-#: src/dialog.c:589
+#: src/dialog.c:598
 msgid "Copy settings from another button"
 msgstr "Başka bir düğmeden ayarları kopyala"
 
-#: src/dialog.c:599
+#: src/dialog.c:608
 msgid "Line _width (px):"
 msgstr "Çizgi _kalınlığı (px):"
 
 #. TRANSLATORS: unit of the line length: percent of the panel height, or pixels
-#: src/dialog.c:606
+#: src/dialog.c:615
 #, no-c-format
 msgid "% of panel"
 msgstr "panelin %'si"
 
-#: src/dialog.c:606
+#: src/dialog.c:615
 msgid "px"
 msgstr "px"
 
-#: src/dialog.c:610
+#: src/dialog.c:619
 msgid "Line _length:"
 msgstr "Çizgi _uzunluğu:"
 
-#: src/dialog.c:615
+#: src/dialog.c:624
 msgid "Start (left / top)"
 msgstr "Başlangıç (sol / üst)"
 
-#: src/dialog.c:615
+#: src/dialog.c:624
 msgid "Center"
 msgstr "Orta"
 
-#: src/dialog.c:615
+#: src/dialog.c:624
 msgid "End (right / bottom)"
 msgstr "Bitiş (sağ / alt)"
 
-#: src/dialog.c:616
+#: src/dialog.c:625
 msgid "_Position:"
 msgstr "_Konum:"
 
-#: src/dialog.c:618
+#: src/dialog.c:627
 msgid "Always"
 msgstr "Her zaman"
 
-#: src/dialog.c:618
+#: src/dialog.c:627
 msgid "Only on hover"
 msgstr "Yalnızca üzerine gelince"
 
-#: src/dialog.c:619
+#: src/dialog.c:628
 msgid "_Visible:"
 msgstr "_Görünür:"
 
-#: src/dialog.c:622
+#: src/dialog.c:631
 msgid "_Color:"
 msgstr "_Renk:"
 
-#: src/dialog.c:625
+#: src/dialog.c:634
 msgid "Color on _hover:"
 msgstr "Üzerine gelince _renk:"
 
-#: src/dialog.c:628
+#: src/dialog.c:637
 msgid "Color when p_ressed:"
 msgstr "_Basılınca renk:"
 
-#: src/dialog.c:630
+#: src/dialog.c:639
 msgid "R_ounded ends"
 msgstr "_Yuvarlak uçlar"
 
-#: src/dialog.c:637
+#: src/dialog.c:646
 msgid "Background"
 msgstr "Arka plan"
 
-#: src/dialog.c:643
+#: src/dialog.c:652
 msgid "_Normal:"
 msgstr "_Normal:"
 
-#: src/dialog.c:646
+#: src/dialog.c:655
 msgid "On h_over:"
 msgstr "Üzerine _gelince:"
 
-#: src/dialog.c:649
+#: src/dialog.c:658
 msgid "_Pressed:"
 msgstr "_Basılı:"
 
-#: src/dialog.c:652
+#: src/dialog.c:661
 msgid "Corner _radius (px):"
 msgstr "Köşe _yarıçapı (px):"
 
-#: src/dialog.c:656
+#: src/dialog.c:665
 msgid "Empty space between the edge of the button and the colored background"
 msgstr "Düğmenin kenarı ile renkli arka plan arasındaki boşluk"
 
-#: src/dialog.c:657
+#: src/dialog.c:666
 msgid "_Margin (px):"
 msgstr "_Kenar boşluğu (px):"
 
-#: src/dialog.c:659
+#: src/dialog.c:668
 msgid "_Glass shine"
 msgstr "_Cam parlaklığı"
 
-#: src/dialog.c:663
+#: src/dialog.c:672
 msgid "_Keep the pressed color while the desktop is shown"
 msgstr "Masaüstü gösterilirken basılı rengi _koru"
 
-#: src/dialog.c:666
+#: src/dialog.c:675
 msgid "Background colors"
 msgstr "Arka plan renkleri"
 
-#: src/dialog.c:671
+#: src/dialog.c:680
 msgid "Smooth _transitions"
 msgstr "_Yumuşak geçişler"
 
-#: src/dialog.c:673
+#: src/dialog.c:682
 msgid ""
 "Fade colors when hovering and clicking instead of changing them instantly"
 msgstr ""
 "Üzerine gelince ve tıklanınca renkleri anında değiştirmek yerine yumuşakça "
 "geçir"
 
-#: src/dialog.c:676
+#: src/dialog.c:685
 msgid "Fast"
 msgstr "Hızlı"
 
-#: src/dialog.c:676
+#: src/dialog.c:685
 msgid "Normal"
 msgstr "Normal"
 
-#: src/dialog.c:676
+#: src/dialog.c:685
 msgid "Slow"
 msgstr "Yavaş"
 
-#: src/dialog.c:677
+#: src/dialog.c:686
 msgid "Spee_d:"
 msgstr "_Hız:"
 
-#: src/dialog.c:679
+#: src/dialog.c:688
 msgid "Animations are disabled in the system settings."
 msgstr "Animasyonlar sistem ayarlarında kapalı."
 
-#: src/dialog.c:686
+#: src/dialog.c:695
 msgid "Animation"
 msgstr "Animasyon"
 
-#: src/dialog.c:689
+#: src/dialog.c:698
 msgid "Behavior"
 msgstr "Davranış"
 
-#: src/dialog.c:693 src/dialog.c:705
+#: src/dialog.c:702 src/dialog.c:714
 msgid "Do nothing"
 msgstr "Hiçbir şey yapma"
 
-#: src/dialog.c:693
+#: src/dialog.c:702
 msgid "Show / restore desktop"
 msgstr "Masaüstünü göster / geri yükle"
 
-#: src/dialog.c:694
+#: src/dialog.c:703
 msgid "Minimize all windows"
 msgstr "Tüm pencereleri küçült"
 
-#: src/dialog.c:695
+#: src/dialog.c:704
 msgid "Shade / unshade windows (X11 only)"
 msgstr "Pencereleri tavana sar / aç (yalnızca X11)"
 
-#: src/dialog.c:696
+#: src/dialog.c:705
 msgid "_Middle click:"
 msgstr "_Orta tık:"
 
-#: src/dialog.c:698
+#: src/dialog.c:707
 msgid "Window shading is not supported on Wayland."
 msgstr "Pencereleri tavana sarma Wayland'de desteklenmiyor."
 
-#: src/dialog.c:705
+#: src/dialog.c:714
 msgid "Switch workspace"
 msgstr "Çalışma alanını değiştir"
 
-#: src/dialog.c:706
+#: src/dialog.c:715
 msgid "Up shows desktop, down restores"
 msgstr "Yukarı masaüstünü gösterir, aşağı geri yükler"
 
-#: src/dialog.c:707
+#: src/dialog.c:716
 msgid "Mouse _wheel:"
 msgstr "Fare _tekerleği:"
 
-#: src/dialog.c:709
+#: src/dialog.c:718
 msgid "Workspace switching is not available in this session."
 msgstr "Bu oturumda çalışma alanı değiştirme kullanılamıyor."
 
-#: src/dialog.c:716
+#: src/dialog.c:725
 msgid "Show desktop when _dragging a file over the button"
 msgstr "Düğmenin üzerine dosya _sürüklenince masaüstünü göster"
 
-#: src/dialog.c:720
+#: src/dialog.c:729
 msgid "Cop_y files dropped on the button to the Desktop"
 msgstr "Düğmeye bırakılan dosyaları Masaüstüne _kopyala"
 
-#: src/dialog.c:722
+#: src/dialog.c:731
 msgid ""
 "The original files are never moved or deleted, and existing files on the "
 "Desktop are never overwritten: a copy gets a new name such as \"photo "
@@ -358,19 +370,19 @@ msgstr ""
 "Özgün dosyalar asla taşınmaz veya silinmez, Masaüstündeki mevcut dosyaların "
 "üzerine asla yazılmaz: kopya \"fotoğraf (2).jpg\" gibi yeni bir ad alır."
 
-#: src/dialog.c:726
+#: src/dialog.c:735
 msgid "Show _tooltip"
 msgstr "_İpucunu göster"
 
-#: src/dialog.c:729
+#: src/dialog.c:738
 msgid "Actions"
 msgstr "Eylemler"
 
-#: src/dialog.c:736
+#: src/dialog.c:745
 msgid "Show the desktop while the mouse is _over the button"
 msgstr "Fare düğmenin _üzerindeyken masaüstünü göster"
 
-#: src/dialog.c:738
+#: src/dialog.c:747
 msgid ""
 "Moving the mouse away restores the windows. Click during the peek to keep the"
 " desktop visible."
@@ -378,15 +390,15 @@ msgstr ""
 "Fare uzaklaştırılınca pencereler geri yüklenir. Masaüstünün görünür kalması "
 "için önizleme sırasında tıklayın."
 
-#: src/dialog.c:743
+#: src/dialog.c:752
 msgid "D_elay (ms):"
 msgstr "_Gecikme (ms):"
 
-#: src/dialog.c:745
+#: src/dialog.c:754
 msgid "Peek"
 msgstr "Önizleme"
 
-#: src/dialog.c:750
+#: src/dialog.c:759
 msgid ""
 "Tip: place the button at the end of the panel and set the panel margin to 0 "
 "so you can click it by pushing the mouse into the screen corner."
@@ -394,39 +406,39 @@ msgstr ""
 "İpucu: Düğmeyi panelin sonuna yerleştirip panel kenar boşluğunu 0 yaparsanız "
 "fareyi ekranın köşesine iterek tıklayabilirsiniz."
 
-#: src/dialog.c:752
+#: src/dialog.c:761
 msgid "Keyboard shortcut command:"
 msgstr "Klavye kısayolu komutu:"
 
-#: src/plugin.c:243
+#: src/plugin.c:249
 msgid "Show desktop is not available in this session"
 msgstr "Bu oturumda masaüstünü gösterme kullanılamıyor"
 
-#: src/plugin.c:245
+#: src/plugin.c:251
 msgid "Restore the minimized windows"
 msgstr "Küçültülmüş pencereleri geri yükle"
 
-#: src/plugin.c:247
+#: src/plugin.c:253
 msgid "Minimize all open windows and show the desktop"
 msgstr "Tüm açık pencereleri küçült ve masaüstünü göster"
 
-#: src/plugin.c:253
+#: src/plugin.c:259
 msgid "Show Desktop"
 msgstr "Masaüstünü Göster"
 
-#: src/plugin.c:933
+#: src/plugin.c:939
 msgid "_Minimize all windows"
 msgstr "Tüm pencereleri _küçült"
 
-#: src/plugin.c:939
+#: src/plugin.c:945
 msgid "S_hade / unshade windows"
 msgstr "Pencereleri tavana _sar / aç"
 
-#: src/plugin.c:955
+#: src/plugin.c:961
 msgid "_Profile"
 msgstr "_Profil"
 
-#: src/plugin.c:984
+#: src/plugin.c:990
 msgid "A slim, customizable Show Desktop button"
 msgstr "İnce ve özelleştirilebilir bir \"Masaüstünü Göster\" düğmesi"
 

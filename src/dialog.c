@@ -21,6 +21,7 @@ typedef struct
     GtkWidget *tone_hint;
     GtkWidget *thickness;
     GtkWidget *style;
+    GtkWidget *single_row;
 
     GtkWidget *line_frame;
     GtkWidget *line_width;
@@ -219,6 +220,7 @@ dialog_fill (DbDialog *d)
     }
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (d->thickness), cfg->thickness);
     gtk_combo_box_set_active (GTK_COMBO_BOX (d->style), cfg->style);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (d->single_row), cfg->single_row);
 
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (d->line_width), cfg->line_width);
     gtk_combo_box_set_active (GTK_COMBO_BOX (d->line_unit), cfg->line_length_pct ? 0 : 1);
@@ -337,6 +339,7 @@ on_behavior_changed (GtkWidget *widget, DbDialog *d)
     cfg->drag_hover    = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->drag_hover));
     cfg->drop_to_desktop = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->drop_to_desktop));
     cfg->show_tooltip  = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->show_tooltip));
+    cfg->single_row    = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->single_row));
     cfg->highlight_shown = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->highlight_shown));
     cfg->peek_on_hover   = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->peek_on_hover));
     cfg->peek_delay      = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (d->peek_delay));
@@ -551,6 +554,12 @@ db_dialog_show (DbPlugin *db)
 
     d->style = make_combo (_("Line"), _("Icon"), _("None (background only)"), NULL);
     add_row (grid, row++, _("_Style:"), d->style);
+
+    d->single_row = gtk_check_button_new_with_mnemonic (_("Use a single panel _row"));
+    gtk_widget_set_tooltip_text (d->single_row,
+        _("On panels with more than one row, the button takes up only one row "
+          "instead of the full height of the panel"));
+    gtk_grid_attach (GTK_GRID (grid), d->single_row, 0, row++, 2, 1);
     gtk_box_pack_start (GTK_BOX (page), make_frame (_("General"), grid), FALSE, FALSE, 0);
 
     /* icono */
@@ -793,6 +802,8 @@ db_dialog_show (DbPlugin *db)
     connect_behavior (d->drag_hover,    "toggled", d);
     connect_behavior (d->drop_to_desktop, "toggled", d);
     connect_behavior (d->show_tooltip,  "toggled", d);
+    /* no es apariencia del perfil: cambiarlo no pasa a "Personalizado" */
+    connect_behavior (d->single_row,    "toggled", d);
     connect_behavior (d->highlight_shown, "toggled", d);
     connect_behavior (d->peek_on_hover, "toggled",       d);
     connect_behavior (d->peek_delay,    "value-changed", d);

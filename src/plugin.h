@@ -121,6 +121,7 @@ typedef struct
     gboolean         drag_hover;      /* mostrar escritorio al arrastrar encima */
     gboolean         drop_to_desktop; /* copiar al Escritorio los archivos soltados encima */
     gboolean         show_tooltip;
+    gboolean         single_row;      /* ocupar una sola fila en paneles de varias filas */
 
     /* peek: mostrar el escritorio mientras el mouse está encima */
     gboolean         peek_on_hover;

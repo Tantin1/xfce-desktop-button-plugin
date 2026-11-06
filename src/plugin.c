@@ -202,6 +202,7 @@ db_plugin_update_size (DbPlugin *db)
 {
     XfcePanelPluginMode mode = xfce_panel_plugin_get_mode (db->plugin);
     gboolean            small_deskbar;
+    gboolean            small;
     gint                t;
 
     /* Icono clásico: el ancho acompaña al tamaño de iconos del panel */
@@ -214,7 +215,11 @@ db_plugin_update_size (DbPlugin *db)
      * compacto; los modos de línea/barra ocupan todo el ancho de la barra */
     small_deskbar = (mode == XFCE_PANEL_PLUGIN_MODE_DESKBAR
                      && db->cfg.profile == PROFILE_CLASSIC);
-    xfce_panel_plugin_set_small (db->plugin, small_deskbar);
+
+    /* "usar una sola fila": en un panel de varias filas el botón ocupa solo
+     * una, como los iconos pequeños; con una sola fila no cambia nada */
+    small = small_deskbar || db->cfg.single_row;
+    xfce_panel_plugin_set_small (db->plugin, small);
 
     /* el eje delgado es siempre el que corre a lo largo del panel;
      * el otro eje (-1) lo llena el panel completo */
@@ -1035,7 +1040,8 @@ db_plugin_construct (XfcePanelPlugin *plugin)
 
     db_tone_init (db);
 
-    /* el plugin ocupa todo el alto del panel, aun en paneles de varias filas */
+    /* por defecto ocupa todo el alto del panel, aun en paneles de varias
+     * filas; db_plugin_update_size lo ajusta según "usar una sola fila" */
     xfce_panel_plugin_set_small (plugin, FALSE);
 
     db->area = gtk_drawing_area_new ();
