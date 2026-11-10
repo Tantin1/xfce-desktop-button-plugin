@@ -989,6 +989,7 @@ on_about (XfcePanelPlugin *plugin, DbPlugin *db)
                            "version",      PLUGIN_VERSION,
                            "comments",     _("A slim, customizable Show Desktop button"),
                            "logo-icon-name", "user-desktop",
+                           "website", "https://github.com/Tantin1/xfce-desktop-button-plugin",
                            "license-type", GTK_LICENSE_GPL_2_0,
                            "screen",       gtk_widget_get_screen (GTK_WIDGET (plugin)),
                            NULL);

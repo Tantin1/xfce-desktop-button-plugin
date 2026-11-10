@@ -10,7 +10,7 @@ set -euo pipefail
 
 SUFFIX=${1:?falta el sufijo de distro (ej.: deb12)}
 PKG=xfce-desktop-button-plugin
-MAINTAINER=${MAINTAINER:-"Tantin1 <tantin1@users.noreply.github.com>"}
+MAINTAINER=${MAINTAINER:-"Tantin1 <juanperez33840@gmail.com>"}
 HOMEPAGE=${HOMEPAGE:-"https://github.com/Tantin1/xfce-desktop-button-plugin"}
 
 ROOT=$(cd "$(dirname "$0")/../.." && pwd)
