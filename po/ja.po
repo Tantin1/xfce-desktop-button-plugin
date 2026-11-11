@@ -2,10 +2,10 @@
 # This file is distributed under the same license as the xfce-desktop-button-plugin package.
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-desktop-button-plugin 0.4.3\n"
+"Project-Id-Version: xfce-desktop-button-plugin 0.4.4\n"
 "Report-Msgid-Bugs-To: https://github.com/Tantin1/xfce-desktop-button-plugin/"
 "issues\n"
-"POT-Creation-Date: 2026-11-11 15:08+0000\n"
+"POT-Creation-Date: 2026-11-11 16:04+0000\n"
 "PO-Revision-Date: 2026-10-31 18:00-0300\n"
 "Last-Translator: Tantin1\n"
 "Language-Team: Japanese\n"
@@ -62,7 +62,7 @@ msgstr "OK(_O)"
 msgid "Panel %d — button #%d"
 msgstr "パネル %d — ボタン #%d"
 
-#: src/dialog.c:583 src/plugin.c:1074
+#: src/dialog.c:583 src/plugin.c:1084
 #: src/xfce-desktop-button-plugin.desktop.in:4
 msgid "Desktop Button"
 msgstr "デスクトップボタン"
@@ -77,23 +77,23 @@ msgstr "ボタン"
 
 #. TRANSLATORS: profile names. "Glass", "Strip" and "Minimal" are styles
 #. * inspired by Windows 7, 10 and 11; translate them as short style names
-#: src/dialog.c:608 src/plugin.c:1020
+#: src/dialog.c:608 src/plugin.c:1030
 msgid "Custom"
 msgstr "カスタム"
 
-#: src/dialog.c:608 src/plugin.c:1020
+#: src/dialog.c:608 src/plugin.c:1030
 msgid "Glass"
 msgstr "ガラス"
 
-#: src/dialog.c:608 src/plugin.c:1020
+#: src/dialog.c:608 src/plugin.c:1030
 msgid "Strip"
 msgstr "ストライプ"
 
-#: src/dialog.c:608 src/plugin.c:1020
+#: src/dialog.c:608 src/plugin.c:1030
 msgid "Minimal"
 msgstr "ミニマル"
 
-#: src/dialog.c:609 src/plugin.c:1020
+#: src/dialog.c:609 src/plugin.c:1030
 msgid "Classic icon"
 msgstr "クラシックアイコン"
 
@@ -121,282 +121,305 @@ msgstr "組み込みプロファイルは、暗いパネルでは白、明るい
 msgid "Panel t_one:"
 msgstr "パネルの色調(_O):"
 
-#: src/dialog.c:628
+#: src/dialog.c:629
+msgid ""
+"Width of the button along the panel. With the icon style it is the minimum "
+"width: the button grows to fit the icon. In the middle of the panel, the "
+"line styles use twice this width."
+msgstr ""
+"パネルに沿ったボタンの幅です。アイコンスタイルでは最小幅で、アイコンが収まる"
+"ようにボタンが広がります。パネルの中央では、線のスタイルはこの幅の2倍になりま"
+"す。"
+
+#: src/dialog.c:632
 msgid "Button _thickness (px):"
 msgstr "ボタンの太さ(_T) (px):"
 
-#: src/dialog.c:630 src/dialog.c:687 src/dialog.c:729
+#: src/dialog.c:634 src/dialog.c:694 src/dialog.c:739
 msgid "Line"
 msgstr "ライン"
 
-#: src/dialog.c:630 src/dialog.c:663
+#: src/dialog.c:634 src/dialog.c:670
 msgid "Icon"
 msgstr "アイコン"
 
-#: src/dialog.c:630
+#: src/dialog.c:634
 msgid "None (background only)"
 msgstr "なし (背景のみ)"
 
-#: src/dialog.c:631
+#: src/dialog.c:635
 msgid "_Style:"
 msgstr "スタイル(_S):"
 
-#: src/dialog.c:633
+#: src/dialog.c:637
 msgid "Use a single panel _row"
 msgstr "パネルの 1 行だけを使う(_R)"
 
-#: src/dialog.c:635
+#: src/dialog.c:639
 msgid ""
 "On panels with more than one row, the button takes up only one row instead "
 "of the full height of the panel"
 msgstr "複数行のパネルでは、パネルの高さ全体ではなく 1 行分だけを使います"
 
-#: src/dialog.c:641
+#: src/dialog.c:645
 msgid ""
 "Empty space between the button and the other items when the button is at one "
 "end of the panel. It does not react to the mouse. In the middle of the panel "
-"there is no gap: the button is twice as wide, with the line in the center."
+"there is no gap: the button is twice as wide instead, with the line in the "
+"center. With the glass shine, the button looks the same everywhere."
 msgstr ""
 "ボタンがパネルの端にあるときの、ボタンと他の項目の間の空白です。マウスには反"
-"応しません。パネルの中央では空白はなく、ボタンの幅が2倍になり、線が中央に表示"
-"されます。"
+"応しません。パネルの中央では空白はなく、代わりにボタンの幅が2倍になり、線が中"
+"央に表示されます。ガラスの光沢を使うと、ボタンはどこでも同じ見た目になりま"
+"す。"
 
-#: src/dialog.c:645
+#: src/dialog.c:650
 msgid "Gap at the panel _ends (px):"
 msgstr "パネル端の間隔 (px)(_E):"
 
-#: src/dialog.c:646
+#: src/dialog.c:651
 msgid "General"
 msgstr "全般"
 
-#: src/dialog.c:655
+#: src/dialog.c:660
 msgid "_Icon:"
 msgstr "アイコン(_I):"
 
-#: src/dialog.c:658
+#: src/dialog.c:664
+msgid ""
+"The button grows to fit the icon. The only limit is the height of the panel."
+msgstr "アイコンが収まるようにボタンが広がります。上限はパネルの高さだけです。"
+
+#: src/dialog.c:665
 msgid "Icon si_ze (px):"
 msgstr "アイコンサイズ(_Z) (px):"
 
-#: src/dialog.c:660
+#: src/dialog.c:667
 msgid "_Follow the panel icon size"
 msgstr "パネルのアイコンサイズに合わせる(_F)"
 
-#: src/dialog.c:673
-msgid "C_opy"
-msgstr "コピー(_O)"
+#: src/dialog.c:680
+msgid "Cop_y"
+msgstr "コピー(_Y)"
 
-#: src/dialog.c:675
+#: src/dialog.c:682
 msgid "Replace all settings of this button with those of the selected one"
 msgstr "このボタンのすべての設定を、選択したボタンの設定で置き換えます"
 
-#: src/dialog.c:679
-msgid "_From:"
-msgstr "コピー元(_F):"
+#: src/dialog.c:686
+msgid "Fro_m:"
+msgstr "コピー元(_M):"
 
-#: src/dialog.c:683
+#: src/dialog.c:690
 msgid "Copy settings from another button"
 msgstr "他のボタンから設定をコピー"
 
-#: src/dialog.c:693
+#: src/dialog.c:700
 msgid "Line _width (px):"
 msgstr "線の太さ(_W) (px):"
 
 #. TRANSLATORS: unit of the line length: percent of the panel height, or pixels
-#: src/dialog.c:700
+#: src/dialog.c:707
 #, no-c-format
 msgid "% of panel"
 msgstr "パネルの %"
 
-#: src/dialog.c:700
+#: src/dialog.c:707
 msgid "px"
 msgstr "px"
 
-#: src/dialog.c:704
+#: src/dialog.c:711
 msgid "Line _length:"
 msgstr "線の長さ(_L):"
 
-#: src/dialog.c:710
+#: src/dialog.c:717
 msgid "Start (left / top)"
 msgstr "始端 (左 / 上)"
 
-#: src/dialog.c:710
+#: src/dialog.c:717
 msgid "Center"
 msgstr "中央"
 
-#: src/dialog.c:710
+#: src/dialog.c:717
 msgid "End (right / bottom)"
 msgstr "終端 (右 / 下)"
 
-#: src/dialog.c:711
-msgid "Automatic (toward the other panel items)"
-msgstr "自動 (パネルの他の項目側)"
+#: src/dialog.c:718
+msgid "Automatic (depends on where the button is)"
+msgstr "自動 (ボタンの位置による)"
 
-#: src/dialog.c:712
+#: src/dialog.c:720
+msgid ""
+"Automatic: at one end of the panel, the line faces the other items; in the "
+"middle, it goes in the center."
+msgstr "自動: パネルの端では線が他の項目側に、中央では中心に表示されます。"
+
+#: src/dialog.c:722
 msgid "_Position:"
 msgstr "位置(_P):"
 
-#: src/dialog.c:714
+#: src/dialog.c:724
 msgid "Always"
 msgstr "常に表示"
 
-#: src/dialog.c:714
+#: src/dialog.c:724
 msgid "Only on hover"
 msgstr "ホバー時のみ"
 
-#: src/dialog.c:715
+#: src/dialog.c:725
 msgid "_Visible:"
 msgstr "表示(_V):"
 
-#: src/dialog.c:718
-msgid "_Color:"
-msgstr "色(_C):"
+#: src/dialog.c:728
+msgid "C_olor:"
+msgstr "色(_O):"
 
-#: src/dialog.c:721
+#: src/dialog.c:731
 msgid "Color on _hover:"
 msgstr "ホバー時の色(_H):"
 
-#: src/dialog.c:724
+#: src/dialog.c:734
 msgid "Color when p_ressed:"
 msgstr "押下時の色(_R):"
 
-#: src/dialog.c:726
-msgid "R_ounded ends"
-msgstr "端を丸くする(_O)"
+#: src/dialog.c:736
+msgid "Rounded _ends"
+msgstr "端を丸くする(_E)"
 
-#: src/dialog.c:733
+#: src/dialog.c:743
 msgid "Background"
 msgstr "背景"
 
-#: src/dialog.c:739
+#: src/dialog.c:749
 msgid "_Normal:"
 msgstr "通常(_N):"
 
-#: src/dialog.c:742
+#: src/dialog.c:752
 msgid "On h_over:"
 msgstr "ホバー時(_O):"
 
-#: src/dialog.c:745
+#: src/dialog.c:755
 msgid "_Pressed:"
 msgstr "押下時(_P):"
 
-#: src/dialog.c:748
+#: src/dialog.c:758
 msgid "Corner _radius (px):"
 msgstr "角の半径(_R) (px):"
 
-#: src/dialog.c:754
+#: src/dialog.c:764
 msgid "Small"
 msgstr "小"
 
-#: src/dialog.c:755
+#: src/dialog.c:765
 msgid "Full"
 msgstr "全体"
 
-#: src/dialog.c:758
+#: src/dialog.c:768
 msgid "How much of the button the colored background covers"
 msgstr "色付き背景がボタンのどれだけを覆うか"
 
-#: src/dialog.c:759
+#: src/dialog.c:769
 msgid "_Size:"
 msgstr "サイズ(_S):"
 
-#: src/dialog.c:761
+#: src/dialog.c:771
 msgid "_Glass shine"
 msgstr "ガラスの光沢(_G)"
 
-#: src/dialog.c:765
+#: src/dialog.c:775
 msgid "_Keep the pressed color while the desktop is shown"
 msgstr "デスクトップ表示中は押下時の色を維持する(_K)"
 
-#: src/dialog.c:768
+#: src/dialog.c:778
 msgid "Background colors"
 msgstr "背景色"
 
-#: src/dialog.c:773
+#: src/dialog.c:783
 msgid "Smooth _transitions"
 msgstr "なめらかな切り替え(_T)"
 
-#: src/dialog.c:775
+#: src/dialog.c:785
 msgid ""
 "Fade colors when hovering and clicking instead of changing them instantly"
 msgstr "ホバーやクリック時に色を即座に切り替えず、徐々に変化させます"
 
-#: src/dialog.c:778
+#: src/dialog.c:788
 msgid "Fast"
 msgstr "速い"
 
-#: src/dialog.c:778
+#: src/dialog.c:788
 msgid "Normal"
 msgstr "普通"
 
-#: src/dialog.c:778
+#: src/dialog.c:788
 msgid "Slow"
 msgstr "遅い"
 
-#: src/dialog.c:779
+#: src/dialog.c:789
 msgid "Spee_d:"
 msgstr "速度(_D):"
 
-#: src/dialog.c:781
+#: src/dialog.c:791
 msgid "Animations are disabled in the system settings."
 msgstr "システム設定でアニメーションが無効になっています。"
 
-#: src/dialog.c:788
+#: src/dialog.c:798
 msgid "Animation"
 msgstr "アニメーション"
 
-#: src/dialog.c:791
+#: src/dialog.c:801
 msgid "Behavior"
 msgstr "動作"
 
-#: src/dialog.c:795 src/dialog.c:807
+#: src/dialog.c:805 src/dialog.c:817
 msgid "Do nothing"
 msgstr "何もしない"
 
-#: src/dialog.c:795
+#: src/dialog.c:805
 msgid "Show / restore desktop"
 msgstr "デスクトップの表示 / 復元"
 
-#: src/dialog.c:796
+#: src/dialog.c:806
 msgid "Minimize all windows"
 msgstr "すべてのウィンドウを最小化"
 
-#: src/dialog.c:797
+#: src/dialog.c:807
 msgid "Shade / unshade windows (X11 only)"
 msgstr "ウィンドウの巻き上げ / 解除 (X11 のみ)"
 
-#: src/dialog.c:798
+#: src/dialog.c:808
 msgid "_Middle click:"
 msgstr "中クリック(_M):"
 
-#: src/dialog.c:800
+#: src/dialog.c:810
 msgid "Window shading is not supported on Wayland."
 msgstr "Wayland ではウィンドウの巻き上げはサポートされていません。"
 
-#: src/dialog.c:807
+#: src/dialog.c:817
 msgid "Switch workspace"
 msgstr "ワークスペースを切り替え"
 
-#: src/dialog.c:808
+#: src/dialog.c:818
 msgid "Up shows desktop, down restores"
 msgstr "上でデスクトップ表示、下で復元"
 
-#: src/dialog.c:809
+#: src/dialog.c:819
 msgid "Mouse _wheel:"
 msgstr "マウスホイール(_W):"
 
-#: src/dialog.c:811
+#: src/dialog.c:821
 msgid "Workspace switching is not available in this session."
 msgstr "このセッションではワークスペースを切り替えできません。"
 
-#: src/dialog.c:818
+#: src/dialog.c:828
 msgid "Show desktop when _dragging a file over the button"
 msgstr "ファイルをボタンにドラッグしたらデスクトップを表示(_D)"
 
-#: src/dialog.c:822
+#: src/dialog.c:832
 msgid "Cop_y files dropped on the button to the Desktop"
 msgstr "ボタンにドロップしたファイルをデスクトップにコピー(_Y)"
 
-#: src/dialog.c:824
+#: src/dialog.c:834
 msgid ""
 "The original files are never moved or deleted, and existing files on the "
 "Desktop are never overwritten: a copy gets a new name such as \"photo (2)."
@@ -406,19 +429,19 @@ msgstr ""
 "きされることもありません。コピーには「photo (2).jpg」のような新しい名前が付き"
 "ます。"
 
-#: src/dialog.c:828
+#: src/dialog.c:838
 msgid "Show _tooltip"
 msgstr "ツールチップを表示(_T)"
 
-#: src/dialog.c:831
+#: src/dialog.c:841
 msgid "Actions"
 msgstr "操作"
 
-#: src/dialog.c:838
+#: src/dialog.c:848
 msgid "Show the desktop while the mouse is _over the button"
 msgstr "マウスがボタンの上にある間デスクトップを表示(_O)"
 
-#: src/dialog.c:840
+#: src/dialog.c:850
 msgid ""
 "Moving the mouse away restores the windows. Click during the peek to keep "
 "the desktop visible."
@@ -426,55 +449,55 @@ msgstr ""
 "マウスを離すとウィンドウが元に戻ります。プレビュー中にクリックするとデスク"
 "トップが表示されたままになります。"
 
-#: src/dialog.c:845
+#: src/dialog.c:855
 msgid "D_elay (ms):"
 msgstr "遅延(_E) (ms):"
 
-#: src/dialog.c:847
+#: src/dialog.c:857
 msgid "Peek"
 msgstr "プレビュー"
 
-#: src/dialog.c:852
+#: src/dialog.c:862
 msgid ""
-"Tip: place the button at the end of the panel and set the panel margin to 0 "
+"Tip: place the button at one end of the panel and set the panel margin to 0 "
 "so you can click it by pushing the mouse into the screen corner."
 msgstr ""
 "ヒント: ボタンをパネルの端に置き、パネルの余白を 0 にすると、マウスを画面の隅"
 "に押し当てるだけでクリックできます。"
 
-#: src/dialog.c:854
+#: src/dialog.c:864
 msgid "Keyboard shortcut command:"
 msgstr "キーボードショートカット用のコマンド:"
 
-#: src/plugin.c:290
+#: src/plugin.c:302
 msgid "Show desktop is not available in this session"
 msgstr "このセッションではデスクトップの表示を利用できません"
 
-#: src/plugin.c:292
+#: src/plugin.c:304
 msgid "Restore the minimized windows"
 msgstr "最小化したウィンドウを元に戻す"
 
-#: src/plugin.c:294
+#: src/plugin.c:306
 msgid "Minimize all open windows and show the desktop"
 msgstr "開いているすべてのウィンドウを最小化してデスクトップを表示"
 
-#: src/plugin.c:300
+#: src/plugin.c:312
 msgid "Show Desktop"
 msgstr "デスクトップを表示"
 
-#: src/plugin.c:1025
+#: src/plugin.c:1035
 msgid "_Minimize all windows"
 msgstr "すべてのウィンドウを最小化(_M)"
 
-#: src/plugin.c:1031
+#: src/plugin.c:1041
 msgid "S_hade / unshade windows"
 msgstr "ウィンドウの巻き上げ / 解除(_H)"
 
-#: src/plugin.c:1047
+#: src/plugin.c:1057
 msgid "_Profile"
 msgstr "プロファイル(_P)"
 
-#: src/plugin.c:1076
+#: src/plugin.c:1086
 msgid "A slim, customizable Show Desktop button"
 msgstr "細くてカスタマイズできる「デスクトップを表示」ボタン"
 

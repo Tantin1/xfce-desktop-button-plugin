@@ -2,10 +2,10 @@
 # This file is distributed under the same license as the xfce-desktop-button-plugin package.
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-desktop-button-plugin 0.4.3\n"
+"Project-Id-Version: xfce-desktop-button-plugin 0.4.4\n"
 "Report-Msgid-Bugs-To: https://github.com/Tantin1/xfce-desktop-button-plugin/"
 "issues\n"
-"POT-Creation-Date: 2026-11-11 15:08+0000\n"
+"POT-Creation-Date: 2026-11-11 16:04+0000\n"
 "PO-Revision-Date: 2026-10-31 18:00-0300\n"
 "Last-Translator: Tantin1\n"
 "Language-Team: Korean\n"
@@ -62,7 +62,7 @@ msgstr "확인(_O)"
 msgid "Panel %d — button #%d"
 msgstr "패널 %d — 버튼 #%d"
 
-#: src/dialog.c:583 src/plugin.c:1074
+#: src/dialog.c:583 src/plugin.c:1084
 #: src/xfce-desktop-button-plugin.desktop.in:4
 msgid "Desktop Button"
 msgstr "바탕 화면 버튼"
@@ -77,23 +77,23 @@ msgstr "버튼"
 
 #. TRANSLATORS: profile names. "Glass", "Strip" and "Minimal" are styles
 #. * inspired by Windows 7, 10 and 11; translate them as short style names
-#: src/dialog.c:608 src/plugin.c:1020
+#: src/dialog.c:608 src/plugin.c:1030
 msgid "Custom"
 msgstr "사용자 지정"
 
-#: src/dialog.c:608 src/plugin.c:1020
+#: src/dialog.c:608 src/plugin.c:1030
 msgid "Glass"
 msgstr "유리"
 
-#: src/dialog.c:608 src/plugin.c:1020
+#: src/dialog.c:608 src/plugin.c:1030
 msgid "Strip"
 msgstr "스트립"
 
-#: src/dialog.c:608 src/plugin.c:1020
+#: src/dialog.c:608 src/plugin.c:1030
 msgid "Minimal"
 msgstr "미니멀"
 
-#: src/dialog.c:609 src/plugin.c:1020
+#: src/dialog.c:609 src/plugin.c:1030
 msgid "Classic icon"
 msgstr "클래식 아이콘"
 
@@ -122,282 +122,308 @@ msgstr ""
 msgid "Panel t_one:"
 msgstr "패널 색조(_O):"
 
-#: src/dialog.c:628
+#: src/dialog.c:629
+msgid ""
+"Width of the button along the panel. With the icon style it is the minimum "
+"width: the button grows to fit the icon. In the middle of the panel, the "
+"line styles use twice this width."
+msgstr ""
+"패널을 따라 잰 버튼의 너비입니다. 아이콘 스타일에서는 최소 너비이며, 아이콘"
+"이 들어가도록 버튼이 넓어집니다. 패널 가운데에서는 선 스타일이 이 너비의 두 "
+"배를 사용합니다."
+
+#: src/dialog.c:632
 msgid "Button _thickness (px):"
 msgstr "버튼 두께(_T) (px):"
 
-#: src/dialog.c:630 src/dialog.c:687 src/dialog.c:729
+#: src/dialog.c:634 src/dialog.c:694 src/dialog.c:739
 msgid "Line"
 msgstr "선"
 
-#: src/dialog.c:630 src/dialog.c:663
+#: src/dialog.c:634 src/dialog.c:670
 msgid "Icon"
 msgstr "아이콘"
 
-#: src/dialog.c:630
+#: src/dialog.c:634
 msgid "None (background only)"
 msgstr "없음 (배경만)"
 
-#: src/dialog.c:631
+#: src/dialog.c:635
 msgid "_Style:"
 msgstr "스타일(_S):"
 
-#: src/dialog.c:633
+#: src/dialog.c:637
 msgid "Use a single panel _row"
 msgstr "패널의 한 줄만 사용(_R)"
 
-#: src/dialog.c:635
+#: src/dialog.c:639
 msgid ""
 "On panels with more than one row, the button takes up only one row instead "
 "of the full height of the panel"
 msgstr "여러 줄로 된 패널에서 버튼이 패널 전체 높이 대신 한 줄만 차지합니다"
 
-#: src/dialog.c:641
+#: src/dialog.c:645
 msgid ""
 "Empty space between the button and the other items when the button is at one "
 "end of the panel. It does not react to the mouse. In the middle of the panel "
-"there is no gap: the button is twice as wide, with the line in the center."
+"there is no gap: the button is twice as wide instead, with the line in the "
+"center. With the glass shine, the button looks the same everywhere."
 msgstr ""
 "버튼이 패널 끝에 있을 때 버튼과 다른 항목 사이의 빈 공간입니다. 마우스에 반응"
-"하지 않습니다. 패널 가운데에서는 빈 공간이 없고, 버튼이 두 배로 넓어지며 선"
-"이 가운데에 표시됩니다."
+"하지 않습니다. 패널 가운데에서는 빈 공간이 없는 대신 버튼이 두 배로 넓어지고 "
+"선이 가운데에 표시됩니다. 유리 광택을 사용하면 버튼이 어디서나 같은 모양입니"
+"다."
 
-#: src/dialog.c:645
+#: src/dialog.c:650
 msgid "Gap at the panel _ends (px):"
 msgstr "패널 끝 간격 (px)(_E):"
 
-#: src/dialog.c:646
+#: src/dialog.c:651
 msgid "General"
 msgstr "일반"
 
-#: src/dialog.c:655
+#: src/dialog.c:660
 msgid "_Icon:"
 msgstr "아이콘(_I):"
 
-#: src/dialog.c:658
+#: src/dialog.c:664
+msgid ""
+"The button grows to fit the icon. The only limit is the height of the panel."
+msgstr ""
+"아이콘이 들어가도록 버튼이 넓어집니다. 유일한 제한은 패널의 높이입니다."
+
+#: src/dialog.c:665
 msgid "Icon si_ze (px):"
 msgstr "아이콘 크기(_Z) (px):"
 
-#: src/dialog.c:660
+#: src/dialog.c:667
 msgid "_Follow the panel icon size"
 msgstr "패널 아이콘 크기 따르기(_F)"
 
-#: src/dialog.c:673
-msgid "C_opy"
-msgstr "복사(_O)"
+#: src/dialog.c:680
+msgid "Cop_y"
+msgstr "복사(_Y)"
 
-#: src/dialog.c:675
+#: src/dialog.c:682
 msgid "Replace all settings of this button with those of the selected one"
 msgstr "이 버튼의 모든 설정을 선택한 버튼의 설정으로 바꿉니다"
 
-#: src/dialog.c:679
-msgid "_From:"
-msgstr "원본(_F):"
+#: src/dialog.c:686
+msgid "Fro_m:"
+msgstr "원본(_M):"
 
-#: src/dialog.c:683
+#: src/dialog.c:690
 msgid "Copy settings from another button"
 msgstr "다른 버튼에서 설정 복사"
 
-#: src/dialog.c:693
+#: src/dialog.c:700
 msgid "Line _width (px):"
 msgstr "선 두께(_W) (px):"
 
 #. TRANSLATORS: unit of the line length: percent of the panel height, or pixels
-#: src/dialog.c:700
+#: src/dialog.c:707
 #, no-c-format
 msgid "% of panel"
 msgstr "패널의 %"
 
-#: src/dialog.c:700
+#: src/dialog.c:707
 msgid "px"
 msgstr "px"
 
-#: src/dialog.c:704
+#: src/dialog.c:711
 msgid "Line _length:"
 msgstr "선 길이(_L):"
 
-#: src/dialog.c:710
+#: src/dialog.c:717
 msgid "Start (left / top)"
 msgstr "시작 (왼쪽 / 위)"
 
-#: src/dialog.c:710
+#: src/dialog.c:717
 msgid "Center"
 msgstr "가운데"
 
-#: src/dialog.c:710
+#: src/dialog.c:717
 msgid "End (right / bottom)"
 msgstr "끝 (오른쪽 / 아래)"
 
-#: src/dialog.c:711
-msgid "Automatic (toward the other panel items)"
-msgstr "자동 (패널의 다른 항목 쪽)"
+#: src/dialog.c:718
+msgid "Automatic (depends on where the button is)"
+msgstr "자동 (버튼 위치에 따라)"
 
-#: src/dialog.c:712
+#: src/dialog.c:720
+msgid ""
+"Automatic: at one end of the panel, the line faces the other items; in the "
+"middle, it goes in the center."
+msgstr ""
+"자동: 패널 끝에서는 선이 다른 항목 쪽을 향하고, 가운데에서는 중앙에 표시됩니"
+"다."
+
+#: src/dialog.c:722
 msgid "_Position:"
 msgstr "위치(_P):"
 
-#: src/dialog.c:714
+#: src/dialog.c:724
 msgid "Always"
 msgstr "항상"
 
-#: src/dialog.c:714
+#: src/dialog.c:724
 msgid "Only on hover"
 msgstr "마우스를 올릴 때만"
 
-#: src/dialog.c:715
+#: src/dialog.c:725
 msgid "_Visible:"
 msgstr "표시(_V):"
 
-#: src/dialog.c:718
-msgid "_Color:"
-msgstr "색상(_C):"
+#: src/dialog.c:728
+msgid "C_olor:"
+msgstr "색상(_O):"
 
-#: src/dialog.c:721
+#: src/dialog.c:731
 msgid "Color on _hover:"
 msgstr "마우스를 올렸을 때 색상(_H):"
 
-#: src/dialog.c:724
+#: src/dialog.c:734
 msgid "Color when p_ressed:"
 msgstr "눌렀을 때 색상(_R):"
 
-#: src/dialog.c:726
-msgid "R_ounded ends"
-msgstr "끝을 둥글게(_O)"
+#: src/dialog.c:736
+msgid "Rounded _ends"
+msgstr "끝을 둥글게(_E)"
 
-#: src/dialog.c:733
+#: src/dialog.c:743
 msgid "Background"
 msgstr "배경"
 
-#: src/dialog.c:739
+#: src/dialog.c:749
 msgid "_Normal:"
 msgstr "기본(_N):"
 
-#: src/dialog.c:742
+#: src/dialog.c:752
 msgid "On h_over:"
 msgstr "마우스를 올렸을 때(_O):"
 
-#: src/dialog.c:745
+#: src/dialog.c:755
 msgid "_Pressed:"
 msgstr "눌렀을 때(_P):"
 
-#: src/dialog.c:748
+#: src/dialog.c:758
 msgid "Corner _radius (px):"
 msgstr "모서리 반경(_R) (px):"
 
-#: src/dialog.c:754
+#: src/dialog.c:764
 msgid "Small"
 msgstr "작게"
 
-#: src/dialog.c:755
+#: src/dialog.c:765
 msgid "Full"
 msgstr "전체"
 
-#: src/dialog.c:758
+#: src/dialog.c:768
 msgid "How much of the button the colored background covers"
 msgstr "색 배경이 버튼을 얼마나 덮는지"
 
-#: src/dialog.c:759
+#: src/dialog.c:769
 msgid "_Size:"
 msgstr "크기(_S):"
 
-#: src/dialog.c:761
+#: src/dialog.c:771
 msgid "_Glass shine"
 msgstr "유리 광택(_G)"
 
-#: src/dialog.c:765
+#: src/dialog.c:775
 msgid "_Keep the pressed color while the desktop is shown"
 msgstr "바탕 화면이 표시되는 동안 눌림 색상 유지(_K)"
 
-#: src/dialog.c:768
+#: src/dialog.c:778
 msgid "Background colors"
 msgstr "배경 색상"
 
-#: src/dialog.c:773
+#: src/dialog.c:783
 msgid "Smooth _transitions"
 msgstr "부드러운 전환(_T)"
 
-#: src/dialog.c:775
+#: src/dialog.c:785
 msgid ""
 "Fade colors when hovering and clicking instead of changing them instantly"
 msgstr "마우스를 올리거나 클릭할 때 색상을 즉시 바꾸지 않고 서서히 바꿉니다"
 
-#: src/dialog.c:778
+#: src/dialog.c:788
 msgid "Fast"
 msgstr "빠르게"
 
-#: src/dialog.c:778
+#: src/dialog.c:788
 msgid "Normal"
 msgstr "보통"
 
-#: src/dialog.c:778
+#: src/dialog.c:788
 msgid "Slow"
 msgstr "느리게"
 
-#: src/dialog.c:779
+#: src/dialog.c:789
 msgid "Spee_d:"
 msgstr "속도(_D):"
 
-#: src/dialog.c:781
+#: src/dialog.c:791
 msgid "Animations are disabled in the system settings."
 msgstr "시스템 설정에서 애니메이션이 꺼져 있습니다."
 
-#: src/dialog.c:788
+#: src/dialog.c:798
 msgid "Animation"
 msgstr "애니메이션"
 
-#: src/dialog.c:791
+#: src/dialog.c:801
 msgid "Behavior"
 msgstr "동작"
 
-#: src/dialog.c:795 src/dialog.c:807
+#: src/dialog.c:805 src/dialog.c:817
 msgid "Do nothing"
 msgstr "아무것도 안 함"
 
-#: src/dialog.c:795
+#: src/dialog.c:805
 msgid "Show / restore desktop"
 msgstr "바탕 화면 표시 / 복원"
 
-#: src/dialog.c:796
+#: src/dialog.c:806
 msgid "Minimize all windows"
 msgstr "모든 창 최소화"
 
-#: src/dialog.c:797
+#: src/dialog.c:807
 msgid "Shade / unshade windows (X11 only)"
 msgstr "창 말아 올리기 / 펼치기 (X11 전용)"
 
-#: src/dialog.c:798
+#: src/dialog.c:808
 msgid "_Middle click:"
 msgstr "가운데 클릭(_M):"
 
-#: src/dialog.c:800
+#: src/dialog.c:810
 msgid "Window shading is not supported on Wayland."
 msgstr "Wayland에서는 창 말아 올리기를 지원하지 않습니다."
 
-#: src/dialog.c:807
+#: src/dialog.c:817
 msgid "Switch workspace"
 msgstr "작업 공간 전환"
 
-#: src/dialog.c:808
+#: src/dialog.c:818
 msgid "Up shows desktop, down restores"
 msgstr "위로 바탕 화면 표시, 아래로 복원"
 
-#: src/dialog.c:809
+#: src/dialog.c:819
 msgid "Mouse _wheel:"
 msgstr "마우스 휠(_W):"
 
-#: src/dialog.c:811
+#: src/dialog.c:821
 msgid "Workspace switching is not available in this session."
 msgstr "이 세션에서는 작업 공간을 전환할 수 없습니다."
 
-#: src/dialog.c:818
+#: src/dialog.c:828
 msgid "Show desktop when _dragging a file over the button"
 msgstr "파일을 버튼 위로 끌면 바탕 화면 표시(_D)"
 
-#: src/dialog.c:822
+#: src/dialog.c:832
 msgid "Cop_y files dropped on the button to the Desktop"
 msgstr "버튼에 놓은 파일을 바탕 화면에 복사(_Y)"
 
-#: src/dialog.c:824
+#: src/dialog.c:834
 msgid ""
 "The original files are never moved or deleted, and existing files on the "
 "Desktop are never overwritten: a copy gets a new name such as \"photo (2)."
@@ -406,19 +432,19 @@ msgstr ""
 "원본 파일은 이동하거나 삭제하지 않으며, 바탕 화면에 있는 기존 파일을 덮어쓰"
 "지 않습니다. 복사본에는 \"photo (2).jpg\"와 같은 새 이름이 붙습니다."
 
-#: src/dialog.c:828
+#: src/dialog.c:838
 msgid "Show _tooltip"
 msgstr "도구 설명 표시(_T)"
 
-#: src/dialog.c:831
+#: src/dialog.c:841
 msgid "Actions"
 msgstr "작업"
 
-#: src/dialog.c:838
+#: src/dialog.c:848
 msgid "Show the desktop while the mouse is _over the button"
 msgstr "마우스가 버튼 위에 있는 동안 바탕 화면 표시(_O)"
 
-#: src/dialog.c:840
+#: src/dialog.c:850
 msgid ""
 "Moving the mouse away restores the windows. Click during the peek to keep "
 "the desktop visible."
@@ -426,55 +452,55 @@ msgstr ""
 "마우스를 치우면 창이 복원됩니다. 미리 보기 중에 클릭하면 바탕 화면이 계속 표"
 "시됩니다."
 
-#: src/dialog.c:845
+#: src/dialog.c:855
 msgid "D_elay (ms):"
 msgstr "지연(_E) (ms):"
 
-#: src/dialog.c:847
+#: src/dialog.c:857
 msgid "Peek"
 msgstr "미리 보기"
 
-#: src/dialog.c:852
+#: src/dialog.c:862
 msgid ""
-"Tip: place the button at the end of the panel and set the panel margin to 0 "
+"Tip: place the button at one end of the panel and set the panel margin to 0 "
 "so you can click it by pushing the mouse into the screen corner."
 msgstr ""
-"팁: 버튼을 패널 끝에 두고 패널 여백을 0으로 설정하면 마우스를 화면 모서리로 "
-"밀어서 클릭할 수 있습니다."
+"팁: 버튼을 패널 한쪽 끝에 두고 패널 여백을 0으로 설정하면 마우스를 화면 모서"
+"리로 밀어서 클릭할 수 있습니다."
 
-#: src/dialog.c:854
+#: src/dialog.c:864
 msgid "Keyboard shortcut command:"
 msgstr "키보드 단축키 명령:"
 
-#: src/plugin.c:290
+#: src/plugin.c:302
 msgid "Show desktop is not available in this session"
 msgstr "이 세션에서는 바탕 화면 표시를 사용할 수 없습니다"
 
-#: src/plugin.c:292
+#: src/plugin.c:304
 msgid "Restore the minimized windows"
 msgstr "최소화된 창 복원"
 
-#: src/plugin.c:294
+#: src/plugin.c:306
 msgid "Minimize all open windows and show the desktop"
 msgstr "열린 모든 창을 최소화하고 바탕 화면 표시"
 
-#: src/plugin.c:300
+#: src/plugin.c:312
 msgid "Show Desktop"
 msgstr "바탕 화면 보기"
 
-#: src/plugin.c:1025
+#: src/plugin.c:1035
 msgid "_Minimize all windows"
 msgstr "모든 창 최소화(_M)"
 
-#: src/plugin.c:1031
+#: src/plugin.c:1041
 msgid "S_hade / unshade windows"
 msgstr "창 말아 올리기 / 펼치기(_H)"
 
-#: src/plugin.c:1047
+#: src/plugin.c:1057
 msgid "_Profile"
 msgstr "프로필(_P)"
 
-#: src/plugin.c:1076
+#: src/plugin.c:1086
 msgid "A slim, customizable Show Desktop button"
 msgstr "얇고 사용자 지정 가능한 '바탕 화면 보기' 버튼"
 

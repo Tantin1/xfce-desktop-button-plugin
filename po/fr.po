@@ -2,10 +2,10 @@
 # This file is distributed under the same license as the xfce-desktop-button-plugin package.
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-desktop-button-plugin 0.4.3\n"
+"Project-Id-Version: xfce-desktop-button-plugin 0.4.4\n"
 "Report-Msgid-Bugs-To: https://github.com/Tantin1/xfce-desktop-button-plugin/"
 "issues\n"
-"POT-Creation-Date: 2026-11-11 15:08+0000\n"
+"POT-Creation-Date: 2026-11-11 16:04+0000\n"
 "PO-Revision-Date: 2026-10-31 18:00-0300\n"
 "Last-Translator: Tantin1\n"
 "Language-Team: French\n"
@@ -62,7 +62,7 @@ msgstr "_Valider"
 msgid "Panel %d — button #%d"
 msgstr "Panneau %d — bouton n° %d"
 
-#: src/dialog.c:583 src/plugin.c:1074
+#: src/dialog.c:583 src/plugin.c:1084
 #: src/xfce-desktop-button-plugin.desktop.in:4
 msgid "Desktop Button"
 msgstr "Bouton Bureau"
@@ -77,23 +77,23 @@ msgstr "Bouton"
 
 #. TRANSLATORS: profile names. "Glass", "Strip" and "Minimal" are styles
 #. * inspired by Windows 7, 10 and 11; translate them as short style names
-#: src/dialog.c:608 src/plugin.c:1020
+#: src/dialog.c:608 src/plugin.c:1030
 msgid "Custom"
 msgstr "Personnalisé"
 
-#: src/dialog.c:608 src/plugin.c:1020
+#: src/dialog.c:608 src/plugin.c:1030
 msgid "Glass"
 msgstr "Verre"
 
-#: src/dialog.c:608 src/plugin.c:1020
+#: src/dialog.c:608 src/plugin.c:1030
 msgid "Strip"
 msgstr "Bande"
 
-#: src/dialog.c:608 src/plugin.c:1020
+#: src/dialog.c:608 src/plugin.c:1030
 msgid "Minimal"
 msgstr "Minimal"
 
-#: src/dialog.c:609 src/plugin.c:1020
+#: src/dialog.c:609 src/plugin.c:1030
 msgid "Classic icon"
 msgstr "Icône classique"
 
@@ -123,31 +123,41 @@ msgstr ""
 msgid "Panel t_one:"
 msgstr "_Teinte du panneau :"
 
-#: src/dialog.c:628
-msgid "Button _thickness (px):"
-msgstr "É_paisseur du bouton (px) :"
+#: src/dialog.c:629
+msgid ""
+"Width of the button along the panel. With the icon style it is the minimum "
+"width: the button grows to fit the icon. In the middle of the panel, the "
+"line styles use twice this width."
+msgstr ""
+"Largeur du bouton le long du tableau de bord. Avec le style icône, c'est la "
+"largeur minimale : le bouton s'élargit pour contenir l'icône. Au milieu du "
+"tableau de bord, les styles avec ligne utilisent le double de cette largeur."
 
-#: src/dialog.c:630 src/dialog.c:687 src/dialog.c:729
+#: src/dialog.c:632
+msgid "Button _thickness (px):"
+msgstr "_Épaisseur du bouton (px) :"
+
+#: src/dialog.c:634 src/dialog.c:694 src/dialog.c:739
 msgid "Line"
 msgstr "Ligne"
 
-#: src/dialog.c:630 src/dialog.c:663
+#: src/dialog.c:634 src/dialog.c:670
 msgid "Icon"
 msgstr "Icône"
 
-#: src/dialog.c:630
+#: src/dialog.c:634
 msgid "None (background only)"
 msgstr "Aucun (fond uniquement)"
 
-#: src/dialog.c:631
+#: src/dialog.c:635
 msgid "_Style:"
 msgstr "_Style :"
 
-#: src/dialog.c:633
+#: src/dialog.c:637
 msgid "Use a single panel _row"
 msgstr "Utiliser une seule _rangée du panneau"
 
-#: src/dialog.c:635
+#: src/dialog.c:639
 msgid ""
 "On panels with more than one row, the button takes up only one row instead "
 "of the full height of the panel"
@@ -155,257 +165,274 @@ msgstr ""
 "Sur les panneaux à plusieurs rangées, le bouton n'occupe qu'une seule rangée "
 "au lieu de toute la hauteur du panneau"
 
-#: src/dialog.c:641
+#: src/dialog.c:645
 msgid ""
 "Empty space between the button and the other items when the button is at one "
 "end of the panel. It does not react to the mouse. In the middle of the panel "
-"there is no gap: the button is twice as wide, with the line in the center."
+"there is no gap: the button is twice as wide instead, with the line in the "
+"center. With the glass shine, the button looks the same everywhere."
 msgstr ""
 "Espace vide entre le bouton et les autres éléments lorsque le bouton est à "
 "une extrémité du tableau de bord. Il ne réagit pas à la souris. Au milieu du "
-"tableau de bord, il n'y a pas d'espace : le bouton est deux fois plus large, "
-"avec la ligne au centre."
+"tableau de bord, il n'y a pas d'espace : le bouton est plutôt deux fois plus "
+"large, avec la ligne au centre. Avec le reflet de verre, le bouton a le même "
+"aspect partout."
 
-#: src/dialog.c:645
+#: src/dialog.c:650
 msgid "Gap at the panel _ends (px):"
 msgstr "Espace aux _extrémités (px) :"
 
-#: src/dialog.c:646
+#: src/dialog.c:651
 msgid "General"
 msgstr "Général"
 
-#: src/dialog.c:655
+#: src/dialog.c:660
 msgid "_Icon:"
 msgstr "_Icône :"
 
-#: src/dialog.c:658
+#: src/dialog.c:664
+msgid ""
+"The button grows to fit the icon. The only limit is the height of the panel."
+msgstr ""
+"Le bouton s'élargit pour contenir l'icône. La seule limite est la hauteur du "
+"tableau de bord."
+
+#: src/dialog.c:665
 msgid "Icon si_ze (px):"
-msgstr "_Taille de l'icône (px) :"
+msgstr "Taille _de l'icône (px) :"
 
-#: src/dialog.c:660
+#: src/dialog.c:667
 msgid "_Follow the panel icon size"
-msgstr "_Suivre la taille des icônes du panneau"
+msgstr "Suivre _la taille des icônes du panneau"
 
-#: src/dialog.c:673
-msgid "C_opy"
+#: src/dialog.c:680
+msgid "Cop_y"
 msgstr "C_opier"
 
-#: src/dialog.c:675
+#: src/dialog.c:682
 msgid "Replace all settings of this button with those of the selected one"
 msgstr ""
 "Remplacer tous les réglages de ce bouton par ceux du bouton sélectionné"
 
-#: src/dialog.c:679
-msgid "_From:"
-msgstr "_Depuis :"
+#: src/dialog.c:686
+msgid "Fro_m:"
+msgstr "Dep_uis :"
 
-#: src/dialog.c:683
+#: src/dialog.c:690
 msgid "Copy settings from another button"
 msgstr "Copier les réglages d'un autre bouton"
 
-#: src/dialog.c:693
+#: src/dialog.c:700
 msgid "Line _width (px):"
 msgstr "É_paisseur de la ligne (px) :"
 
 #. TRANSLATORS: unit of the line length: percent of the panel height, or pixels
-#: src/dialog.c:700
+#: src/dialog.c:707
 #, no-c-format
 msgid "% of panel"
 msgstr "% du panneau"
 
-#: src/dialog.c:700
+#: src/dialog.c:707
 msgid "px"
 msgstr "px"
 
-#: src/dialog.c:704
+#: src/dialog.c:711
 msgid "Line _length:"
 msgstr "_Longueur de la ligne :"
 
-#: src/dialog.c:710
+#: src/dialog.c:717
 msgid "Start (left / top)"
 msgstr "Début (gauche / haut)"
 
-#: src/dialog.c:710
+#: src/dialog.c:717
 msgid "Center"
 msgstr "Centre"
 
-#: src/dialog.c:710
+#: src/dialog.c:717
 msgid "End (right / bottom)"
 msgstr "Fin (droite / bas)"
 
-#: src/dialog.c:711
-msgid "Automatic (toward the other panel items)"
-msgstr "Automatique (du côté des autres éléments du tableau de bord)"
+#: src/dialog.c:718
+msgid "Automatic (depends on where the button is)"
+msgstr "Automatique (selon l'emplacement du bouton)"
 
-#: src/dialog.c:712
+#: src/dialog.c:720
+msgid ""
+"Automatic: at one end of the panel, the line faces the other items; in the "
+"middle, it goes in the center."
+msgstr ""
+"Automatique : à une extrémité du tableau de bord, la ligne est du côté des "
+"autres éléments ; au milieu, elle est centrée."
+
+#: src/dialog.c:722
 msgid "_Position:"
-msgstr "_Position :"
+msgstr "P_osition :"
 
-#: src/dialog.c:714
+#: src/dialog.c:724
 msgid "Always"
 msgstr "Toujours"
 
-#: src/dialog.c:714
+#: src/dialog.c:724
 msgid "Only on hover"
 msgstr "Seulement au survol"
 
-#: src/dialog.c:715
+#: src/dialog.c:725
 msgid "_Visible:"
 msgstr "_Visible :"
 
-#: src/dialog.c:718
-msgid "_Color:"
+#: src/dialog.c:728
+msgid "C_olor:"
 msgstr "_Couleur :"
 
-#: src/dialog.c:721
+#: src/dialog.c:731
 msgid "Color on _hover:"
 msgstr "Couleur au _survol :"
 
-#: src/dialog.c:724
+#: src/dialog.c:734
 msgid "Color when p_ressed:"
 msgstr "Couleur à l'_appui :"
 
-#: src/dialog.c:726
-msgid "R_ounded ends"
+#: src/dialog.c:736
+msgid "Rounded _ends"
 msgstr "E_xtrémités arrondies"
 
-#: src/dialog.c:733
+#: src/dialog.c:743
 msgid "Background"
 msgstr "Fond"
 
-#: src/dialog.c:739
+#: src/dialog.c:749
 msgid "_Normal:"
 msgstr "_Normal :"
 
-#: src/dialog.c:742
+#: src/dialog.c:752
 msgid "On h_over:"
 msgstr "Au s_urvol :"
 
-#: src/dialog.c:745
+#: src/dialog.c:755
 msgid "_Pressed:"
 msgstr "_Appuyé :"
 
-#: src/dialog.c:748
+#: src/dialog.c:758
 msgid "Corner _radius (px):"
 msgstr "_Rayon des coins (px) :"
 
-#: src/dialog.c:754
+#: src/dialog.c:764
 msgid "Small"
 msgstr "Petit"
 
-#: src/dialog.c:755
+#: src/dialog.c:765
 msgid "Full"
 msgstr "Complet"
 
-#: src/dialog.c:758
+#: src/dialog.c:768
 msgid "How much of the button the colored background covers"
 msgstr "Part du bouton couverte par le fond coloré"
 
-#: src/dialog.c:759
+#: src/dialog.c:769
 msgid "_Size:"
 msgstr "_Taille :"
 
-#: src/dialog.c:761
+#: src/dialog.c:771
 msgid "_Glass shine"
-msgstr "_Reflet de verre"
+msgstr "Reflet _de verre"
 
-#: src/dialog.c:765
+#: src/dialog.c:775
 msgid "_Keep the pressed color while the desktop is shown"
 msgstr "_Conserver la couleur d'appui tant que le bureau est affiché"
 
-#: src/dialog.c:768
+#: src/dialog.c:778
 msgid "Background colors"
 msgstr "Couleurs de fond"
 
-#: src/dialog.c:773
+#: src/dialog.c:783
 msgid "Smooth _transitions"
-msgstr "_Transitions douces"
+msgstr "Tran_sitions douces"
 
-#: src/dialog.c:775
+#: src/dialog.c:785
 msgid ""
 "Fade colors when hovering and clicking instead of changing them instantly"
 msgstr ""
 "Faire un fondu des couleurs au survol et au clic au lieu de les changer "
 "instantanément"
 
-#: src/dialog.c:778
+#: src/dialog.c:788
 msgid "Fast"
 msgstr "Rapide"
 
-#: src/dialog.c:778
+#: src/dialog.c:788
 msgid "Normal"
 msgstr "Normale"
 
-#: src/dialog.c:778
+#: src/dialog.c:788
 msgid "Slow"
 msgstr "Lente"
 
-#: src/dialog.c:779
+#: src/dialog.c:789
 msgid "Spee_d:"
 msgstr "_Vitesse :"
 
-#: src/dialog.c:781
+#: src/dialog.c:791
 msgid "Animations are disabled in the system settings."
 msgstr "Les animations sont désactivées dans les paramètres du système."
 
-#: src/dialog.c:788
+#: src/dialog.c:798
 msgid "Animation"
 msgstr "Animation"
 
-#: src/dialog.c:791
+#: src/dialog.c:801
 msgid "Behavior"
 msgstr "Comportement"
 
-#: src/dialog.c:795 src/dialog.c:807
+#: src/dialog.c:805 src/dialog.c:817
 msgid "Do nothing"
 msgstr "Ne rien faire"
 
-#: src/dialog.c:795
+#: src/dialog.c:805
 msgid "Show / restore desktop"
 msgstr "Afficher / restaurer le bureau"
 
-#: src/dialog.c:796
+#: src/dialog.c:806
 msgid "Minimize all windows"
 msgstr "Réduire toutes les fenêtres"
 
-#: src/dialog.c:797
+#: src/dialog.c:807
 msgid "Shade / unshade windows (X11 only)"
 msgstr "Enrouler / dérouler les fenêtres (X11 uniquement)"
 
-#: src/dialog.c:798
+#: src/dialog.c:808
 msgid "_Middle click:"
 msgstr "Clic du _milieu :"
 
-#: src/dialog.c:800
+#: src/dialog.c:810
 msgid "Window shading is not supported on Wayland."
 msgstr "L'enroulement des fenêtres n'est pas pris en charge sous Wayland."
 
-#: src/dialog.c:807
+#: src/dialog.c:817
 msgid "Switch workspace"
 msgstr "Changer d'espace de travail"
 
-#: src/dialog.c:808
+#: src/dialog.c:818
 msgid "Up shows desktop, down restores"
 msgstr "Haut affiche le bureau, bas restaure"
 
-#: src/dialog.c:809
+#: src/dialog.c:819
 msgid "Mouse _wheel:"
-msgstr "_Molette de la souris :"
+msgstr "Molette _de la souris :"
 
-#: src/dialog.c:811
+#: src/dialog.c:821
 msgid "Workspace switching is not available in this session."
 msgstr ""
 "Le changement d'espace de travail n'est pas disponible dans cette session."
 
-#: src/dialog.c:818
+#: src/dialog.c:828
 msgid "Show desktop when _dragging a file over the button"
 msgstr "Afficher le bureau en _glissant un fichier sur le bouton"
 
-#: src/dialog.c:822
+#: src/dialog.c:832
 msgid "Cop_y files dropped on the button to the Desktop"
 msgstr "Cop_ier sur le Bureau les fichiers déposés sur le bouton"
 
-#: src/dialog.c:824
+#: src/dialog.c:834
 msgid ""
 "The original files are never moved or deleted, and existing files on the "
 "Desktop are never overwritten: a copy gets a new name such as \"photo (2)."
@@ -415,19 +442,19 @@ msgstr ""
 "existants sur le Bureau ne sont jamais écrasés : la copie reçoit un nouveau "
 "nom, comme « photo (2).jpg »."
 
-#: src/dialog.c:828
+#: src/dialog.c:838
 msgid "Show _tooltip"
-msgstr "Afficher l'_infobulle"
+msgstr "_Afficher l'infobulle"
 
-#: src/dialog.c:831
+#: src/dialog.c:841
 msgid "Actions"
 msgstr "Actions"
 
-#: src/dialog.c:838
+#: src/dialog.c:848
 msgid "Show the desktop while the mouse is _over the button"
 msgstr "Afficher le bureau tant que la souris est _sur le bouton"
 
-#: src/dialog.c:840
+#: src/dialog.c:850
 msgid ""
 "Moving the mouse away restores the windows. Click during the peek to keep "
 "the desktop visible."
@@ -435,56 +462,56 @@ msgstr ""
 "Éloigner la souris restaure les fenêtres. Cliquez pendant l'aperçu pour "
 "garder le bureau visible."
 
-#: src/dialog.c:845
+#: src/dialog.c:855
 msgid "D_elay (ms):"
-msgstr "_Délai (ms) :"
+msgstr "D_élai (ms) :"
 
-#: src/dialog.c:847
+#: src/dialog.c:857
 msgid "Peek"
 msgstr "Aperçu"
 
-#: src/dialog.c:852
+#: src/dialog.c:862
 msgid ""
-"Tip: place the button at the end of the panel and set the panel margin to 0 "
+"Tip: place the button at one end of the panel and set the panel margin to 0 "
 "so you can click it by pushing the mouse into the screen corner."
 msgstr ""
-"Astuce : placez le bouton à la fin du panneau et réglez la marge du panneau "
-"sur 0 pour pouvoir cliquer dessus en poussant la souris dans le coin de "
-"l'écran."
+"Astuce : placez le bouton à une extrémité du panneau et réglez la marge du "
+"panneau sur 0 pour pouvoir cliquer dessus en poussant la souris dans le coin "
+"de l'écran."
 
-#: src/dialog.c:854
+#: src/dialog.c:864
 msgid "Keyboard shortcut command:"
 msgstr "Commande pour un raccourci clavier :"
 
-#: src/plugin.c:290
+#: src/plugin.c:302
 msgid "Show desktop is not available in this session"
 msgstr "L'affichage du bureau n'est pas disponible dans cette session"
 
-#: src/plugin.c:292
+#: src/plugin.c:304
 msgid "Restore the minimized windows"
 msgstr "Restaurer les fenêtres réduites"
 
-#: src/plugin.c:294
+#: src/plugin.c:306
 msgid "Minimize all open windows and show the desktop"
 msgstr "Réduire toutes les fenêtres ouvertes et afficher le bureau"
 
-#: src/plugin.c:300
+#: src/plugin.c:312
 msgid "Show Desktop"
 msgstr "Afficher le bureau"
 
-#: src/plugin.c:1025
+#: src/plugin.c:1035
 msgid "_Minimize all windows"
 msgstr "_Réduire toutes les fenêtres"
 
-#: src/plugin.c:1031
+#: src/plugin.c:1041
 msgid "S_hade / unshade windows"
 msgstr "_Enrouler / dérouler les fenêtres"
 
-#: src/plugin.c:1047
+#: src/plugin.c:1057
 msgid "_Profile"
 msgstr "_Profil"
 
-#: src/plugin.c:1076
+#: src/plugin.c:1086
 msgid "A slim, customizable Show Desktop button"
 msgstr "Un bouton « Afficher le bureau » fin et personnalisable"
 

@@ -33,6 +33,18 @@ db_is_horizontal (DbPlugin *db)
     return xfce_panel_plugin_get_mode (db->plugin) == XFCE_PANEL_PLUGIN_MODE_HORIZONTAL;
 }
 
+/* ubicación que decide la forma del botón con línea. Con brillo de vidrio
+ * la línea es el borde de un bloque: en el medio del panel se ve igual que
+ * en un extremo (ancho normal, borde al principio, separación), en lugar
+ * de duplicar el ancho y partir el bloque con una línea al centro */
+static DbPlacement
+layout_placement (DbPlugin *db)
+{
+    if (db->placement == PLACE_MIDDLE && db->cfg.glass)
+        return PLACE_END;
+    return db->placement;
+}
+
 /* ---------- animación ----------
  *
  * Tres valores (hover, presionado, escritorio mostrado) van de 0 a 1.
@@ -241,7 +253,7 @@ db_plugin_update_size (DbPlugin *db)
      *    puede clickear y resaltar, y la línea va al centro (ver draw_line). */
     if (db->cfg.style == STYLE_LINE && !small_deskbar)
     {
-        switch (db->placement)
+        switch (layout_placement (db))
         {
         case PLACE_END:    gap_start = db->cfg.gap_size;  break;
         case PLACE_START:  gap_end   = db->cfg.gap_size;  break;
@@ -565,8 +577,8 @@ draw_line (DbPlugin *db, cairo_t *cr, gboolean horizontal, gint w, gint h)
     /* "Automática": del lado que mira a los demás ítems del panel. Último
      * del panel → al principio del botón; primero → al final; en el medio →
      * al centro; solo en el panel → como siempre, al principio.
-     * Con brillo de vidrio la línea es el borde del bloque: en el medio
-     * partiría el bloque en dos, así que ahí no se dibuja. */
+     * Con brillo de vidrio, en el medio queda como en un extremo
+     * (ver layout_placement). */
     switch (cfg->line_align)
     {
     case ALIGN_START:  pos_along = 0;                    break;
@@ -574,14 +586,12 @@ draw_line (DbPlugin *db, cairo_t *cr, gboolean horizontal, gint w, gint h)
     case ALIGN_CENTER: pos_along = (along - thick) / 2;  break;
     case ALIGN_AUTO:
     default:
-        switch (db->placement)
+        switch (layout_placement (db))
         {
         case PLACE_START:
             pos_along = along - thick;
             break;
         case PLACE_MIDDLE:
-            if (cfg->glass)
-                return;
             pos_along = (along - thick) / 2;
             break;
         case PLACE_END:

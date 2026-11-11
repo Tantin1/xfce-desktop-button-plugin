@@ -2,10 +2,10 @@
 # This file is distributed under the same license as the xfce-desktop-button-plugin package.
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-desktop-button-plugin 0.4.3\n"
+"Project-Id-Version: xfce-desktop-button-plugin 0.4.4\n"
 "Report-Msgid-Bugs-To: https://github.com/Tantin1/xfce-desktop-button-plugin/"
 "issues\n"
-"POT-Creation-Date: 2026-11-11 15:08+0000\n"
+"POT-Creation-Date: 2026-11-11 16:04+0000\n"
 "PO-Revision-Date: 2026-10-31 18:00-0300\n"
 "Last-Translator: Tantin1\n"
 "Language-Team: Chinese (simplified)\n"
@@ -62,7 +62,7 @@ msgstr "确定(_O)"
 msgid "Panel %d — button #%d"
 msgstr "面板 %d — 按钮 #%d"
 
-#: src/dialog.c:583 src/plugin.c:1074
+#: src/dialog.c:583 src/plugin.c:1084
 #: src/xfce-desktop-button-plugin.desktop.in:4
 msgid "Desktop Button"
 msgstr "桌面按钮"
@@ -77,23 +77,23 @@ msgstr "按钮"
 
 #. TRANSLATORS: profile names. "Glass", "Strip" and "Minimal" are styles
 #. * inspired by Windows 7, 10 and 11; translate them as short style names
-#: src/dialog.c:608 src/plugin.c:1020
+#: src/dialog.c:608 src/plugin.c:1030
 msgid "Custom"
 msgstr "自定义"
 
-#: src/dialog.c:608 src/plugin.c:1020
+#: src/dialog.c:608 src/plugin.c:1030
 msgid "Glass"
 msgstr "玻璃"
 
-#: src/dialog.c:608 src/plugin.c:1020
+#: src/dialog.c:608 src/plugin.c:1030
 msgid "Strip"
 msgstr "条带"
 
-#: src/dialog.c:608 src/plugin.c:1020
+#: src/dialog.c:608 src/plugin.c:1030
 msgid "Minimal"
 msgstr "极简"
 
-#: src/dialog.c:609 src/plugin.c:1020
+#: src/dialog.c:609 src/plugin.c:1030
 msgid "Classic icon"
 msgstr "经典图标"
 
@@ -121,281 +121,303 @@ msgstr "内置方案在深色面板上使用白色，在浅色面板上使用黑
 msgid "Panel t_one:"
 msgstr "面板色调(_O)："
 
-#: src/dialog.c:628
+#: src/dialog.c:629
+msgid ""
+"Width of the button along the panel. With the icon style it is the minimum "
+"width: the button grows to fit the icon. In the middle of the panel, the "
+"line styles use twice this width."
+msgstr ""
+"按钮沿面板方向的宽度。在图标样式中这是最小宽度：按钮会变宽以容纳图标。在面板"
+"中间，线条样式使用此宽度的两倍。"
+
+#: src/dialog.c:632
 msgid "Button _thickness (px):"
 msgstr "按钮粗细(_T)（像素）："
 
-#: src/dialog.c:630 src/dialog.c:687 src/dialog.c:729
+#: src/dialog.c:634 src/dialog.c:694 src/dialog.c:739
 msgid "Line"
 msgstr "线条"
 
-#: src/dialog.c:630 src/dialog.c:663
+#: src/dialog.c:634 src/dialog.c:670
 msgid "Icon"
 msgstr "图标"
 
-#: src/dialog.c:630
+#: src/dialog.c:634
 msgid "None (background only)"
 msgstr "无（仅背景）"
 
-#: src/dialog.c:631
+#: src/dialog.c:635
 msgid "_Style:"
 msgstr "样式(_S)："
 
-#: src/dialog.c:633
+#: src/dialog.c:637
 msgid "Use a single panel _row"
 msgstr "仅使用面板的一行(_R)"
 
-#: src/dialog.c:635
+#: src/dialog.c:639
 msgid ""
 "On panels with more than one row, the button takes up only one row instead "
 "of the full height of the panel"
 msgstr "在多行面板中，按钮只占一行，而不是占满面板的整个高度"
 
-#: src/dialog.c:641
+#: src/dialog.c:645
 msgid ""
 "Empty space between the button and the other items when the button is at one "
 "end of the panel. It does not react to the mouse. In the middle of the panel "
-"there is no gap: the button is twice as wide, with the line in the center."
+"there is no gap: the button is twice as wide instead, with the line in the "
+"center. With the glass shine, the button looks the same everywhere."
 msgstr ""
 "当按钮位于面板一端时，按钮与其他项目之间的空白。它不响应鼠标。在面板中间没有"
-"空白：按钮宽度加倍，线条位于中央。"
+"空白，而是按钮宽度加倍，线条位于中央。启用玻璃光泽时，按钮在任何位置外观都相"
+"同。"
 
-#: src/dialog.c:645
+#: src/dialog.c:650
 msgid "Gap at the panel _ends (px):"
 msgstr "面板两端的间距（像素）(_E)："
 
-#: src/dialog.c:646
+#: src/dialog.c:651
 msgid "General"
 msgstr "常规"
 
-#: src/dialog.c:655
+#: src/dialog.c:660
 msgid "_Icon:"
 msgstr "图标(_I)："
 
-#: src/dialog.c:658
+#: src/dialog.c:664
+msgid ""
+"The button grows to fit the icon. The only limit is the height of the panel."
+msgstr "按钮会变宽以容纳图标。唯一的限制是面板的高度。"
+
+#: src/dialog.c:665
 msgid "Icon si_ze (px):"
 msgstr "图标大小(_Z)（像素）："
 
-#: src/dialog.c:660
+#: src/dialog.c:667
 msgid "_Follow the panel icon size"
 msgstr "跟随面板图标大小(_F)"
 
-#: src/dialog.c:673
-msgid "C_opy"
-msgstr "复制(_O)"
+#: src/dialog.c:680
+msgid "Cop_y"
+msgstr "复制(_Y)"
 
-#: src/dialog.c:675
+#: src/dialog.c:682
 msgid "Replace all settings of this button with those of the selected one"
 msgstr "用所选按钮的设置替换此按钮的全部设置"
 
-#: src/dialog.c:679
-msgid "_From:"
-msgstr "来源(_F)："
+#: src/dialog.c:686
+msgid "Fro_m:"
+msgstr "来源(_M)："
 
-#: src/dialog.c:683
+#: src/dialog.c:690
 msgid "Copy settings from another button"
 msgstr "从其他按钮复制设置"
 
-#: src/dialog.c:693
+#: src/dialog.c:700
 msgid "Line _width (px):"
 msgstr "线条粗细(_W)（像素）："
 
 #. TRANSLATORS: unit of the line length: percent of the panel height, or pixels
-#: src/dialog.c:700
+#: src/dialog.c:707
 #, no-c-format
 msgid "% of panel"
 msgstr "面板的 %"
 
-#: src/dialog.c:700
+#: src/dialog.c:707
 msgid "px"
 msgstr "像素"
 
-#: src/dialog.c:704
+#: src/dialog.c:711
 msgid "Line _length:"
 msgstr "线条长度(_L)："
 
-#: src/dialog.c:710
+#: src/dialog.c:717
 msgid "Start (left / top)"
 msgstr "起始（左 / 上）"
 
-#: src/dialog.c:710
+#: src/dialog.c:717
 msgid "Center"
 msgstr "居中"
 
-#: src/dialog.c:710
+#: src/dialog.c:717
 msgid "End (right / bottom)"
 msgstr "末端（右 / 下）"
 
-#: src/dialog.c:711
-msgid "Automatic (toward the other panel items)"
-msgstr "自动（朝向面板中的其他项目）"
+#: src/dialog.c:718
+msgid "Automatic (depends on where the button is)"
+msgstr "自动（取决于按钮的位置）"
 
-#: src/dialog.c:712
+#: src/dialog.c:720
+msgid ""
+"Automatic: at one end of the panel, the line faces the other items; in the "
+"middle, it goes in the center."
+msgstr "自动：在面板一端时，线条朝向其他项目；在中间时，线条居中。"
+
+#: src/dialog.c:722
 msgid "_Position:"
 msgstr "位置(_P)："
 
-#: src/dialog.c:714
+#: src/dialog.c:724
 msgid "Always"
 msgstr "始终"
 
-#: src/dialog.c:714
+#: src/dialog.c:724
 msgid "Only on hover"
 msgstr "仅在悬停时"
 
-#: src/dialog.c:715
+#: src/dialog.c:725
 msgid "_Visible:"
 msgstr "显示(_V)："
 
-#: src/dialog.c:718
-msgid "_Color:"
-msgstr "颜色(_C)："
+#: src/dialog.c:728
+msgid "C_olor:"
+msgstr "颜色(_O)："
 
-#: src/dialog.c:721
+#: src/dialog.c:731
 msgid "Color on _hover:"
 msgstr "悬停时颜色(_H)："
 
-#: src/dialog.c:724
+#: src/dialog.c:734
 msgid "Color when p_ressed:"
 msgstr "按下时颜色(_R)："
 
-#: src/dialog.c:726
-msgid "R_ounded ends"
-msgstr "圆角端点(_O)"
+#: src/dialog.c:736
+msgid "Rounded _ends"
+msgstr "圆角端点(_E)"
 
-#: src/dialog.c:733
+#: src/dialog.c:743
 msgid "Background"
 msgstr "背景"
 
-#: src/dialog.c:739
+#: src/dialog.c:749
 msgid "_Normal:"
 msgstr "正常(_N)："
 
-#: src/dialog.c:742
+#: src/dialog.c:752
 msgid "On h_over:"
 msgstr "悬停时(_O)："
 
-#: src/dialog.c:745
+#: src/dialog.c:755
 msgid "_Pressed:"
 msgstr "按下时(_P)："
 
-#: src/dialog.c:748
+#: src/dialog.c:758
 msgid "Corner _radius (px):"
 msgstr "圆角半径(_R)（像素）："
 
-#: src/dialog.c:754
+#: src/dialog.c:764
 msgid "Small"
 msgstr "小"
 
-#: src/dialog.c:755
+#: src/dialog.c:765
 msgid "Full"
 msgstr "完整"
 
-#: src/dialog.c:758
+#: src/dialog.c:768
 msgid "How much of the button the colored background covers"
 msgstr "彩色背景覆盖按钮的比例"
 
-#: src/dialog.c:759
+#: src/dialog.c:769
 msgid "_Size:"
 msgstr "大小(_S)："
 
-#: src/dialog.c:761
+#: src/dialog.c:771
 msgid "_Glass shine"
 msgstr "玻璃光泽(_G)"
 
-#: src/dialog.c:765
+#: src/dialog.c:775
 msgid "_Keep the pressed color while the desktop is shown"
 msgstr "显示桌面时保持按下颜色(_K)"
 
-#: src/dialog.c:768
+#: src/dialog.c:778
 msgid "Background colors"
 msgstr "背景颜色"
 
-#: src/dialog.c:773
+#: src/dialog.c:783
 msgid "Smooth _transitions"
 msgstr "平滑过渡(_T)"
 
-#: src/dialog.c:775
+#: src/dialog.c:785
 msgid ""
 "Fade colors when hovering and clicking instead of changing them instantly"
 msgstr "悬停和点击时渐变颜色，而不是立即切换"
 
-#: src/dialog.c:778
+#: src/dialog.c:788
 msgid "Fast"
 msgstr "快"
 
-#: src/dialog.c:778
+#: src/dialog.c:788
 msgid "Normal"
 msgstr "正常"
 
-#: src/dialog.c:778
+#: src/dialog.c:788
 msgid "Slow"
 msgstr "慢"
 
-#: src/dialog.c:779
+#: src/dialog.c:789
 msgid "Spee_d:"
 msgstr "速度(_D)："
 
-#: src/dialog.c:781
+#: src/dialog.c:791
 msgid "Animations are disabled in the system settings."
 msgstr "系统设置中已禁用动画。"
 
-#: src/dialog.c:788
+#: src/dialog.c:798
 msgid "Animation"
 msgstr "动画"
 
-#: src/dialog.c:791
+#: src/dialog.c:801
 msgid "Behavior"
 msgstr "行为"
 
-#: src/dialog.c:795 src/dialog.c:807
+#: src/dialog.c:805 src/dialog.c:817
 msgid "Do nothing"
 msgstr "不执行任何操作"
 
-#: src/dialog.c:795
+#: src/dialog.c:805
 msgid "Show / restore desktop"
 msgstr "显示 / 恢复桌面"
 
-#: src/dialog.c:796
+#: src/dialog.c:806
 msgid "Minimize all windows"
 msgstr "最小化所有窗口"
 
-#: src/dialog.c:797
+#: src/dialog.c:807
 msgid "Shade / unshade windows (X11 only)"
 msgstr "卷起 / 展开窗口（仅 X11）"
 
-#: src/dialog.c:798
+#: src/dialog.c:808
 msgid "_Middle click:"
 msgstr "中键单击(_M)："
 
-#: src/dialog.c:800
+#: src/dialog.c:810
 msgid "Window shading is not supported on Wayland."
 msgstr "Wayland 不支持卷起窗口。"
 
-#: src/dialog.c:807
+#: src/dialog.c:817
 msgid "Switch workspace"
 msgstr "切换工作区"
 
-#: src/dialog.c:808
+#: src/dialog.c:818
 msgid "Up shows desktop, down restores"
 msgstr "向上显示桌面，向下恢复"
 
-#: src/dialog.c:809
+#: src/dialog.c:819
 msgid "Mouse _wheel:"
 msgstr "鼠标滚轮(_W)："
 
-#: src/dialog.c:811
+#: src/dialog.c:821
 msgid "Workspace switching is not available in this session."
 msgstr "此会话中无法切换工作区。"
 
-#: src/dialog.c:818
+#: src/dialog.c:828
 msgid "Show desktop when _dragging a file over the button"
 msgstr "将文件拖到按钮上时显示桌面(_D)"
 
-#: src/dialog.c:822
+#: src/dialog.c:832
 msgid "Cop_y files dropped on the button to the Desktop"
 msgstr "将拖放到按钮上的文件复制到桌面(_Y)"
 
-#: src/dialog.c:824
+#: src/dialog.c:834
 msgid ""
 "The original files are never moved or deleted, and existing files on the "
 "Desktop are never overwritten: a copy gets a new name such as \"photo (2)."
@@ -404,72 +426,73 @@ msgstr ""
 "原始文件绝不会被移动或删除，桌面上已有的文件也绝不会被覆盖：副本会得到新名"
 "称，例如“photo (2).jpg”。"
 
-#: src/dialog.c:828
+#: src/dialog.c:838
 msgid "Show _tooltip"
 msgstr "显示工具提示(_T)"
 
-#: src/dialog.c:831
+#: src/dialog.c:841
 msgid "Actions"
 msgstr "操作"
 
-#: src/dialog.c:838
+#: src/dialog.c:848
 msgid "Show the desktop while the mouse is _over the button"
 msgstr "鼠标位于按钮上时显示桌面(_O)"
 
-#: src/dialog.c:840
+#: src/dialog.c:850
 msgid ""
 "Moving the mouse away restores the windows. Click during the peek to keep "
 "the desktop visible."
 msgstr "移开鼠标即可恢复窗口。在预览期间单击可使桌面保持可见。"
 
-#: src/dialog.c:845
+#: src/dialog.c:855
 msgid "D_elay (ms):"
 msgstr "延迟(_E)（毫秒）："
 
-#: src/dialog.c:847
+#: src/dialog.c:857
 msgid "Peek"
 msgstr "预览"
 
-#: src/dialog.c:852
+#: src/dialog.c:862
 msgid ""
-"Tip: place the button at the end of the panel and set the panel margin to 0 "
+"Tip: place the button at one end of the panel and set the panel margin to 0 "
 "so you can click it by pushing the mouse into the screen corner."
 msgstr ""
-"提示：将按钮放在面板末端并把面板边距设为 0，即可将鼠标推到屏幕角落来点击它。"
+"提示：将按钮放在面板任一端并把面板边距设为 0，即可将鼠标推到屏幕角落来点击"
+"它。"
 
-#: src/dialog.c:854
+#: src/dialog.c:864
 msgid "Keyboard shortcut command:"
 msgstr "键盘快捷键命令："
 
-#: src/plugin.c:290
+#: src/plugin.c:302
 msgid "Show desktop is not available in this session"
 msgstr "此会话中无法显示桌面"
 
-#: src/plugin.c:292
+#: src/plugin.c:304
 msgid "Restore the minimized windows"
 msgstr "恢复已最小化的窗口"
 
-#: src/plugin.c:294
+#: src/plugin.c:306
 msgid "Minimize all open windows and show the desktop"
 msgstr "最小化所有打开的窗口并显示桌面"
 
-#: src/plugin.c:300
+#: src/plugin.c:312
 msgid "Show Desktop"
 msgstr "显示桌面"
 
-#: src/plugin.c:1025
+#: src/plugin.c:1035
 msgid "_Minimize all windows"
 msgstr "最小化所有窗口(_M)"
 
-#: src/plugin.c:1031
+#: src/plugin.c:1041
 msgid "S_hade / unshade windows"
 msgstr "卷起 / 展开窗口(_H)"
 
-#: src/plugin.c:1047
+#: src/plugin.c:1057
 msgid "_Profile"
 msgstr "配置方案(_P)"
 
-#: src/plugin.c:1076
+#: src/plugin.c:1086
 msgid "A slim, customizable Show Desktop button"
 msgstr "纤细且可自定义的“显示桌面”按钮"
 

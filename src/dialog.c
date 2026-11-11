@@ -625,6 +625,10 @@ db_dialog_show (DbPlugin *db)
     gtk_grid_attach (GTK_GRID (grid), d->tone_hint, 1, row++, 1, 1);
 
     d->thickness = gtk_spin_button_new_with_range (1, 128, 1);
+    gtk_widget_set_tooltip_text (d->thickness,
+        _("Width of the button along the panel. With the icon style it is the "
+          "minimum width: the button grows to fit the icon. In the middle of the "
+          "panel, the line styles use twice this width."));
     add_row (grid, row++, _("Button _thickness (px):"), d->thickness);
 
     d->style = make_combo (_("Line"), _("Icon"), _("None (background only)"), NULL);
@@ -640,8 +644,9 @@ db_dialog_show (DbPlugin *db)
     gtk_widget_set_tooltip_text (d->gap_size,
         _("Empty space between the button and the other items when the button is "
           "at one end of the panel. It does not react to the mouse. In the middle "
-          "of the panel there is no gap: the button is twice as wide, with the "
-          "line in the center."));
+          "of the panel there is no gap: the button is twice as wide instead, with "
+          "the line in the center. With the glass shine, the button looks the same "
+          "everywhere."));
     add_row (grid, row++, _("Gap at the panel _ends (px):"), d->gap_size);
     gtk_box_pack_start (GTK_BOX (page), make_frame (_("General"), grid), FALSE, FALSE, 0);
 
@@ -655,6 +660,8 @@ db_dialog_show (DbPlugin *db)
     add_row (grid, row++, _("_Icon:"), d->icon_button);
 
     d->icon_size = gtk_spin_button_new_with_range (8, 128, 1);
+    gtk_widget_set_tooltip_text (d->icon_size,
+        _("The button grows to fit the icon. The only limit is the height of the panel."));
     add_row (grid, row++, _("Icon si_ze (px):"), d->icon_size);
 
     d->icon_follow_panel = gtk_check_button_new_with_mnemonic (_("_Follow the panel icon size"));
@@ -670,13 +677,13 @@ db_dialog_show (DbPlugin *db)
         GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
         d->copy_combo  = gtk_combo_box_text_new ();
-        d->copy_button = gtk_button_new_with_mnemonic (_("C_opy"));
+        d->copy_button = gtk_button_new_with_mnemonic (_("Cop_y"));
         gtk_widget_set_tooltip_text (d->copy_button,
             _("Replace all settings of this button with those of the selected one"));
         gtk_widget_set_hexpand (d->copy_combo, TRUE);
         gtk_box_pack_start (GTK_BOX (box), d->copy_combo, TRUE, TRUE, 0);
         gtk_box_pack_start (GTK_BOX (box), d->copy_button, FALSE, FALSE, 0);
-        add_row (grid, row++, _("_From:"), box);
+        add_row (grid, row++, _("Fro_m:"), box);
         gtk_label_set_mnemonic_widget (
             GTK_LABEL (gtk_grid_get_child_at (GTK_GRID (grid), 0, row - 1)), d->copy_combo);
     }
@@ -708,14 +715,17 @@ db_dialog_show (DbPlugin *db)
 
     /* el orden sigue a DbAlign */
     d->line_align = make_combo (_("Start (left / top)"), _("Center"), _("End (right / bottom)"),
-                                _("Automatic (toward the other panel items)"), NULL);
+                                _("Automatic (depends on where the button is)"), NULL);
+    gtk_widget_set_tooltip_text (d->line_align,
+        _("Automatic: at one end of the panel, the line faces the other items; "
+          "in the middle, it goes in the center."));
     add_row (grid, row++, _("_Position:"), d->line_align);
 
     d->line_visibility = make_combo (_("Always"), _("Only on hover"), NULL);
     add_row (grid, row++, _("_Visible:"), d->line_visibility);
 
     d->line_color = make_color ();
-    add_row (grid, row++, _("_Color:"), d->line_color);
+    add_row (grid, row++, _("C_olor:"), d->line_color);
 
     d->line_hover_color = make_color ();
     add_row (grid, row++, _("Color on _hover:"), d->line_hover_color);
@@ -723,7 +733,7 @@ db_dialog_show (DbPlugin *db)
     d->line_pressed_color = make_color ();
     add_row (grid, row++, _("Color when p_ressed:"), d->line_pressed_color);
 
-    d->line_round = gtk_check_button_new_with_mnemonic (_("R_ounded ends"));
+    d->line_round = gtk_check_button_new_with_mnemonic (_("Rounded _ends"));
     gtk_grid_attach (GTK_GRID (grid), d->line_round, 0, row++, 2, 1);
 
     d->line_frame = make_frame (_("Line"), grid);
@@ -849,7 +859,7 @@ db_dialog_show (DbPlugin *db)
     {
         /* el comando queda fuera del texto traducible: debe escribirse tal cual */
         gchar *text = g_strdup_printf ("%s\n\n%s\n%s",
-            _("Tip: place the button at the end of the panel and set the panel margin "
+            _("Tip: place the button at one end of the panel and set the panel margin "
               "to 0 so you can click it by pushing the mouse into the screen corner."),
             _("Keyboard shortcut command:"),
             "xfce4-panel --plugin-event=xfce-desktop-button-plugin:show");
