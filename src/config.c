@@ -68,7 +68,7 @@ db_config_apply_profile (DbConfig *cfg, DbProfile profile, gboolean light)
         cfg->line_width      = 1;
         cfg->line_length     = 100;
         cfg->line_length_pct = TRUE;
-        cfg->line_align      = ALIGN_START;
+        cfg->line_align      = ALIGN_AUTO;  /* hacia los demás ítems */
         cfg->line_visibility = LINE_ALWAYS;
         TINT (&cfg->line_color,         0.40);
         TINT (&cfg->line_hover_color,   0.70);
@@ -89,7 +89,7 @@ db_config_apply_profile (DbConfig *cfg, DbProfile profile, gboolean light)
         cfg->line_width      = 1;
         cfg->line_length     = 100;
         cfg->line_length_pct = TRUE;
-        cfg->line_align      = ALIGN_START;
+        cfg->line_align      = ALIGN_AUTO;  /* hacia los demás ítems */
         cfg->line_visibility = LINE_ALWAYS;
         TINT (&cfg->line_color,         0.35);
         TINT (&cfg->line_hover_color,   0.60);
@@ -111,7 +111,7 @@ db_config_apply_profile (DbConfig *cfg, DbProfile profile, gboolean light)
         cfg->line_width      = 1;
         cfg->line_length     = 50;
         cfg->line_length_pct = TRUE;
-        cfg->line_align      = ALIGN_START;
+        cfg->line_align      = ALIGN_AUTO;  /* hacia los demás ítems */
         cfg->line_visibility = LINE_HOVER;
         TINT (&cfg->line_color,         0.55);
         TINT (&cfg->line_hover_color,   0.55);
@@ -284,7 +284,7 @@ db_config_load_file (DbConfig *cfg, const gchar *file)
     xfce_rc_close (rc);
 
     cfg->style           = CLAMP (cfg->style,           STYLE_LINE,  STYLE_NONE);
-    cfg->line_align      = CLAMP (cfg->line_align,      ALIGN_START, ALIGN_END);
+    cfg->line_align      = CLAMP (cfg->line_align,      ALIGN_START, ALIGN_AUTO);
     cfg->line_visibility = CLAMP (cfg->line_visibility, LINE_ALWAYS, LINE_HOVER);
     cfg->middle_action   = CLAMP (cfg->middle_action,   MIDDLE_NONE, MIDDLE_SHADE);
     cfg->scroll_action   = CLAMP (cfg->scroll_action,   SCROLL_NONE, SCROLL_SHOW_HIDE);

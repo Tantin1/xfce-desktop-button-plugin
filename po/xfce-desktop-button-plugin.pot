@@ -6,10 +6,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-desktop-button-plugin 0.4.1\n"
+"Project-Id-Version: xfce-desktop-button-plugin 0.4.2\n"
 "Report-Msgid-Bugs-To: https://github.com/Tantin1/xfce-desktop-button-plugin/"
 "issues\n"
-"POT-Creation-Date: 2026-11-06 21:24+0000\n"
+"POT-Creation-Date: 2026-11-11 14:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Panel %d — button #%d"
 msgstr ""
 
-#: src/dialog.c:508 src/plugin.c:988
+#: src/dialog.c:508 src/plugin.c:1049
 #: src/xfce-desktop-button-plugin.desktop.in:4
 msgid "Desktop Button"
 msgstr ""
@@ -68,23 +68,23 @@ msgstr ""
 
 #. TRANSLATORS: profile names. "Glass", "Strip" and "Minimal" are styles
 #. * inspired by Windows 7, 10 and 11; translate them as short style names
-#: src/dialog.c:533 src/plugin.c:934
+#: src/dialog.c:533 src/plugin.c:995
 msgid "Custom"
 msgstr ""
 
-#: src/dialog.c:533 src/plugin.c:934
+#: src/dialog.c:533 src/plugin.c:995
 msgid "Glass"
 msgstr ""
 
-#: src/dialog.c:533 src/plugin.c:934
+#: src/dialog.c:533 src/plugin.c:995
 msgid "Strip"
 msgstr ""
 
-#: src/dialog.c:533 src/plugin.c:934
+#: src/dialog.c:533 src/plugin.c:995
 msgid "Minimal"
 msgstr ""
 
-#: src/dialog.c:534 src/plugin.c:934
+#: src/dialog.c:534 src/plugin.c:995
 msgid "Classic icon"
 msgstr ""
 
@@ -116,7 +116,7 @@ msgstr ""
 msgid "Button _thickness (px):"
 msgstr ""
 
-#: src/dialog.c:555 src/dialog.c:602 src/dialog.c:642
+#: src/dialog.c:555 src/dialog.c:602 src/dialog.c:644
 msgid "Line"
 msgstr ""
 
@@ -192,247 +192,251 @@ msgstr ""
 msgid "Line _length:"
 msgstr ""
 
-#: src/dialog.c:624
+#: src/dialog.c:625
 msgid "Start (left / top)"
 msgstr ""
 
-#: src/dialog.c:624
+#: src/dialog.c:625
 msgid "Center"
 msgstr ""
 
-#: src/dialog.c:624
+#: src/dialog.c:625
 msgid "End (right / bottom)"
 msgstr ""
 
-#: src/dialog.c:625
+#: src/dialog.c:626
+msgid "Automatic (toward the other panel items)"
+msgstr ""
+
+#: src/dialog.c:627
 msgid "_Position:"
 msgstr ""
 
-#: src/dialog.c:627
+#: src/dialog.c:629
 msgid "Always"
 msgstr ""
 
-#: src/dialog.c:627
+#: src/dialog.c:629
 msgid "Only on hover"
 msgstr ""
 
-#: src/dialog.c:628
+#: src/dialog.c:630
 msgid "_Visible:"
 msgstr ""
 
-#: src/dialog.c:631
+#: src/dialog.c:633
 msgid "_Color:"
 msgstr ""
 
-#: src/dialog.c:634
+#: src/dialog.c:636
 msgid "Color on _hover:"
 msgstr ""
 
-#: src/dialog.c:637
+#: src/dialog.c:639
 msgid "Color when p_ressed:"
 msgstr ""
 
-#: src/dialog.c:639
+#: src/dialog.c:641
 msgid "R_ounded ends"
 msgstr ""
 
-#: src/dialog.c:646
+#: src/dialog.c:648
 msgid "Background"
 msgstr ""
 
-#: src/dialog.c:652
+#: src/dialog.c:654
 msgid "_Normal:"
 msgstr ""
 
-#: src/dialog.c:655
+#: src/dialog.c:657
 msgid "On h_over:"
 msgstr ""
 
-#: src/dialog.c:658
+#: src/dialog.c:660
 msgid "_Pressed:"
 msgstr ""
 
-#: src/dialog.c:661
+#: src/dialog.c:663
 msgid "Corner _radius (px):"
 msgstr ""
 
-#: src/dialog.c:665
+#: src/dialog.c:667
 msgid "Empty space between the edge of the button and the colored background"
 msgstr ""
 
-#: src/dialog.c:666
+#: src/dialog.c:668
 msgid "_Margin (px):"
 msgstr ""
 
-#: src/dialog.c:668
+#: src/dialog.c:670
 msgid "_Glass shine"
 msgstr ""
 
-#: src/dialog.c:672
+#: src/dialog.c:674
 msgid "_Keep the pressed color while the desktop is shown"
 msgstr ""
 
-#: src/dialog.c:675
+#: src/dialog.c:677
 msgid "Background colors"
 msgstr ""
 
-#: src/dialog.c:680
+#: src/dialog.c:682
 msgid "Smooth _transitions"
 msgstr ""
 
-#: src/dialog.c:682
+#: src/dialog.c:684
 msgid ""
 "Fade colors when hovering and clicking instead of changing them instantly"
 msgstr ""
 
-#: src/dialog.c:685
+#: src/dialog.c:687
 msgid "Fast"
 msgstr ""
 
-#: src/dialog.c:685
+#: src/dialog.c:687
 msgid "Normal"
 msgstr ""
 
-#: src/dialog.c:685
+#: src/dialog.c:687
 msgid "Slow"
 msgstr ""
 
-#: src/dialog.c:686
+#: src/dialog.c:688
 msgid "Spee_d:"
 msgstr ""
 
-#: src/dialog.c:688
+#: src/dialog.c:690
 msgid "Animations are disabled in the system settings."
 msgstr ""
 
-#: src/dialog.c:695
+#: src/dialog.c:697
 msgid "Animation"
 msgstr ""
 
-#: src/dialog.c:698
+#: src/dialog.c:700
 msgid "Behavior"
 msgstr ""
 
-#: src/dialog.c:702 src/dialog.c:714
+#: src/dialog.c:704 src/dialog.c:716
 msgid "Do nothing"
 msgstr ""
 
-#: src/dialog.c:702
+#: src/dialog.c:704
 msgid "Show / restore desktop"
 msgstr ""
 
-#: src/dialog.c:703
+#: src/dialog.c:705
 msgid "Minimize all windows"
 msgstr ""
 
-#: src/dialog.c:704
+#: src/dialog.c:706
 msgid "Shade / unshade windows (X11 only)"
 msgstr ""
 
-#: src/dialog.c:705
+#: src/dialog.c:707
 msgid "_Middle click:"
 msgstr ""
 
-#: src/dialog.c:707
+#: src/dialog.c:709
 msgid "Window shading is not supported on Wayland."
 msgstr ""
 
-#: src/dialog.c:714
+#: src/dialog.c:716
 msgid "Switch workspace"
 msgstr ""
 
-#: src/dialog.c:715
+#: src/dialog.c:717
 msgid "Up shows desktop, down restores"
 msgstr ""
 
-#: src/dialog.c:716
+#: src/dialog.c:718
 msgid "Mouse _wheel:"
 msgstr ""
 
-#: src/dialog.c:718
+#: src/dialog.c:720
 msgid "Workspace switching is not available in this session."
 msgstr ""
 
-#: src/dialog.c:725
+#: src/dialog.c:727
 msgid "Show desktop when _dragging a file over the button"
 msgstr ""
 
-#: src/dialog.c:729
+#: src/dialog.c:731
 msgid "Cop_y files dropped on the button to the Desktop"
 msgstr ""
 
-#: src/dialog.c:731
+#: src/dialog.c:733
 msgid ""
 "The original files are never moved or deleted, and existing files on the "
 "Desktop are never overwritten: a copy gets a new name such as \"photo (2)."
 "jpg\"."
 msgstr ""
 
-#: src/dialog.c:735
+#: src/dialog.c:737
 msgid "Show _tooltip"
 msgstr ""
 
-#: src/dialog.c:738
+#: src/dialog.c:740
 msgid "Actions"
 msgstr ""
 
-#: src/dialog.c:745
+#: src/dialog.c:747
 msgid "Show the desktop while the mouse is _over the button"
 msgstr ""
 
-#: src/dialog.c:747
+#: src/dialog.c:749
 msgid ""
 "Moving the mouse away restores the windows. Click during the peek to keep "
 "the desktop visible."
 msgstr ""
 
-#: src/dialog.c:752
+#: src/dialog.c:754
 msgid "D_elay (ms):"
 msgstr ""
 
-#: src/dialog.c:754
+#: src/dialog.c:756
 msgid "Peek"
 msgstr ""
 
-#: src/dialog.c:759
+#: src/dialog.c:761
 msgid ""
 "Tip: place the button at the end of the panel and set the panel margin to 0 "
 "so you can click it by pushing the mouse into the screen corner."
 msgstr ""
 
-#: src/dialog.c:761
+#: src/dialog.c:763
 msgid "Keyboard shortcut command:"
 msgstr ""
 
-#: src/plugin.c:249
+#: src/plugin.c:287
 msgid "Show desktop is not available in this session"
 msgstr ""
 
-#: src/plugin.c:251
+#: src/plugin.c:289
 msgid "Restore the minimized windows"
 msgstr ""
 
-#: src/plugin.c:253
+#: src/plugin.c:291
 msgid "Minimize all open windows and show the desktop"
 msgstr ""
 
-#: src/plugin.c:259
+#: src/plugin.c:297
 msgid "Show Desktop"
 msgstr ""
 
-#: src/plugin.c:939
+#: src/plugin.c:1000
 msgid "_Minimize all windows"
 msgstr ""
 
-#: src/plugin.c:945
+#: src/plugin.c:1006
 msgid "S_hade / unshade windows"
 msgstr ""
 
-#: src/plugin.c:961
+#: src/plugin.c:1022
 msgid "_Profile"
 msgstr ""
 
-#: src/plugin.c:990
+#: src/plugin.c:1051
 msgid "A slim, customizable Show Desktop button"
 msgstr ""
 

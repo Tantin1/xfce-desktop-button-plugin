@@ -7,6 +7,7 @@ A thin, customizable **Show Desktop** button for the Xfce panel. It can display 
 - Adjustable button thickness (1–128 px) and an option to occupy only one row of a multi-row panel.
 - Four built-in appearance presets: **Glass** (inspired by Windows 7), **Strip** (Windows 10), **Minimal** (Windows 11), and **Classic icon** (the Xfce-style button). A **Custom** profile provides individual controls.
 - Configurable line width, length, alignment, visibility, colors, rounded ends, backgrounds, icon name, and icon size.
+- Works anywhere in the panel: line styles put the line on the side facing the other items (both sides when placed in the middle) and leave a gap as wide as a transparent separator. The gap does not react to the mouse.
 - Optional smooth transitions, automatic light/dark panel detection, and highlighting while the desktop is shown.
 - Configurable middle-click and mouse-wheel actions; optional **peek** to show the desktop while hovering, with a delay.
 - Optional drag-hover to show the desktop. Files dropped onto the button can be **copied** to the Desktop: originals are preserved, and existing names are not overwritten.

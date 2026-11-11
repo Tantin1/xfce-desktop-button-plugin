@@ -621,7 +621,9 @@ db_dialog_show (DbPlugin *db)
             GTK_LABEL (gtk_grid_get_child_at (GTK_GRID (grid), 0, row - 1)), d->line_length);
     }
 
-    d->line_align = make_combo (_("Start (left / top)"), _("Center"), _("End (right / bottom)"), NULL);
+    /* el orden sigue a DbAlign */
+    d->line_align = make_combo (_("Start (left / top)"), _("Center"), _("End (right / bottom)"),
+                                _("Automatic (toward the other panel items)"), NULL);
     add_row (grid, row++, _("_Position:"), d->line_align);
 
     d->line_visibility = make_combo (_("Always"), _("Only on hover"), NULL);

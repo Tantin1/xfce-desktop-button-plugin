@@ -158,6 +158,67 @@ db_tone_panel_of_plugin (DbPlugin *db, gint plugin_id)
     return find_panel_id (db->tone_channel, plugin_id);
 }
 
+/*
+ * ¿Dónde quedó el botón entre los ítems de su panel?
+ * Se mira el orden de "plugin-ids" en xfconf: el panel ubica los ítems en
+ * ese orden de izquierda a derecha (o de arriba abajo), sin invertirlo en
+ * idiomas que se escriben de derecha a izquierda. Funciona igual en X11 y
+ * en Wayland, porque no depende de coordenadas de pantalla.
+ * Sin xfconf se supone el caso de siempre: último del panel.
+ */
+DbPlacement
+db_tone_placement (DbPlugin *db)
+{
+    XfconfChannel *ch = db->tone_channel;
+    GPtrArray     *ids;
+    gchar         *prop;
+    gint           self = xfce_panel_plugin_get_unique_id (db->plugin);
+    gint           idx  = -1;
+    guint          i;
+    DbPlacement    place = PLACE_END;
+
+    if (db->cached_placement >= 0)
+        return db->cached_placement;
+
+    if (ch == NULL)
+        return PLACE_END;
+
+    if (db->cached_panel_id < 0)
+        db->cached_panel_id = find_panel_id (ch, self);
+    if (db->cached_panel_id < 0)
+        return PLACE_END;   /* todavía no figura en ningún panel: volver a mirar después */
+
+    prop = g_strdup_printf ("/panels/panel-%d/plugin-ids", db->cached_panel_id);
+    ids  = xfconf_channel_get_arrayv (ch, prop);
+    g_free (prop);
+    if (ids == NULL)
+        return PLACE_END;
+
+    for (i = 0; i < ids->len; i++)
+        if (value_as_int (g_ptr_array_index (ids, i)) == self)
+        {
+            idx = (gint) i;
+            break;
+        }
+
+    if (idx < 0)
+        place = PLACE_END;
+    else if (ids->len == 1)
+        place = PLACE_ALONE;
+    else if (idx == 0)
+        place = PLACE_START;
+    else if (idx == (gint) ids->len - 1)
+        place = PLACE_END;
+    else
+        place = PLACE_MIDDLE;
+
+    xfconf_array_free (ids);
+
+    if (idx >= 0)
+        db->cached_placement = place;
+    return place;
+}
+
 static gint
 compare_ids (gconstpointer a, gconstpointer b)
 {
@@ -216,20 +277,30 @@ static void
 on_panel_property_changed (XfconfChannel *ch, const gchar *property,
                            const GValue *value, DbPlugin *db)
 {
+    gboolean moved;
+
     (void) ch; (void) value;
 
-    if (g_str_has_suffix (property, "plugin-ids"))
-        db->cached_panel_id = -1;
-
-    if (db->cfg.panel_tone != TONE_AUTO)
+    if (!g_str_has_prefix (property, "/panels"))
         return;
 
-    if (g_str_has_prefix (property, "/panels")
-        && (g_str_has_suffix (property, "background-style")
+    /* se agregó, quitó o movió algún ítem: el botón puede haber cambiado
+     * de panel o de lugar dentro del panel */
+    moved = g_str_has_suffix (property, "plugin-ids");
+    if (moved)
+    {
+        db->cached_panel_id  = -1;
+        db->cached_placement = -1;
+    }
+
+    if (db->cfg.panel_tone == TONE_AUTO
+        && (moved
+            || g_str_has_suffix (property, "background-style")
             || g_str_has_suffix (property, "background-rgba")
-            || g_str_has_suffix (property, "dark-mode")
-            || g_str_has_suffix (property, "plugin-ids")))
-        db_plugin_apply_tone (db);
+            || g_str_has_suffix (property, "dark-mode")))
+        db_plugin_apply_tone (db);       /* también acomoda línea y separación */
+    else if (moved)
+        db_plugin_update_size (db);
 }
 
 void
@@ -237,7 +308,8 @@ db_tone_init (DbPlugin *db)
 {
     GError *err = NULL;
 
-    db->cached_panel_id = -1;
+    db->cached_panel_id  = -1;
+    db->cached_placement = -1;
 
     if (!xfconf_init (&err))
     {

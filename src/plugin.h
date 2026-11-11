@@ -34,8 +34,18 @@ typedef enum
 {
     ALIGN_START = 0,     /* izquierda en panel horizontal, arriba en vertical */
     ALIGN_CENTER,
-    ALIGN_END
+    ALIGN_END,
+    ALIGN_AUTO           /* del lado que mira a los demás ítems del panel */
 } DbAlign;
+
+/* dónde quedó el botón entre los ítems de su panel (orden de xfconf) */
+typedef enum
+{
+    PLACE_END = 0,       /* último: lo normal, a la derecha o abajo de todo */
+    PLACE_START,         /* primero: a la izquierda o arriba de todo */
+    PLACE_MIDDLE,        /* con ítems de los dos lados */
+    PLACE_ALONE          /* único ítem del panel */
+} DbPlacement;
 
 typedef enum
 {
@@ -142,6 +152,8 @@ typedef struct
     gulong           tone_handler;
     gint             cached_panel_id; /* evita recorrer /panels en cada consulta */
     gboolean         light_panel;     /* resultado del tono en uso */
+    gint             cached_placement; /* DbPlacement, o -1 si hay que volver a mirar */
+    DbPlacement      placement;       /* ubicación en uso para dibujar */
 
     gboolean         showing;         /* escritorio mostrado */
     gboolean         hovered;
@@ -211,6 +223,7 @@ void     db_tone_free            (DbPlugin *db);
 gboolean db_tone_detect_light    (DbPlugin *db);
 gint     db_tone_panel_of_plugin (DbPlugin *db, gint plugin_id);
 GList   *db_tone_list_siblings   (DbPlugin *db);   /* ids de otros botones (GINT_TO_POINTER) */
+DbPlacement db_tone_placement    (DbPlugin *db);   /* primero, último, en el medio o solo */
 
 /* drop.c — copiar al Escritorio los archivos soltados sobre el botón */
 void     db_drop_init            (DbPlugin *db);

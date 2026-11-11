@@ -16,6 +16,10 @@
 /* margen a cada lado del icono en el perfil Icono clásico */
 #define CLASSIC_ICON_PADDING 4
 
+/* espacio vacío junto a la línea: el ancho por defecto del separador
+ * transparente de Xfce (plugins/separator/separator.c, DEFAULT_SIZE) */
+#define SEPARATOR_GAP 8
+
 /* duración de cada transición a velocidad Normal (ms).
  * Asimétricas a propósito: presionar casi inmediato, apagarse más lento. */
 #define ANIM_HOVER_IN_MS   120
@@ -204,12 +208,17 @@ db_plugin_update_size (DbPlugin *db)
     gboolean            small_deskbar;
     gboolean            small;
     gint                t;
+    gint                gap_start = 0, gap_end = 0;
 
     /* Icono clásico: el ancho acompaña al tamaño de iconos del panel */
     if (db->cfg.profile == PROFILE_CLASSIC)
         db->cfg.thickness = db_plugin_icon_size (db) + 2 * CLASSIC_ICON_PADDING;
 
     t = db->cfg.thickness;
+
+    /* lugar del botón entre los ítems del panel: decide de qué lado va la
+     * línea y dónde va la separación (ver db_tone_placement) */
+    db->placement = db_tone_placement (db);
 
     /* en modo Deskbar, el perfil Icono clásico se comporta como botón
      * compacto; los modos de línea/barra ocupan todo el ancho de la barra */
@@ -221,14 +230,43 @@ db_plugin_update_size (DbPlugin *db)
     small = small_deskbar || db->cfg.single_row;
     xfce_panel_plugin_set_small (db->plugin, small);
 
+    /* separación de los estilos con línea: un hueco transparente del lado
+     * de los demás ítems (de los dos lados si está en el medio). Es margen
+     * del área de dibujo, así que no reacciona al mouse: no resalta, no
+     * muestra el escritorio ni recibe archivos, como un separador. Del lado
+     * del borde de la pantalla no hay hueco: el botón sigue llegando a la
+     * esquina. */
+    if (db->cfg.style == STYLE_LINE && !small_deskbar)
+    {
+        switch (db->placement)
+        {
+        case PLACE_END:    gap_start = SEPARATOR_GAP;                         break;
+        case PLACE_START:  gap_end   = SEPARATOR_GAP;                         break;
+        case PLACE_MIDDLE: gap_start = gap_end = SEPARATOR_GAP;               break;
+        case PLACE_ALONE:
+        default:                                                              break;
+        }
+    }
+
+    if (db->area != NULL)
+    {
+        /* el área es siempre de izquierda a derecha (ver construcción):
+         * "start" es la izquierda en horizontal y arriba en vertical */
+        gboolean hz = db_is_horizontal (db);
+        gtk_widget_set_margin_start  (db->area, hz ? gap_start : 0);
+        gtk_widget_set_margin_end    (db->area, hz ? gap_end   : 0);
+        gtk_widget_set_margin_top    (db->area, hz ? 0 : gap_start);
+        gtk_widget_set_margin_bottom (db->area, hz ? 0 : gap_end);
+    }
+
     /* el eje delgado es siempre el que corre a lo largo del panel;
      * el otro eje (-1) lo llena el panel completo */
     if (small_deskbar)
         gtk_widget_set_size_request (GTK_WIDGET (db->plugin), t, t);
     else if (db_is_horizontal (db))
-        gtk_widget_set_size_request (GTK_WIDGET (db->plugin), t, -1);
+        gtk_widget_set_size_request (GTK_WIDGET (db->plugin), t + gap_start + gap_end, -1);
     else
-        gtk_widget_set_size_request (GTK_WIDGET (db->plugin), -1, t);
+        gtk_widget_set_size_request (GTK_WIDGET (db->plugin), -1, t + gap_start + gap_end);
 
     /* todo cambio de apariencia pasa por acá: mantener el menú al día */
     menu_sync (db);
@@ -498,7 +536,8 @@ draw_line (DbPlugin *db, cairo_t *cr, gboolean horizontal, gint w, gint h)
 {
     DbConfig *cfg = &db->cfg;
     GdkRGBA   color;
-    gint      along, across, thick, len, pos_along, pos_across;
+    gint      along, across, thick, len, pos_across;
+    gint      pos[2], n = 0;    /* posiciones de la línea a lo largo del botón */
 
     /* hover aclara, presionado atenúa (estilo Fluent) */
     color = mix_rgba (&cfg->line_color, &cfg->line_hover_color, db->anim_hover);
@@ -521,23 +560,45 @@ draw_line (DbPlugin *db, cairo_t *cr, gboolean horizontal, gint w, gint h)
     else
         len = MIN (cfg->line_length, across);
 
+    /* "Automática": del lado que mira a los demás ítems del panel. Último
+     * del panel → al principio del botón; primero → al final; en el medio →
+     * una a cada lado; solo en el panel → como siempre, al principio. */
     switch (cfg->line_align)
     {
-    case ALIGN_START:  pos_along = 0;                    break;
-    case ALIGN_END:    pos_along = along - thick;        break;
-    case ALIGN_CENTER:
-    default:           pos_along = (along - thick) / 2;  break;
+    case ALIGN_START:  pos[n++] = 0;                    break;
+    case ALIGN_END:    pos[n++] = along - thick;        break;
+    case ALIGN_CENTER: pos[n++] = (along - thick) / 2;  break;
+    case ALIGN_AUTO:
+    default:
+        switch (db->placement)
+        {
+        case PLACE_START:  pos[n++] = along - thick;                       break;
+        case PLACE_MIDDLE: pos[n++] = 0; pos[n++] = along - thick;         break;
+        case PLACE_END:
+        case PLACE_ALONE:
+        default:           pos[n++] = 0;                                   break;
+        }
+        break;
     }
     pos_across = (across - len) / 2;
+
+    /* botón tan delgado que las dos líneas se tocan: dibujar una sola,
+     * así un color translúcido no se ve más intenso */
+    if (n == 2 && pos[1] < pos[0] + thick)
+        n = 1;
 
     /* puntas redondeadas: radio de medio grosor, efecto "píldora" */
     {
         gdouble r = cfg->line_round ? thick / 2.0 : 0.0;
+        gint    i;
 
-        if (horizontal)
-            fill_shape_rgba (cr, &color, pos_along, pos_across, thick, len, r);
-        else
-            fill_shape_rgba (cr, &color, pos_across, pos_along, len, thick, r);
+        for (i = 0; i < n; i++)
+        {
+            if (horizontal)
+                fill_shape_rgba (cr, &color, pos[i], pos_across, thick, len, r);
+            else
+                fill_shape_rgba (cr, &color, pos_across, pos[i], len, thick, r);
+        }
     }
 }
 
@@ -1046,6 +1107,9 @@ db_plugin_construct (XfcePanelPlugin *plugin)
     xfce_panel_plugin_set_small (plugin, FALSE);
 
     db->area = gtk_drawing_area_new ();
+    /* el panel ordena los ítems de izquierda a derecha aun en idiomas que
+     * se escriben al revés: los márgenes de separación siguen ese orden */
+    gtk_widget_set_direction (db->area, GTK_TEXT_DIR_LTR);
     gtk_widget_add_events (db->area,
                            GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK |
                            GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK |
