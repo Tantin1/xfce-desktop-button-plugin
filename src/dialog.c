@@ -10,6 +10,24 @@
 
 #include "plugin.h"
 
+/* ventana para elegir icono: la misma de "Menú de aplicaciones".
+ * Hasta Xfce 4.20 está en exo; desde 4.21, en libxfce4ui (ver meson.build) */
+#ifdef HAVE_XFCE_ICON_CHOOSER
+#include <libxfce4ui/libxfce4ui.h>
+#define ICON_CHOOSER_NEW       xfce_icon_chooser_dialog_new
+#define ICON_CHOOSER_SET(d, i) xfce_icon_chooser_dialog_set_icon (XFCE_ICON_CHOOSER_DIALOG (d), (i))
+#define ICON_CHOOSER_GET(d)    xfce_icon_chooser_dialog_get_icon (XFCE_ICON_CHOOSER_DIALOG (d))
+#else
+#include <exo/exo.h>
+#define ICON_CHOOSER_NEW       exo_icon_chooser_dialog_new
+#define ICON_CHOOSER_SET(d, i) exo_icon_chooser_dialog_set_icon (EXO_ICON_CHOOSER_DIALOG (d), (i))
+#define ICON_CHOOSER_GET(d)    exo_icon_chooser_dialog_get_icon (EXO_ICON_CHOOSER_DIALOG (d))
+#endif
+
+#define DEFAULT_ICON        "user-desktop"
+#define ICON_PREVIEW_SIZE   32      /* icono que se ve en el botón de elegir */
+#define BG_MARGIN_MAX       8       /* "tamaño del fondo" = BG_MARGIN_MAX - margen */
+
 typedef struct
 {
     DbPlugin  *db;
@@ -22,6 +40,7 @@ typedef struct
     GtkWidget *thickness;
     GtkWidget *style;
     GtkWidget *single_row;
+    GtkWidget *gap_size;
 
     GtkWidget *line_frame;
     GtkWidget *line_width;
@@ -35,7 +54,8 @@ typedef struct
     GtkWidget *line_round;
 
     GtkWidget *icon_frame;
-    GtkWidget *icon_name;
+    GtkWidget *icon_button;
+    GtkWidget *icon_image;
     GtkWidget *icon_size;
     GtkWidget *icon_follow_panel;
 
@@ -45,7 +65,7 @@ typedef struct
     GtkWidget *glass;
     GtkWidget *highlight_shown;
     GtkWidget *bg_radius;
-    GtkWidget *bg_margin;
+    GtkWidget *bg_size;
     GtkWidget *animate;
     GtkWidget *anim_speed;
     GtkWidget *anim_hint;
@@ -179,6 +199,7 @@ update_sensitivity (DbDialog *d)
     gtk_widget_set_sensitive (d->line_frame, cfg->style == STYLE_LINE);
     gtk_widget_set_sensitive (d->icon_frame, cfg->style == STYLE_ICON);
     gtk_widget_set_sensitive (d->icon_size,  !cfg->icon_follow_panel);
+    gtk_widget_set_sensitive (d->gap_size,   cfg->style == STYLE_LINE);
     gtk_widget_set_sensitive (d->peek_delay, cfg->peek_on_hover);
     gtk_widget_set_sensitive (d->anim_speed, cfg->animate);
 
@@ -202,6 +223,21 @@ update_anim_hint (DbDialog *d)
     gtk_widget_set_visible (d->anim_hint, !system);
 }
 
+/* muestra el icono elegido en el botón de elegir icono */
+static void
+update_icon_preview (DbDialog *d)
+{
+    const gchar *name = d->db->cfg.icon_name;
+
+    if (name == NULL || *name == '\0')
+        name = DEFAULT_ICON;
+
+    xfce_panel_set_image_from_source (GTK_IMAGE (d->icon_image), name, NULL,
+                                      ICON_PREVIEW_SIZE,
+                                      gtk_widget_get_scale_factor (d->icon_image));
+    gtk_widget_set_tooltip_text (d->icon_button, name);
+}
+
 /* cfg -> controles */
 static void
 dialog_fill (DbDialog *d)
@@ -221,6 +257,7 @@ dialog_fill (DbDialog *d)
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (d->thickness), cfg->thickness);
     gtk_combo_box_set_active (GTK_COMBO_BOX (d->style), cfg->style);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (d->single_row), cfg->single_row);
+    gtk_spin_button_set_value (GTK_SPIN_BUTTON (d->gap_size), cfg->gap_size);
 
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (d->line_width), cfg->line_width);
     gtk_combo_box_set_active (GTK_COMBO_BOX (d->line_unit), cfg->line_length_pct ? 0 : 1);
@@ -233,7 +270,7 @@ dialog_fill (DbDialog *d)
     gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (d->line_pressed_color), &cfg->line_pressed_color);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (d->line_round), cfg->line_round);
 
-    gtk_entry_set_text (GTK_ENTRY (d->icon_name), cfg->icon_name ? cfg->icon_name : "");
+    update_icon_preview (d);
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (d->icon_size), db_plugin_icon_size (d->db));
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (d->icon_follow_panel), cfg->icon_follow_panel);
 
@@ -243,7 +280,7 @@ dialog_fill (DbDialog *d)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (d->glass), cfg->glass);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (d->highlight_shown), cfg->highlight_shown);
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (d->bg_radius), cfg->bg_radius);
-    gtk_spin_button_set_value (GTK_SPIN_BUTTON (d->bg_margin), cfg->bg_margin);
+    gtk_range_set_value (GTK_RANGE (d->bg_size), BG_MARGIN_MAX - cfg->bg_margin);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (d->animate), cfg->animate);
     gtk_combo_box_set_active (GTK_COMBO_BOX (d->anim_speed), cfg->anim_speed);
 
@@ -299,8 +336,7 @@ on_appearance_changed (GtkWidget *widget, DbDialog *d)
     gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (d->line_pressed_color), &cfg->line_pressed_color);
     cfg->line_round = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->line_round));
 
-    g_free (cfg->icon_name);
-    cfg->icon_name = g_strdup (gtk_entry_get_text (GTK_ENTRY (d->icon_name)));
+    /* el icono lo guarda on_icon_clicked al elegirlo */
     cfg->icon_follow_panel = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->icon_follow_panel));
     if (!cfg->icon_follow_panel)
         cfg->icon_size = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (d->icon_size));
@@ -310,7 +346,8 @@ on_appearance_changed (GtkWidget *widget, DbDialog *d)
     gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (d->active_bg_color), &cfg->active_bg_color);
     cfg->glass = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->glass));
     cfg->bg_radius = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (d->bg_radius));
-    cfg->bg_margin = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (d->bg_margin));
+    cfg->bg_margin = BG_MARGIN_MAX
+                     - (gint) (gtk_range_get_value (GTK_RANGE (d->bg_size)) + 0.5);
 
     if (cfg->profile != PROFILE_CUSTOM)
     {
@@ -340,6 +377,7 @@ on_behavior_changed (GtkWidget *widget, DbDialog *d)
     cfg->drop_to_desktop = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->drop_to_desktop));
     cfg->show_tooltip  = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->show_tooltip));
     cfg->single_row    = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->single_row));
+    cfg->gap_size      = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (d->gap_size));
     cfg->highlight_shown = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->highlight_shown));
     cfg->peek_on_hover   = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (d->peek_on_hover));
     cfg->peek_delay      = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (d->peek_delay));
@@ -348,6 +386,43 @@ on_behavior_changed (GtkWidget *widget, DbDialog *d)
 
     update_sensitivity (d);
     apply_to_panel (d);
+}
+
+/* elegir icono: la misma ventana que usa "Menú de aplicaciones"
+ * (iconos del tema o una imagen propia) */
+static void
+on_icon_clicked (GtkButton *button, DbDialog *d)
+{
+    DbConfig  *cfg = &d->db->cfg;
+    GtkWidget *chooser;
+    gchar     *icon;
+
+    (void) button;
+
+    chooser = ICON_CHOOSER_NEW (_("Select an icon"), GTK_WINDOW (d->db->dialog),
+                                _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                _("_OK"),     GTK_RESPONSE_ACCEPT,
+                                NULL);
+    gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_ACCEPT);
+    ICON_CHOOSER_SET (chooser, (cfg->icon_name && *cfg->icon_name) ? cfg->icon_name
+                                                                    : DEFAULT_ICON);
+
+    if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_ACCEPT)
+    {
+        icon = ICON_CHOOSER_GET (chooser);
+        if (icon != NULL && *icon != '\0')
+        {
+            g_free (cfg->icon_name);
+            cfg->icon_name = icon;
+            icon = NULL;
+            db_plugin_invalidate_icon (d->db);
+            update_icon_preview (d);
+            on_appearance_changed (NULL, d);   /* aplica y pasa a Personalizado */
+        }
+        g_free (icon);
+    }
+
+    gtk_widget_destroy (chooser);
 }
 
 static void
@@ -560,14 +635,24 @@ db_dialog_show (DbPlugin *db)
         _("On panels with more than one row, the button takes up only one row "
           "instead of the full height of the panel"));
     gtk_grid_attach (GTK_GRID (grid), d->single_row, 0, row++, 2, 1);
+
+    d->gap_size = gtk_spin_button_new_with_range (0, 32, 1);
+    gtk_widget_set_tooltip_text (d->gap_size,
+        _("Empty space between the button and the other items when the button is "
+          "at one end of the panel. It does not react to the mouse. In the middle "
+          "of the panel there is no gap: the button is twice as wide, with the "
+          "line in the center."));
+    add_row (grid, row++, _("Gap at the panel _ends (px):"), d->gap_size);
     gtk_box_pack_start (GTK_BOX (page), make_frame (_("General"), grid), FALSE, FALSE, 0);
 
     /* icono */
     grid = make_grid ();
     row  = 0;
-    d->icon_name = gtk_entry_new ();
-    gtk_entry_set_placeholder_text (GTK_ENTRY (d->icon_name), "user-desktop");
-    add_row (grid, row++, _("Icon _name:"), d->icon_name);
+    d->icon_button = gtk_button_new ();
+    d->icon_image  = gtk_image_new ();
+    gtk_container_add (GTK_CONTAINER (d->icon_button), d->icon_image);
+    gtk_widget_set_halign (d->icon_button, GTK_ALIGN_START);
+    add_row (grid, row++, _("_Icon:"), d->icon_button);
 
     d->icon_size = gtk_spin_button_new_with_range (8, 128, 1);
     add_row (grid, row++, _("Icon si_ze (px):"), d->icon_size);
@@ -662,10 +747,16 @@ db_dialog_show (DbPlugin *db)
     d->bg_radius = gtk_spin_button_new_with_range (0, 16, 1);
     add_row (grid, row++, _("Corner _radius (px):"), d->bg_radius);
 
-    d->bg_margin = gtk_spin_button_new_with_range (0, 8, 1);
-    gtk_widget_set_tooltip_text (d->bg_margin,
-        _("Empty space between the edge of the button and the colored background"));
-    add_row (grid, row++, _("_Margin (px):"), d->bg_margin);
+    /* más a la derecha, fondo más grande; al máximo llena todo el botón */
+    d->bg_size = gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL, 0, BG_MARGIN_MAX, 1);
+    gtk_scale_set_draw_value (GTK_SCALE (d->bg_size), FALSE);
+    gtk_range_set_round_digits (GTK_RANGE (d->bg_size), 0);
+    gtk_scale_add_mark (GTK_SCALE (d->bg_size), 0, GTK_POS_BOTTOM, _("Small"));
+    gtk_scale_add_mark (GTK_SCALE (d->bg_size), BG_MARGIN_MAX, GTK_POS_BOTTOM, _("Full"));
+    gtk_widget_set_hexpand (d->bg_size, TRUE);
+    gtk_widget_set_tooltip_text (d->bg_size,
+        _("How much of the button the colored background covers"));
+    add_row (grid, row++, _("_Size:"), d->bg_size);
 
     d->glass = gtk_check_button_new_with_mnemonic (_("_Glass shine"));
     gtk_grid_attach (GTK_GRID (grid), d->glass, 0, row++, 2, 1);
@@ -790,8 +881,8 @@ db_dialog_show (DbPlugin *db)
     connect_appearance (d->line_pressed_color, "color-set",   d);
     connect_appearance (d->line_round,       "toggled",       d);
     connect_appearance (d->bg_radius,        "value-changed", d);
-    connect_appearance (d->bg_margin,        "value-changed", d);
-    connect_appearance (d->icon_name,        "changed",       d);
+    connect_appearance (d->bg_size,          "value-changed", d);
+    g_signal_connect (d->icon_button, "clicked", G_CALLBACK (on_icon_clicked), d);
     connect_appearance (d->icon_size,        "value-changed", d);
     connect_appearance (d->icon_follow_panel, "toggled",      d);
     connect_appearance (d->bg_color,         "color-set",     d);
@@ -806,6 +897,7 @@ db_dialog_show (DbPlugin *db)
     connect_behavior (d->show_tooltip,  "toggled", d);
     /* no es apariencia del perfil: cambiarlo no pasa a "Personalizado" */
     connect_behavior (d->single_row,    "toggled", d);
+    connect_behavior (d->gap_size,      "value-changed", d);
     connect_behavior (d->highlight_shown, "toggled", d);
     connect_behavior (d->peek_on_hover, "toggled",       d);
     connect_behavior (d->peek_delay,    "value-changed", d);

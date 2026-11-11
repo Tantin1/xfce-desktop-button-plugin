@@ -1,7 +1,7 @@
 project(
   'xfce-desktop-button-plugin',
   'c',
-  version: '0.4.2',
+  version: '0.4.3',
   license: 'GPL-2.0-or-later',
   meson_version: '>= 0.60.0',
   default_options: [
@@ -53,6 +53,22 @@ else
   wm_summary = 'libwnck @0@ (solo X11)'.format(wm_dep.version())
 endif
 
+# Ventana para elegir icono, la misma que usa "Menú de aplicaciones":
+#   Xfce 4.18 y 4.20 -> exo-2
+#   Xfce 4.21 en adelante -> libxfce4ui (la ventana pasó de exo a libxfce4ui)
+chooser_dep = dependency('libxfce4ui-2', version: '>= 4.21.0', required: false)
+if chooser_dep.found()
+  chooser_c_args = ['-DHAVE_XFCE_ICON_CHOOSER']
+else
+  chooser_dep = dependency('exo-2', version: '>= 4.18', required: false)
+  chooser_c_args = []
+  if not chooser_dep.found()
+    error('''Falta exo-2 (la ventana para elegir icono).
+    Debian / Ubuntu:  sudo apt install libexo-2-dev
+    Arch / CachyOS:   sudo pacman -S exo''')
+  endif
+endif
+
 # ---------- rutas ----------
 
 # carpeta de plugins del panel instalado:
@@ -72,12 +88,12 @@ shared_module(
   'src/wm.c',
   'src/tone.c',
   'src/drop.c',
-  c_args: wm_c_args + [
+  c_args: wm_c_args + chooser_c_args + [
     '-DGETTEXT_PACKAGE="@0@"'.format(gettext_package),
     '-DLOCALEDIR="@0@"'.format(locale_dir),
     '-DPLUGIN_VERSION="@0@"'.format(meson.project_version()),
   ],
-  dependencies: [gtk_dep, panel_dep, util_dep, xfconf_dep, wm_dep, m_dep],
+  dependencies: [gtk_dep, panel_dep, util_dep, xfconf_dep, wm_dep, chooser_dep, m_dep],
   gnu_symbol_visibility: 'default',
   install: true,
   install_dir: plugin_dir,
@@ -104,6 +120,7 @@ subdir('po')
 
 summary({
   'Motor de ventanas': wm_summary,
+  'Elegir icono': '@0@ @1@'.format(chooser_dep.name(), chooser_dep.version()),
   'Plugin': plugin_dir,
   '.desktop': desktop_dir,
   'Traducciones': locale_dir,

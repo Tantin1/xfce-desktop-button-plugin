@@ -7,7 +7,8 @@ A thin, customizable **Show Desktop** button for the Xfce panel. It can display 
 - Adjustable button thickness (1–128 px) and an option to occupy only one row of a multi-row panel.
 - Four built-in appearance presets: **Glass** (inspired by Windows 7), **Strip** (Windows 10), **Minimal** (Windows 11), and **Classic icon** (the Xfce-style button). A **Custom** profile provides individual controls.
 - Configurable line width, length, alignment, visibility, colors, rounded ends, backgrounds, icon name, and icon size.
-- Works anywhere in the panel: line styles put the line on the side facing the other items (both sides when placed in the middle) and leave a gap as wide as a transparent separator. The gap does not react to the mouse.
+- Works anywhere in the panel. At either end, line styles put the line on the side facing the other items and leave an adjustable gap (as wide as a transparent separator by default) that does not react to the mouse. In the middle, the button is twice as wide, fully clickable, with the line in the center.
+- Pick the icon with the same icon chooser as the Applications Menu (theme icons or your own image). In the icon style, the button widens to fit larger icons.
 - Optional smooth transitions, automatic light/dark panel detection, and highlighting while the desktop is shown.
 - Configurable middle-click and mouse-wheel actions; optional **peek** to show the desktop while hovering, with a delay.
 - Optional drag-hover to show the desktop. Files dropped onto the button can be **copied** to the Desktop: originals are preserved, and existing names are not overwritten.
@@ -24,7 +25,7 @@ The GitHub Actions workflow builds against Debian 12, Debian 13, Ubuntu 24.04, a
 
 ## Building
 
-You need Meson (>= 0.60), Ninja, a C compiler, pkg-config, gettext, GTK 3.24+, `libxfce4panel-2.0`, `libxfce4util-1.0`, `libxfconf-0`, and **either** `libxfce4windowing-0` (>= 4.19.2) **or** `libwnck-3.0`, with the corresponding development files.
+You need Meson (>= 0.60), Ninja, a C compiler, pkg-config, gettext, GTK 3.24+, `libxfce4panel-2.0`, `libxfce4util-1.0`, `libxfconf-0`, `exo-2` (the icon chooser; on Xfce 4.21 and later, `libxfce4ui-2` provides it instead), and **either** `libxfce4windowing-0` (>= 4.19.2) **or** `libwnck-3.0`, with the corresponding development files.
 
 ```sh
 meson setup build --prefix=/usr

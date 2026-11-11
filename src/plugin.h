@@ -105,7 +105,7 @@ typedef struct
     gboolean         line_round;      /* puntas redondeadas en la línea */
 
     /* modo icono */
-    gchar           *icon_name;
+    gchar           *icon_name;       /* nombre del tema o ruta a una imagen */
     gint             icon_size;
     gboolean         icon_follow_panel; /* usar el "tamaño de iconos" del panel */
 
@@ -116,7 +116,8 @@ typedef struct
     gboolean         glass;           /* brillo degradado estilo Aero */
     gboolean         highlight_shown; /* mantener el fondo "presionado" con el escritorio visible */
     gint             bg_radius;       /* radio de esquinas del fondo (px) */
-    gint             bg_margin;       /* margen interior del fondo (px) */
+    gint             bg_margin;       /* margen interior del fondo (px); el diálogo lo
+                                       * muestra al revés, como "tamaño del fondo" */
 
     /* transiciones suaves entre estados (hover, presionado) */
     gboolean         animate;
@@ -132,6 +133,7 @@ typedef struct
     gboolean         drop_to_desktop; /* copiar al Escritorio los archivos soltados encima */
     gboolean         show_tooltip;
     gboolean         single_row;      /* ocupar una sola fila en paneles de varias filas */
+    gint             gap_size;        /* separación en los extremos del panel (px) */
 
     /* peek: mostrar el escritorio mientras el mouse está encima */
     gboolean         peek_on_hover;

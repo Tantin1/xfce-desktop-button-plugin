@@ -172,6 +172,8 @@ db_config_init_defaults (DbConfig *cfg)
     cfg->drag_hover    = TRUE;
     cfg->show_tooltip  = TRUE;
     cfg->single_row    = FALSE;
+    /* el ancho por defecto del separador transparente de Xfce */
+    cfg->gap_size      = 8;
 
     cfg->highlight_shown = FALSE;
     cfg->panel_tone      = TONE_AUTO;
@@ -263,6 +265,7 @@ db_config_load_file (DbConfig *cfg, const gchar *file)
     cfg->drop_to_desktop = xfce_rc_read_bool_entry (rc, "drop-to-desktop", cfg->drop_to_desktop);
     cfg->show_tooltip    = xfce_rc_read_bool_entry (rc, "show-tooltip",    cfg->show_tooltip);
     cfg->single_row      = xfce_rc_read_bool_entry (rc, "single-row",      cfg->single_row);
+    cfg->gap_size        = xfce_rc_read_int_entry  (rc, "gap-size",        cfg->gap_size);
     cfg->highlight_shown = xfce_rc_read_bool_entry (rc, "highlight-shown", cfg->highlight_shown);
     cfg->panel_tone      = xfce_rc_read_int_entry  (rc, "panel-tone",      cfg->panel_tone);
     cfg->peek_on_hover   = xfce_rc_read_bool_entry (rc, "peek-on-hover",   cfg->peek_on_hover);
@@ -299,6 +302,7 @@ db_config_load_file (DbConfig *cfg, const gchar *file)
     cfg->peek_delay  = CLAMP (cfg->peek_delay,  100, 3000);
     cfg->bg_radius   = CLAMP (cfg->bg_radius,   0, 16);
     cfg->bg_margin   = CLAMP (cfg->bg_margin,   0, 8);
+    cfg->gap_size    = CLAMP (cfg->gap_size,    0, 32);
 }
 
 void
@@ -338,6 +342,7 @@ db_config_save (DbPlugin *db)
     xfce_rc_write_int_entry  (rc, "bg-margin",       cfg->bg_margin);
     xfce_rc_write_bool_entry (rc, "show-tooltip",    cfg->show_tooltip);
     xfce_rc_write_bool_entry (rc, "single-row",      cfg->single_row);
+    xfce_rc_write_int_entry  (rc, "gap-size",        cfg->gap_size);
     xfce_rc_write_bool_entry (rc, "highlight-shown", cfg->highlight_shown);
     xfce_rc_write_int_entry  (rc, "panel-tone",      cfg->panel_tone);
     xfce_rc_write_bool_entry (rc, "peek-on-hover",   cfg->peek_on_hover);

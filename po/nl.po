@@ -2,10 +2,10 @@
 # This file is distributed under the same license as the xfce-desktop-button-plugin package.
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce-desktop-button-plugin 0.4.2\n"
+"Project-Id-Version: xfce-desktop-button-plugin 0.4.3\n"
 "Report-Msgid-Bugs-To: https://github.com/Tantin1/xfce-desktop-button-plugin/"
 "issues\n"
-"POT-Creation-Date: 2026-11-11 14:32+0000\n"
+"POT-Creation-Date: 2026-11-11 15:08+0000\n"
 "PO-Revision-Date: 2026-10-31 18:00-0300\n"
 "Last-Translator: Tantin1\n"
 "Language-Team: Dutch\n"
@@ -15,127 +15,139 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/dialog.c:73
+#: src/dialog.c:93
 msgid "Inspired by Windows 7"
 msgstr "Geïnspireerd op Windows 7"
 
-#: src/dialog.c:74
+#: src/dialog.c:94
 msgid "Inspired by Windows 10"
 msgstr "Geïnspireerd op Windows 10"
 
-#: src/dialog.c:75
+#: src/dialog.c:95
 msgid "Inspired by Windows 11"
 msgstr "Geïnspireerd op Windows 11"
 
-#: src/dialog.c:76
+#: src/dialog.c:96
 msgid "Like the original Xfce button"
 msgstr "Zoals de originele Xfce-knop"
 
-#: src/dialog.c:78
+#: src/dialog.c:98
 msgid "Your own settings"
 msgstr "Eigen instellingen"
 
-#: src/dialog.c:219
+#: src/dialog.c:255
 msgid "Detected: light panel"
 msgstr "Gedetecteerd: licht paneel"
 
-#: src/dialog.c:219
+#: src/dialog.c:255
 msgid "Detected: dark panel"
 msgstr "Gedetecteerd: donker paneel"
 
+#: src/dialog.c:402
+msgid "Select an icon"
+msgstr "Kies een pictogram"
+
+#: src/dialog.c:403
+msgid "_Cancel"
+msgstr "_Annuleren"
+
+#: src/dialog.c:404
+msgid "_OK"
+msgstr "_OK"
+
 #. TRANSLATORS: entry in "Copy settings from another button";
 #. * the first number is the panel, the second the plugin id
-#: src/dialog.c:448
+#: src/dialog.c:523
 #, c-format
 msgid "Panel %d — button #%d"
 msgstr "Paneel %d — knop #%d"
 
-#: src/dialog.c:508 src/plugin.c:1049
+#: src/dialog.c:583 src/plugin.c:1074
 #: src/xfce-desktop-button-plugin.desktop.in:4
 msgid "Desktop Button"
 msgstr "Bureaubladknop"
 
-#: src/dialog.c:510
+#: src/dialog.c:585
 msgid "_Close"
 msgstr "_Sluiten"
 
-#: src/dialog.c:526
+#: src/dialog.c:601
 msgid "Button"
 msgstr "Knop"
 
 #. TRANSLATORS: profile names. "Glass", "Strip" and "Minimal" are styles
 #. * inspired by Windows 7, 10 and 11; translate them as short style names
-#: src/dialog.c:533 src/plugin.c:995
+#: src/dialog.c:608 src/plugin.c:1020
 msgid "Custom"
 msgstr "Aangepast"
 
-#: src/dialog.c:533 src/plugin.c:995
+#: src/dialog.c:608 src/plugin.c:1020
 msgid "Glass"
 msgstr "Glas"
 
-#: src/dialog.c:533 src/plugin.c:995
+#: src/dialog.c:608 src/plugin.c:1020
 msgid "Strip"
 msgstr "Strook"
 
-#: src/dialog.c:533 src/plugin.c:995
+#: src/dialog.c:608 src/plugin.c:1020
 msgid "Minimal"
 msgstr "Minimaal"
 
-#: src/dialog.c:534 src/plugin.c:995
+#: src/dialog.c:609 src/plugin.c:1020
 msgid "Classic icon"
 msgstr "Klassiek pictogram"
 
-#: src/dialog.c:535
+#: src/dialog.c:610
 msgid "_Profile:"
 msgstr "_Profiel:"
 
-#: src/dialog.c:542
+#: src/dialog.c:617
 msgid "Automatic"
 msgstr "Automatisch"
 
-#: src/dialog.c:542
+#: src/dialog.c:617
 msgid "Dark"
 msgstr "Donker"
 
-#: src/dialog.c:542
+#: src/dialog.c:617
 msgid "Light"
 msgstr "Licht"
 
-#: src/dialog.c:544
+#: src/dialog.c:619
 msgid "Built-in profiles use white on dark panels and black on light panels"
 msgstr ""
 "Ingebouwde profielen gebruiken wit op donkere panelen en zwart op lichte "
 "panelen"
 
-#: src/dialog.c:545
+#: src/dialog.c:620
 msgid "Panel t_one:"
 msgstr "Paneel_toon:"
 
-#: src/dialog.c:553
+#: src/dialog.c:628
 msgid "Button _thickness (px):"
 msgstr "Knop_dikte (px):"
 
-#: src/dialog.c:555 src/dialog.c:602 src/dialog.c:644
+#: src/dialog.c:630 src/dialog.c:687 src/dialog.c:729
 msgid "Line"
 msgstr "Lijn"
 
-#: src/dialog.c:555 src/dialog.c:578
+#: src/dialog.c:630 src/dialog.c:663
 msgid "Icon"
 msgstr "Pictogram"
 
-#: src/dialog.c:555
+#: src/dialog.c:630
 msgid "None (background only)"
 msgstr "Geen (alleen achtergrond)"
 
-#: src/dialog.c:556
+#: src/dialog.c:631
 msgid "_Style:"
 msgstr "_Stijl:"
 
-#: src/dialog.c:558
+#: src/dialog.c:633
 msgid "Use a single panel _row"
 msgstr "Slechts één paneel_rij gebruiken"
 
-#: src/dialog.c:560
+#: src/dialog.c:635
 msgid ""
 "On panels with more than one row, the button takes up only one row instead "
 "of the full height of the panel"
@@ -143,233 +155,256 @@ msgstr ""
 "Op panelen met meer dan één rij neemt de knop slechts één rij in beslag in "
 "plaats van de volledige hoogte van het paneel"
 
-#: src/dialog.c:563
+#: src/dialog.c:641
+msgid ""
+"Empty space between the button and the other items when the button is at one "
+"end of the panel. It does not react to the mouse. In the middle of the panel "
+"there is no gap: the button is twice as wide, with the line in the center."
+msgstr ""
+"Lege ruimte tussen de knop en de andere items wanneer de knop aan een "
+"uiteinde van het paneel staat. Reageert niet op de muis. In het midden van "
+"het paneel is er geen ruimte: de knop is twee keer zo breed, met de lijn in "
+"het midden."
+
+#: src/dialog.c:645
+msgid "Gap at the panel _ends (px):"
+msgstr "Ruimte aan de paneel_uiteinden (px):"
+
+#: src/dialog.c:646
 msgid "General"
 msgstr "Algemeen"
 
-#: src/dialog.c:570
-msgid "Icon _name:"
-msgstr "Pictogram_naam:"
+#: src/dialog.c:655
+msgid "_Icon:"
+msgstr "P_ictogram:"
 
-#: src/dialog.c:573
+#: src/dialog.c:658
 msgid "Icon si_ze (px):"
 msgstr "Pictogram_grootte (px):"
 
-#: src/dialog.c:575
+#: src/dialog.c:660
 msgid "_Follow the panel icon size"
 msgstr "Pictogramgrootte van het paneel _volgen"
 
-#: src/dialog.c:588
+#: src/dialog.c:673
 msgid "C_opy"
 msgstr "K_opiëren"
 
-#: src/dialog.c:590
+#: src/dialog.c:675
 msgid "Replace all settings of this button with those of the selected one"
 msgstr ""
 "Alle instellingen van deze knop vervangen door die van de geselecteerde knop"
 
-#: src/dialog.c:594
+#: src/dialog.c:679
 msgid "_From:"
 msgstr "_Van:"
 
-#: src/dialog.c:598
+#: src/dialog.c:683
 msgid "Copy settings from another button"
 msgstr "Instellingen van een andere knop kopiëren"
 
-#: src/dialog.c:608
+#: src/dialog.c:693
 msgid "Line _width (px):"
 msgstr "Lijn_dikte (px):"
 
 #. TRANSLATORS: unit of the line length: percent of the panel height, or pixels
-#: src/dialog.c:615
+#: src/dialog.c:700
 #, no-c-format
 msgid "% of panel"
 msgstr "% van paneel"
 
-#: src/dialog.c:615
+#: src/dialog.c:700
 msgid "px"
 msgstr "px"
 
-#: src/dialog.c:619
+#: src/dialog.c:704
 msgid "Line _length:"
 msgstr "Lijn_lengte:"
 
-#: src/dialog.c:625
+#: src/dialog.c:710
 msgid "Start (left / top)"
 msgstr "Begin (links / boven)"
 
-#: src/dialog.c:625
+#: src/dialog.c:710
 msgid "Center"
 msgstr "Midden"
 
-#: src/dialog.c:625
+#: src/dialog.c:710
 msgid "End (right / bottom)"
 msgstr "Einde (rechts / onder)"
 
-#: src/dialog.c:626
+#: src/dialog.c:711
 msgid "Automatic (toward the other panel items)"
 msgstr "Automatisch (naar de andere paneelitems toe)"
 
-#: src/dialog.c:627
+#: src/dialog.c:712
 msgid "_Position:"
 msgstr "_Positie:"
 
-#: src/dialog.c:629
+#: src/dialog.c:714
 msgid "Always"
 msgstr "Altijd"
 
-#: src/dialog.c:629
+#: src/dialog.c:714
 msgid "Only on hover"
 msgstr "Alleen bij aanwijzen"
 
-#: src/dialog.c:630
+#: src/dialog.c:715
 msgid "_Visible:"
 msgstr "_Zichtbaar:"
 
-#: src/dialog.c:633
+#: src/dialog.c:718
 msgid "_Color:"
 msgstr "_Kleur:"
 
-#: src/dialog.c:636
+#: src/dialog.c:721
 msgid "Color on _hover:"
 msgstr "Kleur bij _aanwijzen:"
 
-#: src/dialog.c:639
+#: src/dialog.c:724
 msgid "Color when p_ressed:"
 msgstr "Kleur bij _indrukken:"
 
-#: src/dialog.c:641
+#: src/dialog.c:726
 msgid "R_ounded ends"
 msgstr "Afgeronde _uiteinden"
 
-#: src/dialog.c:648
+#: src/dialog.c:733
 msgid "Background"
 msgstr "Achtergrond"
 
-#: src/dialog.c:654
+#: src/dialog.c:739
 msgid "_Normal:"
 msgstr "_Normaal:"
 
-#: src/dialog.c:657
+#: src/dialog.c:742
 msgid "On h_over:"
 msgstr "Bij _aanwijzen:"
 
-#: src/dialog.c:660
+#: src/dialog.c:745
 msgid "_Pressed:"
 msgstr "_Ingedrukt:"
 
-#: src/dialog.c:663
+#: src/dialog.c:748
 msgid "Corner _radius (px):"
 msgstr "Hoek_straal (px):"
 
-#: src/dialog.c:667
-msgid "Empty space between the edge of the button and the colored background"
-msgstr "Lege ruimte tussen de rand van de knop en de gekleurde achtergrond"
+#: src/dialog.c:754
+msgid "Small"
+msgstr "Klein"
 
-#: src/dialog.c:668
-msgid "_Margin (px):"
-msgstr "_Marge (px):"
+#: src/dialog.c:755
+msgid "Full"
+msgstr "Volledig"
 
-#: src/dialog.c:670
+#: src/dialog.c:758
+msgid "How much of the button the colored background covers"
+msgstr "Hoeveel van de knop de gekleurde achtergrond bedekt"
+
+#: src/dialog.c:759
+msgid "_Size:"
+msgstr "_Grootte:"
+
+#: src/dialog.c:761
 msgid "_Glass shine"
 msgstr "_Glasglans"
 
-#: src/dialog.c:674
+#: src/dialog.c:765
 msgid "_Keep the pressed color while the desktop is shown"
 msgstr "Kleur bij indrukken _behouden zolang het bureaublad wordt getoond"
 
-#: src/dialog.c:677
+#: src/dialog.c:768
 msgid "Background colors"
 msgstr "Achtergrondkleuren"
 
-#: src/dialog.c:682
+#: src/dialog.c:773
 msgid "Smooth _transitions"
 msgstr "Vloeiende _overgangen"
 
-#: src/dialog.c:684
+#: src/dialog.c:775
 msgid ""
 "Fade colors when hovering and clicking instead of changing them instantly"
 msgstr ""
 "Kleuren laten overvloeien bij aanwijzen en klikken in plaats van ze direct "
 "te wijzigen"
 
-#: src/dialog.c:687
+#: src/dialog.c:778
 msgid "Fast"
 msgstr "Snel"
 
-#: src/dialog.c:687
+#: src/dialog.c:778
 msgid "Normal"
 msgstr "Normaal"
 
-#: src/dialog.c:687
+#: src/dialog.c:778
 msgid "Slow"
 msgstr "Langzaam"
 
-#: src/dialog.c:688
+#: src/dialog.c:779
 msgid "Spee_d:"
 msgstr "_Snelheid:"
 
-#: src/dialog.c:690
+#: src/dialog.c:781
 msgid "Animations are disabled in the system settings."
 msgstr "Animaties zijn uitgeschakeld in de systeeminstellingen."
 
-#: src/dialog.c:697
+#: src/dialog.c:788
 msgid "Animation"
 msgstr "Animatie"
 
-#: src/dialog.c:700
+#: src/dialog.c:791
 msgid "Behavior"
 msgstr "Gedrag"
 
-#: src/dialog.c:704 src/dialog.c:716
+#: src/dialog.c:795 src/dialog.c:807
 msgid "Do nothing"
 msgstr "Niets doen"
 
-#: src/dialog.c:704
+#: src/dialog.c:795
 msgid "Show / restore desktop"
 msgstr "Bureaublad tonen / herstellen"
 
-#: src/dialog.c:705
+#: src/dialog.c:796
 msgid "Minimize all windows"
 msgstr "Alle vensters minimaliseren"
 
-#: src/dialog.c:706
+#: src/dialog.c:797
 msgid "Shade / unshade windows (X11 only)"
 msgstr "Vensters oprollen / uitrollen (alleen X11)"
 
-#: src/dialog.c:707
+#: src/dialog.c:798
 msgid "_Middle click:"
 msgstr "_Middelklik:"
 
-#: src/dialog.c:709
+#: src/dialog.c:800
 msgid "Window shading is not supported on Wayland."
 msgstr "Vensters oprollen wordt niet ondersteund op Wayland."
 
-#: src/dialog.c:716
+#: src/dialog.c:807
 msgid "Switch workspace"
 msgstr "Van werkblad wisselen"
 
-#: src/dialog.c:717
+#: src/dialog.c:808
 msgid "Up shows desktop, down restores"
 msgstr "Omhoog toont bureaublad, omlaag herstelt"
 
-#: src/dialog.c:718
+#: src/dialog.c:809
 msgid "Mouse _wheel:"
 msgstr "_Muiswiel:"
 
-#: src/dialog.c:720
+#: src/dialog.c:811
 msgid "Workspace switching is not available in this session."
 msgstr "Wisselen van werkblad is niet beschikbaar in deze sessie."
 
-#: src/dialog.c:727
+#: src/dialog.c:818
 msgid "Show desktop when _dragging a file over the button"
 msgstr "Bureaublad tonen bij het _slepen van een bestand over de knop"
 
-#: src/dialog.c:731
+#: src/dialog.c:822
 msgid "Cop_y files dropped on the button to the Desktop"
 msgstr "Op de knop neergezette bestanden naar het bureaublad _kopiëren"
 
-#: src/dialog.c:733
+#: src/dialog.c:824
 msgid ""
 "The original files are never moved or deleted, and existing files on the "
 "Desktop are never overwritten: a copy gets a new name such as \"photo (2)."
@@ -379,19 +414,19 @@ msgstr ""
 "bestanden op het bureaublad worden nooit overschreven: een kopie krijgt een "
 "nieuwe naam, zoals \"foto (2).jpg\"."
 
-#: src/dialog.c:737
+#: src/dialog.c:828
 msgid "Show _tooltip"
 msgstr "_Tooltip tonen"
 
-#: src/dialog.c:740
+#: src/dialog.c:831
 msgid "Actions"
 msgstr "Acties"
 
-#: src/dialog.c:747
+#: src/dialog.c:838
 msgid "Show the desktop while the mouse is _over the button"
 msgstr "Bureaublad tonen zolang de muis _boven de knop is"
 
-#: src/dialog.c:749
+#: src/dialog.c:840
 msgid ""
 "Moving the mouse away restores the windows. Click during the peek to keep "
 "the desktop visible."
@@ -399,15 +434,15 @@ msgstr ""
 "Als de muis wordt weggehaald, worden de vensters hersteld. Klik tijdens het "
 "kijkje om het bureaublad zichtbaar te houden."
 
-#: src/dialog.c:754
+#: src/dialog.c:845
 msgid "D_elay (ms):"
 msgstr "_Vertraging (ms):"
 
-#: src/dialog.c:756
+#: src/dialog.c:847
 msgid "Peek"
 msgstr "Kijkje"
 
-#: src/dialog.c:761
+#: src/dialog.c:852
 msgid ""
 "Tip: place the button at the end of the panel and set the panel margin to 0 "
 "so you can click it by pushing the mouse into the screen corner."
@@ -415,39 +450,39 @@ msgstr ""
 "Tip: plaats de knop aan het einde van het paneel en zet de paneelmarge op 0, "
 "zodat je erop kunt klikken door de muis in de schermhoek te duwen."
 
-#: src/dialog.c:763
+#: src/dialog.c:854
 msgid "Keyboard shortcut command:"
 msgstr "Commando voor een sneltoets:"
 
-#: src/plugin.c:287
+#: src/plugin.c:290
 msgid "Show desktop is not available in this session"
 msgstr "Bureaublad tonen is niet beschikbaar in deze sessie"
 
-#: src/plugin.c:289
+#: src/plugin.c:292
 msgid "Restore the minimized windows"
 msgstr "Geminimaliseerde vensters herstellen"
 
-#: src/plugin.c:291
+#: src/plugin.c:294
 msgid "Minimize all open windows and show the desktop"
 msgstr "Alle geopende vensters minimaliseren en het bureaublad tonen"
 
-#: src/plugin.c:297
+#: src/plugin.c:300
 msgid "Show Desktop"
 msgstr "Bureaublad tonen"
 
-#: src/plugin.c:1000
+#: src/plugin.c:1025
 msgid "_Minimize all windows"
 msgstr "Alle vensters _minimaliseren"
 
-#: src/plugin.c:1006
+#: src/plugin.c:1031
 msgid "S_hade / unshade windows"
 msgstr "Vensters _oprollen / uitrollen"
 
-#: src/plugin.c:1022
+#: src/plugin.c:1047
 msgid "_Profile"
 msgstr "_Profiel"
 
-#: src/plugin.c:1051
+#: src/plugin.c:1076
 msgid "A slim, customizable Show Desktop button"
 msgstr "Een smalle, aanpasbare knop om het bureaublad te tonen"
 

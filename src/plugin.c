@@ -16,10 +16,6 @@
 /* margen a cada lado del icono en el perfil Icono clásico */
 #define CLASSIC_ICON_PADDING 4
 
-/* espacio vacío junto a la línea: el ancho por defecto del separador
- * transparente de Xfce (plugins/separator/separator.c, DEFAULT_SIZE) */
-#define SEPARATOR_GAP 8
-
 /* duración de cada transición a velocidad Normal (ms).
  * Asimétricas a propósito: presionar casi inmediato, apagarse más lento. */
 #define ANIM_HOVER_IN_MS   120
@@ -216,6 +212,11 @@ db_plugin_update_size (DbPlugin *db)
 
     t = db->cfg.thickness;
 
+    /* estilo icono: el grosor es el ancho mínimo; si el icono es más grande,
+     * el botón se ensancha para que entre entero (el alto lo pone el panel) */
+    if (db->cfg.style == STYLE_ICON && db->cfg.profile != PROFILE_CLASSIC)
+        t = MAX (t, db_plugin_icon_size (db));
+
     /* lugar del botón entre los ítems del panel: decide de qué lado va la
      * línea y dónde va la separación (ver db_tone_placement) */
     db->placement = db_tone_placement (db);
@@ -230,21 +231,23 @@ db_plugin_update_size (DbPlugin *db)
     small = small_deskbar || db->cfg.single_row;
     xfce_panel_plugin_set_small (db->plugin, small);
 
-    /* separación de los estilos con línea: un hueco transparente del lado
-     * de los demás ítems (de los dos lados si está en el medio). Es margen
-     * del área de dibujo, así que no reacciona al mouse: no resalta, no
-     * muestra el escritorio ni recibe archivos, como un separador. Del lado
-     * del borde de la pantalla no hay hueco: el botón sigue llegando a la
-     * esquina. */
+    /* estilos con línea:
+     *  - en un extremo del panel, un hueco transparente del lado de los demás
+     *    ítems ("separación en los extremos"). Es margen del área de dibujo,
+     *    así que no reacciona al mouse: no resalta, no muestra el escritorio
+     *    ni recibe archivos, como un separador. Del lado del borde no hay
+     *    hueco: el botón sigue llegando a la esquina.
+     *  - en el medio, sin huecos: el botón es el doble de ancho, todo se
+     *    puede clickear y resaltar, y la línea va al centro (ver draw_line). */
     if (db->cfg.style == STYLE_LINE && !small_deskbar)
     {
         switch (db->placement)
         {
-        case PLACE_END:    gap_start = SEPARATOR_GAP;                         break;
-        case PLACE_START:  gap_end   = SEPARATOR_GAP;                         break;
-        case PLACE_MIDDLE: gap_start = gap_end = SEPARATOR_GAP;               break;
+        case PLACE_END:    gap_start = db->cfg.gap_size;  break;
+        case PLACE_START:  gap_end   = db->cfg.gap_size;  break;
+        case PLACE_MIDDLE: t *= 2;                        break;
         case PLACE_ALONE:
-        default:                                                              break;
+        default:                                          break;
         }
     }
 
@@ -536,8 +539,7 @@ draw_line (DbPlugin *db, cairo_t *cr, gboolean horizontal, gint w, gint h)
 {
     DbConfig *cfg = &db->cfg;
     GdkRGBA   color;
-    gint      along, across, thick, len, pos_across;
-    gint      pos[2], n = 0;    /* posiciones de la línea a lo largo del botón */
+    gint      along, across, thick, len, pos_along, pos_across;
 
     /* hover aclara, presionado atenúa (estilo Fluent) */
     color = mix_rgba (&cfg->line_color, &cfg->line_hover_color, db->anim_hover);
@@ -562,43 +564,44 @@ draw_line (DbPlugin *db, cairo_t *cr, gboolean horizontal, gint w, gint h)
 
     /* "Automática": del lado que mira a los demás ítems del panel. Último
      * del panel → al principio del botón; primero → al final; en el medio →
-     * una a cada lado; solo en el panel → como siempre, al principio. */
+     * al centro; solo en el panel → como siempre, al principio.
+     * Con brillo de vidrio la línea es el borde del bloque: en el medio
+     * partiría el bloque en dos, así que ahí no se dibuja. */
     switch (cfg->line_align)
     {
-    case ALIGN_START:  pos[n++] = 0;                    break;
-    case ALIGN_END:    pos[n++] = along - thick;        break;
-    case ALIGN_CENTER: pos[n++] = (along - thick) / 2;  break;
+    case ALIGN_START:  pos_along = 0;                    break;
+    case ALIGN_END:    pos_along = along - thick;        break;
+    case ALIGN_CENTER: pos_along = (along - thick) / 2;  break;
     case ALIGN_AUTO:
     default:
         switch (db->placement)
         {
-        case PLACE_START:  pos[n++] = along - thick;                       break;
-        case PLACE_MIDDLE: pos[n++] = 0; pos[n++] = along - thick;         break;
+        case PLACE_START:
+            pos_along = along - thick;
+            break;
+        case PLACE_MIDDLE:
+            if (cfg->glass)
+                return;
+            pos_along = (along - thick) / 2;
+            break;
         case PLACE_END:
         case PLACE_ALONE:
-        default:           pos[n++] = 0;                                   break;
+        default:
+            pos_along = 0;
+            break;
         }
         break;
     }
     pos_across = (across - len) / 2;
 
-    /* botón tan delgado que las dos líneas se tocan: dibujar una sola,
-     * así un color translúcido no se ve más intenso */
-    if (n == 2 && pos[1] < pos[0] + thick)
-        n = 1;
-
     /* puntas redondeadas: radio de medio grosor, efecto "píldora" */
     {
         gdouble r = cfg->line_round ? thick / 2.0 : 0.0;
-        gint    i;
 
-        for (i = 0; i < n; i++)
-        {
-            if (horizontal)
-                fill_shape_rgba (cr, &color, pos[i], pos_across, thick, len, r);
-            else
-                fill_shape_rgba (cr, &color, pos_across, pos[i], len, thick, r);
-        }
+        if (horizontal)
+            fill_shape_rgba (cr, &color, pos_along, pos_across, thick, len, r);
+        else
+            fill_shape_rgba (cr, &color, pos_across, pos_along, len, thick, r);
     }
 }
 
@@ -621,8 +624,20 @@ draw_icon (DbPlugin *db, GtkWidget *widget, cairo_t *cr, gint w, gint h)
         GtkIconTheme *theme = gtk_icon_theme_get_for_screen (gtk_widget_get_screen (widget));
 
         db_plugin_invalidate_icon (db);
-        db->icon_surf = gtk_icon_theme_load_surface (theme, name, size, scale, NULL,
-                                                     GTK_ICON_LOOKUP_FORCE_SIZE, NULL);
+        if (g_path_is_absolute (name))
+        {
+            /* imagen propia elegida en "Otros archivos" */
+            GdkPixbuf *pix = gdk_pixbuf_new_from_file_at_size (name, size * scale,
+                                                               size * scale, NULL);
+            if (pix != NULL)
+            {
+                db->icon_surf = gdk_cairo_surface_create_from_pixbuf (pix, scale, NULL);
+                g_object_unref (pix);
+            }
+        }
+        else
+            db->icon_surf = gtk_icon_theme_load_surface (theme, name, size, scale, NULL,
+                                                         GTK_ICON_LOOKUP_FORCE_SIZE, NULL);
         if (db->icon_surf == NULL)
             db->icon_surf = gtk_icon_theme_load_surface (theme, "user-desktop", size, scale, NULL,
                                                          GTK_ICON_LOOKUP_FORCE_SIZE, NULL);
@@ -634,7 +649,17 @@ draw_icon (DbPlugin *db, GtkWidget *widget, cairo_t *cr, gint w, gint h)
     if (db->icon_surf == NULL)
         return;
 
-    cairo_set_source_surface (cr, db->icon_surf, (w - size) / 2, (h - size) / 2);
+    /* una imagen propia puede no ser cuadrada: centrar según su tamaño real */
+    {
+        gint iw = size, ih = size;
+
+        if (cairo_surface_get_type (db->icon_surf) == CAIRO_SURFACE_TYPE_IMAGE)
+        {
+            iw = cairo_image_surface_get_width  (db->icon_surf) / scale;
+            ih = cairo_image_surface_get_height (db->icon_surf) / scale;
+        }
+        cairo_set_source_surface (cr, db->icon_surf, (w - iw) / 2, (h - ih) / 2);
+    }
     /* reposo 0.85 → hover 1.0 → presionado 0.65 */
     {
         gdouble a = 0.85 + 0.15 * db->anim_hover;
